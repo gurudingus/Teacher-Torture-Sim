@@ -1,18 +1,61 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
-public class GameManager : MonoBehaviour
+//Written by Liam unless otherwise indicated
+
+/// <summary>
+/// Anything that needs to have something happen when the gameState is changed can implement this interface
+/// </summary>
+public interface IGameEventSubscriber
 {
-    // Start is called before the first frame update
-    void Start()
+    public abstract void OnGameEvent(GameState gameState);
+}
+
+public enum GameState
+{
+    Menu,
+    Playing,
+    Paused
+}
+
+public class GameManager : MonoBehaviour, IResetStatic
+{
+    private void Awake()
     {
-        
+        StaticReset.Subscribe(this);
     }
 
-    // Update is called once per frame
-    void Update()
+    private static List<IGameEventSubscriber> subscribers; //A list of all objects implementing IGameEventSubscriber that will have their OnGameEvent() function called whenever gameState is changed
+
+    public static GameState gameState { get; private set; }
+
+    /// <summary>
+    /// Use this to set the game state and automatically call OnGameEvent() on all subscribed objects
+    /// </summary>
+    /// <param name="state"></param>
+    public void SetGameState(GameState state)
     {
-        
+        gameState = state;
+        foreach (IGameEventSubscriber subscriber in subscribers)
+        {
+            subscriber.OnGameEvent(state);
+        }
+    }
+
+    public static void Subscribe(IGameEventSubscriber subscriber)
+    {
+        subscribers.Add(subscriber);
+    }
+
+    public static void LoadLevel(string sceneName)
+    {
+        SceneManager.LoadScene(sceneName);
+        StaticReset.ResetStatics();
+    }
+
+    public void OnStaticReset()
+    {
+        gameState = GameState.Menu;
     }
 }
