@@ -32,9 +32,10 @@ public class CameraScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //cam state 0 is for the player camera
         if (camState == 0)
         {
-            moveToPos(0);
+            moveToPos(false);
             //rotate player around
             float rotateYaw = Input.GetAxis("Mouse X") * mouseSensitivity;
             player.transform.Rotate(0, rotateYaw, 0);
@@ -53,9 +54,10 @@ public class CameraScript : MonoBehaviour
                 player.GetComponent<MeshRenderer>().enabled = false;
             }
         }
+        //cam state 1 is for the computer camera
         else if (camState == 1)
         {
-            moveToPos(1);
+            moveToPos(true);
             if (Input.GetButtonDown("Jump"))
             {
                 camState = 0;
@@ -68,13 +70,14 @@ public class CameraScript : MonoBehaviour
 
     }
 
-    private void moveToPos(int position)
+    //sets camera to the correct 
+    public void moveToPos(bool position)
     {
-        if (position == 0)
+        if (position == false)
         {
             transform.position = Vector3.Lerp(transform.position, playerPos.position, Time.deltaTime * 10);
         }
-        else if (position == 1)
+        else if (position == true)
         {
             transform.position = Vector3.Lerp(transform.position, camPos.position, Time.deltaTime * 10);
             transform.rotation = Quaternion.Euler(0f,0f,0f);
