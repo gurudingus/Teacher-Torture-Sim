@@ -27,6 +27,4 @@ using UnityEngine.InputSystem;
     {
         
     }
-
-    private void Check
 }
