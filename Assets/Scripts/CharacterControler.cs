@@ -12,8 +12,6 @@ public class CharacterControler : MonoBehaviour
    
     //falling
     public float fallGravityMultiplier = 2f;
-    public float mouseSensitivity = 2f;
-    public float pitchRange = 60f;
 
     private float forwardInputValue;
     private float strafeInputValue;
@@ -22,15 +20,11 @@ public class CharacterControler : MonoBehaviour
     private float terminalVelocity = 53f;
     private float verticalVelocity;
 
-    private float rotateCameraPitch;
-
-    private Camera firstPersonCam;
     private CharacterController characterController;
 
     void Awake()
     {
         characterController = GetComponent<CharacterController>();
-        firstPersonCam = GetComponentInChildren<Camera>();
     }
 
     void Update()
@@ -40,7 +34,6 @@ public class CharacterControler : MonoBehaviour
         jumpInput = Input.GetButtonDown("Jump");
         Movement();
         JumpAndGravity();
-        CameraMovement();
     }
 
     void Movement()
@@ -79,19 +72,5 @@ public class CharacterControler : MonoBehaviour
                 verticalVelocity += Physics.gravity.y * gravityMultiplier * Time.deltaTime;
             }
         }
-    }
-
-    void CameraMovement()
-    {
-        //rotate player around
-        float rotateYaw = Input.GetAxis("Mouse X") * mouseSensitivity;
-        transform.Rotate(0, rotateYaw, 0);
-
-        //rotate cam up and down
-        rotateCameraPitch += -Input.GetAxis("Mouse Y") * mouseSensitivity;
-        //lock rotation so no flip camera
-        rotateCameraPitch = Mathf.Clamp(rotateCameraPitch, -pitchRange, pitchRange);
-        firstPersonCam.transform.localRotation = Quaternion.Euler(rotateCameraPitch, 0, 0);
-
     }
 }
