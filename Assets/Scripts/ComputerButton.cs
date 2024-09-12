@@ -5,15 +5,9 @@ using UnityEngine.UI;
 
 public class ComputerButton : MonoBehaviour
 {
-    public GameObject BrowserPanel;
-    public GameObject DesktopPanel;
-    public GameObject VirusPanel;
-    public GameObject AdminPanel;
-    public int ComputerState;
-
-    public void OpenPanel(GameObject panel)
+    public void PanelManage(GameObject panel)
     {
-        panel.SetActive(false);
+        bool on = panel.activeInHierarchy;
+        panel.SetActive(!on);
     }
-
 }
