@@ -215,8 +215,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf59c65b3a31d5243aa1a04734b92508, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementSpeed: 1
-  JumpHeight: 0.5
+  movementSpeed: 2.4
+  JumpHeight: 0.8
   fallGravityMultiplier: 2
-  mouseSensitivity: 2
-  pitchRange: 60
