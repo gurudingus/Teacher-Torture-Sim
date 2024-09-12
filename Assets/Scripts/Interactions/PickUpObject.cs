@@ -6,11 +6,13 @@ using UnityEngine.InputSystem;
     private PickupableObject objectLeftHand;
     private PickupableObject objectRightHand;
 
+    new private Camera camera;
+
     [SerializeField] private float singleHandMaximumMass = 10;
 
-    void Start()
+    private void Awake()
     {
-        
+        camera = Camera.main;
     }
 
     void Update()
@@ -26,5 +28,24 @@ using UnityEngine.InputSystem;
     private void OnRightHand()
     {
         
+    }
+
+    private bool CheckHandRay(out PickupableObject obj)
+    {
+        if (Physics.Raycast(camera.transform.position, camera.transform.forward, out RaycastHit handRaycast))
+        {
+            obj = null;
+            return false;
+        }
+
+        PickupableObject obj2 = handRaycast.transform.gameObject.GetComponent<PickupableObject>();
+        if (obj2 != null)
+        {
+            obj = obj2;
+            return true;
+        }
+
+        obj = null;
+        return false;
     }
 }
