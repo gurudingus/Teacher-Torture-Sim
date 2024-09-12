@@ -1,0 +1,54 @@
+{
+    "name": "Default",
+    "maps": [
+        {
+            "name": "Pickup-Throw",
+            "id": "ca65c367-ad1f-41a7-b250-da03a059cae5",
+            "actions": [
+                {
+                    "name": "Left Hand",
+                    "type": "Button",
+                    "id": "54d16d58-8ca3-4e7a-bb38-64c878af91a0",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Right Hand",
+                    "type": "Button",
+                    "id": "b6b9873c-7ffc-455e-9516-bcea3d23493d",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "3b1c2bab-e970-4de1-8795-0e5559390d83",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Left Hand",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "092895cb-60b1-4d53-a866-6f9995f10876",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Right Hand",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
