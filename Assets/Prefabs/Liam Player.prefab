@@ -67,7 +67,7 @@ Camera:
     m_Bits: 4294967295
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
-  m_TargetDisplay: 1
+  m_TargetDisplay: 0
   m_TargetEye: 3
   m_HDR: 1
   m_AllowMSAA: 1
@@ -220,8 +220,6 @@ MonoBehaviour:
   movementSpeed: 1
   JumpHeight: 0.5
   fallGravityMultiplier: 2
-  mouseSensitivity: 2
-  pitchRange: 60
 --- !u!114 &7407999828984957411
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -265,3 +263,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   singleHandMaximumMass: 10
+  maximumRange: 2

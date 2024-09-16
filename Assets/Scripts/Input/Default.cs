@@ -28,18 +28,9 @@ public partial class @Default: IInputActionCollection2, IDisposable
             ""id"": ""ca65c367-ad1f-41a7-b250-da03a059cae5"",
             ""actions"": [
                 {
-                    ""name"": ""Left Hand"",
+                    ""name"": ""PickupItem"",
                     ""type"": ""Button"",
                     ""id"": ""54d16d58-8ca3-4e7a-bb38-64c878af91a0"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""Right Hand"",
-                    ""type"": ""Button"",
-                    ""id"": ""b6b9873c-7ffc-455e-9516-bcea3d23493d"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -48,26 +39,37 @@ public partial class @Default: IInputActionCollection2, IDisposable
             ],
             ""bindings"": [
                 {
-                    ""name"": """",
-                    ""id"": ""3b1c2bab-e970-4de1-8795-0e5559390d83"",
+                    ""name"": ""1D Axis"",
+                    ""id"": ""e26aafa1-6c85-45ee-9d58-d4c57026b566"",
+                    ""path"": ""1DAxis"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""PickupItem"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""negative"",
+                    ""id"": ""ba430647-badc-4828-9360-51980fb8d9d4"",
                     ""path"": ""<Mouse>/leftButton"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Left Hand"",
+                    ""action"": ""PickupItem"",
                     ""isComposite"": false,
-                    ""isPartOfComposite"": false
+                    ""isPartOfComposite"": true
                 },
                 {
-                    ""name"": """",
-                    ""id"": ""092895cb-60b1-4d53-a866-6f9995f10876"",
+                    ""name"": ""positive"",
+                    ""id"": ""d59c4c72-9a69-45c4-a78f-60b596c9c4bd"",
                     ""path"": ""<Mouse>/rightButton"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Right Hand"",
+                    ""action"": ""PickupItem"",
                     ""isComposite"": false,
-                    ""isPartOfComposite"": false
+                    ""isPartOfComposite"": true
                 }
             ]
         }
@@ -76,8 +78,7 @@ public partial class @Default: IInputActionCollection2, IDisposable
 }");
         // Pickup-Throw
         m_PickupThrow = asset.FindActionMap("Pickup-Throw", throwIfNotFound: true);
-        m_PickupThrow_LeftHand = m_PickupThrow.FindAction("Left Hand", throwIfNotFound: true);
-        m_PickupThrow_RightHand = m_PickupThrow.FindAction("Right Hand", throwIfNotFound: true);
+        m_PickupThrow_PickupItem = m_PickupThrow.FindAction("PickupItem", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -139,14 +140,12 @@ public partial class @Default: IInputActionCollection2, IDisposable
     // Pickup-Throw
     private readonly InputActionMap m_PickupThrow;
     private List<IPickupThrowActions> m_PickupThrowActionsCallbackInterfaces = new List<IPickupThrowActions>();
-    private readonly InputAction m_PickupThrow_LeftHand;
-    private readonly InputAction m_PickupThrow_RightHand;
+    private readonly InputAction m_PickupThrow_PickupItem;
     public struct PickupThrowActions
     {
         private @Default m_Wrapper;
         public PickupThrowActions(@Default wrapper) { m_Wrapper = wrapper; }
-        public InputAction @LeftHand => m_Wrapper.m_PickupThrow_LeftHand;
-        public InputAction @RightHand => m_Wrapper.m_PickupThrow_RightHand;
+        public InputAction @PickupItem => m_Wrapper.m_PickupThrow_PickupItem;
         public InputActionMap Get() { return m_Wrapper.m_PickupThrow; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -156,22 +155,16 @@ public partial class @Default: IInputActionCollection2, IDisposable
         {
             if (instance == null || m_Wrapper.m_PickupThrowActionsCallbackInterfaces.Contains(instance)) return;
             m_Wrapper.m_PickupThrowActionsCallbackInterfaces.Add(instance);
-            @LeftHand.started += instance.OnLeftHand;
-            @LeftHand.performed += instance.OnLeftHand;
-            @LeftHand.canceled += instance.OnLeftHand;
-            @RightHand.started += instance.OnRightHand;
-            @RightHand.performed += instance.OnRightHand;
-            @RightHand.canceled += instance.OnRightHand;
+            @PickupItem.started += instance.OnPickupItem;
+            @PickupItem.performed += instance.OnPickupItem;
+            @PickupItem.canceled += instance.OnPickupItem;
         }
 
         private void UnregisterCallbacks(IPickupThrowActions instance)
         {
-            @LeftHand.started -= instance.OnLeftHand;
-            @LeftHand.performed -= instance.OnLeftHand;
-            @LeftHand.canceled -= instance.OnLeftHand;
-            @RightHand.started -= instance.OnRightHand;
-            @RightHand.performed -= instance.OnRightHand;
-            @RightHand.canceled -= instance.OnRightHand;
+            @PickupItem.started -= instance.OnPickupItem;
+            @PickupItem.performed -= instance.OnPickupItem;
+            @PickupItem.canceled -= instance.OnPickupItem;
         }
 
         public void RemoveCallbacks(IPickupThrowActions instance)
@@ -191,7 +184,6 @@ public partial class @Default: IInputActionCollection2, IDisposable
     public PickupThrowActions @PickupThrow => new PickupThrowActions(this);
     public interface IPickupThrowActions
     {
-        void OnLeftHand(InputAction.CallbackContext context);
-        void OnRightHand(InputAction.CallbackContext context);
+        void OnPickupItem(InputAction.CallbackContext context);
     }
 }

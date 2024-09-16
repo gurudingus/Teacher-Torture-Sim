@@ -6,18 +6,9 @@
             "id": "ca65c367-ad1f-41a7-b250-da03a059cae5",
             "actions": [
                 {
-                    "name": "Left Hand",
+                    "name": "PickupItem",
                     "type": "Button",
                     "id": "54d16d58-8ca3-4e7a-bb38-64c878af91a0",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "Right Hand",
-                    "type": "Button",
-                    "id": "b6b9873c-7ffc-455e-9516-bcea3d23493d",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -26,26 +17,37 @@
             ],
             "bindings": [
                 {
-                    "name": "",
-                    "id": "3b1c2bab-e970-4de1-8795-0e5559390d83",
+                    "name": "1D Axis",
+                    "id": "e26aafa1-6c85-45ee-9d58-d4c57026b566",
+                    "path": "1DAxis",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "PickupItem",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "negative",
+                    "id": "ba430647-badc-4828-9360-51980fb8d9d4",
                     "path": "<Mouse>/leftButton",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Left Hand",
+                    "action": "PickupItem",
                     "isComposite": false,
-                    "isPartOfComposite": false
+                    "isPartOfComposite": true
                 },
                 {
-                    "name": "",
-                    "id": "092895cb-60b1-4d53-a866-6f9995f10876",
+                    "name": "positive",
+                    "id": "d59c4c72-9a69-45c4-a78f-60b596c9c4bd",
                     "path": "<Mouse>/rightButton",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Right Hand",
+                    "action": "PickupItem",
                     "isComposite": false,
-                    "isPartOfComposite": false
+                    "isPartOfComposite": true
                 }
             ]
         }

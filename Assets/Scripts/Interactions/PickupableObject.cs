@@ -1,14 +1,20 @@
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PickupableObject : MonoBehaviour
 {
-    private static List<PickupableObject> interactableObjects = new();
-
     [SerializeField] [Tooltip("Weight in kg")] private float mass = 1;
+    public static float Mass(PickupableObject pickupableObject) => pickupableObject == null ? 0 : pickupableObject.mass;
 
-    private void Awake()
+    [SerializeField] [Tooltip("The positon and rotation that will attempt to match whatever is defined on a pickup script")] private PositionRotation pickupTransform;
+
+    public void SetPosition(PositionRotation positionRotation, Transform _transform)
     {
-        interactableObjects.Add(this);
+        transform.position = positionRotation.GetPosition(_transform) - pickupTransform.Position;
+        transform.rotation = positionRotation.GetRotation(_transform) * Quaternion.Inverse(pickupTransform.Rotation);
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        PickupUtilities.DrawGizmos(pickupTransform.GetPosition(transform), pickupTransform.GetRotation(transform));
     }
 }
