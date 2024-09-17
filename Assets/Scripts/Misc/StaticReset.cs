@@ -10,18 +10,12 @@ public interface IResetStatic
 
 public static class StaticReset
 {
-    private static List<IResetStatic> subscribers; //A list of all objects implementing IStaticReset that will have a function that resets static variables to their default whenever the reset function in this script is called
+    private static List<IResetStatic> subscribers = new(); //A list of all objects implementing IStaticReset that will have a function that resets static variables to their default whenever the reset function in this script is called
 
     public static void ResetStatics()
     {
-        foreach (IResetStatic subscriber in subscribers)
-        {
-            subscriber.OnStaticReset();
-        }
+        foreach (IResetStatic subscriber in subscribers) subscriber.OnStaticReset();
     }
 
-    public static void Subscribe(IResetStatic subscriber)
-    {
-        subscribers.Add(subscriber);
-    }
+    public static void Subscribe(IResetStatic subscriber) => subscribers.Add(subscriber);
 }

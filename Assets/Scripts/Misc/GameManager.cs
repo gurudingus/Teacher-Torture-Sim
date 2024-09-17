@@ -8,56 +8,42 @@ using UnityEngine.SceneManagement;
 /// <summary>
 /// Anything that needs to have something happen when the gameState is changed can implement this interface
 /// </summary>
-public interface IGameEventSubscriber
+public interface IGameEvent
 {
     public abstract void OnGameEvent(GameState gameState);
 }
 
+public static class Events
+{
+    //Game event storage and manipulation
+    private static ulong eventsCompleted;
+    public static void SetEventComplete(GameEvents gameEvent) => eventsCompleted |= (ulong)1 << (int)gameEvent;
+    public static void SetEventIncomplete(GameEvents gameEvent) => eventsCompleted &= ~((ulong)1 << (int)gameEvent);
+    public static bool GetEventComplete(GameEvents gameEvent) => (eventsCompleted & (ulong)1 << (int)gameEvent) != 0;
+}
+
 public class GameManager : MonoBehaviour, IResetStatic
 {
-    private static ulong eventsCompleted;
+    //Game events
+    private static List<IGameEvent> subscribers = new(); //A list of all objects implementing IGameEventSubscriber that will have their OnGameEvent() function called whenever gameState is changed
 
-    public static void SetEventComplete(GameEvents gameEvent)
+    private static GameState state = GameState.Menu;
+    public static GameState gameState
     {
-        eventsCompleted |= (ulong)1 << (int)gameEvent;
+        get => state;
+        set
+        {
+            state = value;
+            foreach (IGameEvent subscriber in subscribers) subscriber.OnGameEvent(value);
+        }
     }
-
-    public static void SetEventIncomplete(GameEvents gameEvent)
-    {
-        eventsCompleted &= ~((ulong)1 << (int)gameEvent);
-    }
-
-    public static bool GetEventComplete(GameEvents gameEvent)
-    {
-        return (eventsCompleted & (ulong)1 << (int)gameEvent) != 0;
-    }
-
-    private static List<IGameEventSubscriber> subscribers; //A list of all objects implementing IGameEventSubscriber that will have their OnGameEvent() function called whenever gameState is changed
-
-    public static GameState gameState { get; private set; }
 
     private void Awake()
     {
         StaticReset.Subscribe(this);
     }
 
-    /// <summary>
-    /// Use this to set the game state and automatically call OnGameEvent() on all subscribed objects
-    /// </summary>
-    /// <param name="state"></param>
-    public void SetGameState(GameState state)
-    {
-        gameState = state;
-        foreach (IGameEventSubscriber subscriber in subscribers)
-        {
-            subscriber.OnGameEvent(state);
-        }
-    }
-
-    public static void Subscribe(IGameEventSubscriber subscriber)
-    {
-        subscribers.Add(subscriber);
-    }
+    public static void Subscribe(IGameEvent subscriber) => subscribers.Add(subscriber);
 
     public static void LoadLevel(string sceneName)
     {
@@ -67,7 +53,7 @@ public class GameManager : MonoBehaviour, IResetStatic
 
     public void OnStaticReset()
     {
-        gameState = GameState.Menu;
+        state = GameState.Menu;
     }
 }
 
