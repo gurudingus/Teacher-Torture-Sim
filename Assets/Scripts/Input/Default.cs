@@ -83,7 +83,7 @@ public partial class @Default: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""73ab66e6-39d3-4f90-bf75-2bf2df75dd84"",
-                    ""path"": ""<Keyboard>/space"",
+                    ""path"": ""<Keyboard>/e"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
