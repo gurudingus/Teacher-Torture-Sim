@@ -7,6 +7,7 @@ public class ComputerButton : MonoBehaviour
 {
 
     public CameraScript cameraScript;
+    public GameObject door;
     public void PanelManage(GameObject panel)
     {
         bool on = panel.activeInHierarchy;
@@ -16,5 +17,15 @@ public class ComputerButton : MonoBehaviour
     public void quit()
     {
         cameraScript.ComputerInteraction();
+    }
+
+    public void openDoor()
+    {
+        Destroy(door);
+    }
+
+    public void installVirus()
+    {
+        Events.SetEventComplete(GameEvents.Ending1);
     }
 }
