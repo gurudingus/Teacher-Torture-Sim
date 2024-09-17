@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -11,15 +10,6 @@ using UnityEngine.SceneManagement;
 public interface IGameEvent
 {
     public abstract void OnGameEvent(GameState gameState);
-}
-
-public static class Events
-{
-    //Game event storage and manipulation
-    private static ulong eventsCompleted;
-    public static void SetEventComplete(GameEvents gameEvent) => eventsCompleted |= (ulong)1 << (int)gameEvent;
-    public static void SetEventIncomplete(GameEvents gameEvent) => eventsCompleted &= ~((ulong)1 << (int)gameEvent);
-    public static bool GetEventComplete(GameEvents gameEvent) => (eventsCompleted & (ulong)1 << (int)gameEvent) != 0;
 }
 
 public class GameManager : MonoBehaviour, IResetStatic
@@ -41,6 +31,7 @@ public class GameManager : MonoBehaviour, IResetStatic
     private void Awake()
     {
         StaticReset.Subscribe(this);
+        Events.IOTest();
     }
 
     public static void Subscribe(IGameEvent subscriber) => subscribers.Add(subscriber);
@@ -62,17 +53,4 @@ public enum GameState
     Menu,
     Playing,
     Paused
-}
-
-public enum GameEvents
-{
-    Ending1,
-    Ending2,
-    Ending3,
-    Ending4,
-    Ending5,
-    Ending6,
-    Ending7,
-    Ending8,
-    Ending9
 }
