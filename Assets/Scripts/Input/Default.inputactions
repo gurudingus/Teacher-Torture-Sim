@@ -2,13 +2,22 @@
     "name": "Default",
     "maps": [
         {
-            "name": "Pickup-Throw",
+            "name": "Interactions",
             "id": "ca65c367-ad1f-41a7-b250-da03a059cae5",
             "actions": [
                 {
                     "name": "PickupItem",
                     "type": "Button",
                     "id": "54d16d58-8ca3-4e7a-bb38-64c878af91a0",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "ComputerInteraction",
+                    "type": "Button",
+                    "id": "53e41e15-d950-4fd8-99b5-ed1db44594a4",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -48,8 +57,25 @@
                     "action": "PickupItem",
                     "isComposite": false,
                     "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "73ab66e6-39d3-4f90-bf75-2bf2df75dd84",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ComputerInteraction",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "Camera",
+            "id": "0251f851-be4d-459b-b82e-878bc0c6531b",
+            "actions": [],
+            "bindings": []
         }
     ],
     "controlSchemes": []

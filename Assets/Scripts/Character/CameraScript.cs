@@ -1,5 +1,13 @@
 using UnityEngine;
 
+/*
+enum CameraState
+{
+    Player,
+    Computer
+}
+*/
+
 public class CameraScript : MonoBehaviour
 {
     private float rotateCameraPitch;
@@ -12,14 +20,25 @@ public class CameraScript : MonoBehaviour
 
     public GameObject player;
 
+    //#region added by Liam
+    private CharacterController characterController;
+    private MeshRenderer meshRenderer;
+    //#endregion added by Liam
+
     public Transform camPos;
     public Transform playerPos;
 
+    //private CameraState camState = CameraState.Player;
     private int camState = 0;
 
     private void Awake()
     {
         firstPersonCam = GetComponentInChildren<Camera>();
+
+        //#region added by Liam
+        characterController = player.GetComponent<CharacterController>();
+        meshRenderer = player.GetComponent<MeshRenderer>();
+        //#endregion added by Liam
     }
 
     private void Start()
@@ -31,7 +50,7 @@ public class CameraScript : MonoBehaviour
     void Update()
     {
         //cam state 0 is for the player camera
-        if (camState == 0)
+        if (camState == 0 /*CameraState.Player*/)
         {
             moveToPos(false);
             //rotate player around
@@ -44,6 +63,11 @@ public class CameraScript : MonoBehaviour
             rotateCameraPitch = Mathf.Clamp(rotateCameraPitch, -pitchRange, pitchRange);
             firstPersonCam.transform.localRotation = Quaternion.Euler(rotateCameraPitch, 0, 0);
 
+
+
+            //Superseded by the new input system stuff
+
+            /*
             if (Input.GetButtonDown("Jump"))
             {
                 camState = 1;
@@ -51,7 +75,14 @@ public class CameraScript : MonoBehaviour
                 player.GetComponent<CharacterController>().enabled = false;
                 player.GetComponent<MeshRenderer>().enabled = false;
             }
+            */
         }
+
+
+
+        //Superseded by the new input system stuff
+
+        /*
         //cam state 1 is for the computer camera
         else if (camState == 1)
         {
@@ -62,10 +93,19 @@ public class CameraScript : MonoBehaviour
                 Cursor.lockState = CursorLockMode.Locked;
                 player.GetComponent<CharacterController>().enabled = true;
                 player.GetComponent<MeshRenderer>().enabled = true;
-            }
-            
+            }   
         }
+        */
+    }
 
+    private void ComputerInteraction() {
+        camState = 1 - camState; //camState = camState == CameraState.Player ? CameraState.Computer : CameraState.Player;
+
+        bool isPlayer = camState == 1 /*camState == CameraState.Computer*/;
+
+        Cursor.lockState = isPlayer ? CursorLockMode.Locked : CursorLockMode.None;
+        characterController.enabled = isPlayer;
+        meshRenderer.enabled = isPlayer;
     }
 
     //sets camera to the correct 

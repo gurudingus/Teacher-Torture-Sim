@@ -24,13 +24,22 @@ public partial class @Default: IInputActionCollection2, IDisposable
     ""name"": ""Default"",
     ""maps"": [
         {
-            ""name"": ""Pickup-Throw"",
+            ""name"": ""Interactions"",
             ""id"": ""ca65c367-ad1f-41a7-b250-da03a059cae5"",
             ""actions"": [
                 {
                     ""name"": ""PickupItem"",
                     ""type"": ""Button"",
                     ""id"": ""54d16d58-8ca3-4e7a-bb38-64c878af91a0"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ComputerInteraction"",
+                    ""type"": ""Button"",
+                    ""id"": ""53e41e15-d950-4fd8-99b5-ed1db44594a4"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -70,15 +79,35 @@ public partial class @Default: IInputActionCollection2, IDisposable
                     ""action"": ""PickupItem"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""73ab66e6-39d3-4f90-bf75-2bf2df75dd84"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ComputerInteraction"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""Camera"",
+            ""id"": ""0251f851-be4d-459b-b82e-878bc0c6531b"",
+            ""actions"": [],
+            ""bindings"": []
         }
     ],
     ""controlSchemes"": []
 }");
-        // Pickup-Throw
-        m_PickupThrow = asset.FindActionMap("Pickup-Throw", throwIfNotFound: true);
-        m_PickupThrow_PickupItem = m_PickupThrow.FindAction("PickupItem", throwIfNotFound: true);
+        // Interactions
+        m_Interactions = asset.FindActionMap("Interactions", throwIfNotFound: true);
+        m_Interactions_PickupItem = m_Interactions.FindAction("PickupItem", throwIfNotFound: true);
+        m_Interactions_ComputerInteraction = m_Interactions.FindAction("ComputerInteraction", throwIfNotFound: true);
+        // Camera
+        m_Camera = asset.FindActionMap("Camera", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -137,53 +166,103 @@ public partial class @Default: IInputActionCollection2, IDisposable
         return asset.FindBinding(bindingMask, out action);
     }
 
-    // Pickup-Throw
-    private readonly InputActionMap m_PickupThrow;
-    private List<IPickupThrowActions> m_PickupThrowActionsCallbackInterfaces = new List<IPickupThrowActions>();
-    private readonly InputAction m_PickupThrow_PickupItem;
-    public struct PickupThrowActions
+    // Interactions
+    private readonly InputActionMap m_Interactions;
+    private List<IInteractionsActions> m_InteractionsActionsCallbackInterfaces = new List<IInteractionsActions>();
+    private readonly InputAction m_Interactions_PickupItem;
+    private readonly InputAction m_Interactions_ComputerInteraction;
+    public struct InteractionsActions
     {
         private @Default m_Wrapper;
-        public PickupThrowActions(@Default wrapper) { m_Wrapper = wrapper; }
-        public InputAction @PickupItem => m_Wrapper.m_PickupThrow_PickupItem;
-        public InputActionMap Get() { return m_Wrapper.m_PickupThrow; }
+        public InteractionsActions(@Default wrapper) { m_Wrapper = wrapper; }
+        public InputAction @PickupItem => m_Wrapper.m_Interactions_PickupItem;
+        public InputAction @ComputerInteraction => m_Wrapper.m_Interactions_ComputerInteraction;
+        public InputActionMap Get() { return m_Wrapper.m_Interactions; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
         public bool enabled => Get().enabled;
-        public static implicit operator InputActionMap(PickupThrowActions set) { return set.Get(); }
-        public void AddCallbacks(IPickupThrowActions instance)
+        public static implicit operator InputActionMap(InteractionsActions set) { return set.Get(); }
+        public void AddCallbacks(IInteractionsActions instance)
         {
-            if (instance == null || m_Wrapper.m_PickupThrowActionsCallbackInterfaces.Contains(instance)) return;
-            m_Wrapper.m_PickupThrowActionsCallbackInterfaces.Add(instance);
+            if (instance == null || m_Wrapper.m_InteractionsActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_InteractionsActionsCallbackInterfaces.Add(instance);
             @PickupItem.started += instance.OnPickupItem;
             @PickupItem.performed += instance.OnPickupItem;
             @PickupItem.canceled += instance.OnPickupItem;
+            @ComputerInteraction.started += instance.OnComputerInteraction;
+            @ComputerInteraction.performed += instance.OnComputerInteraction;
+            @ComputerInteraction.canceled += instance.OnComputerInteraction;
         }
 
-        private void UnregisterCallbacks(IPickupThrowActions instance)
+        private void UnregisterCallbacks(IInteractionsActions instance)
         {
             @PickupItem.started -= instance.OnPickupItem;
             @PickupItem.performed -= instance.OnPickupItem;
             @PickupItem.canceled -= instance.OnPickupItem;
+            @ComputerInteraction.started -= instance.OnComputerInteraction;
+            @ComputerInteraction.performed -= instance.OnComputerInteraction;
+            @ComputerInteraction.canceled -= instance.OnComputerInteraction;
         }
 
-        public void RemoveCallbacks(IPickupThrowActions instance)
+        public void RemoveCallbacks(IInteractionsActions instance)
         {
-            if (m_Wrapper.m_PickupThrowActionsCallbackInterfaces.Remove(instance))
+            if (m_Wrapper.m_InteractionsActionsCallbackInterfaces.Remove(instance))
                 UnregisterCallbacks(instance);
         }
 
-        public void SetCallbacks(IPickupThrowActions instance)
+        public void SetCallbacks(IInteractionsActions instance)
         {
-            foreach (var item in m_Wrapper.m_PickupThrowActionsCallbackInterfaces)
+            foreach (var item in m_Wrapper.m_InteractionsActionsCallbackInterfaces)
                 UnregisterCallbacks(item);
-            m_Wrapper.m_PickupThrowActionsCallbackInterfaces.Clear();
+            m_Wrapper.m_InteractionsActionsCallbackInterfaces.Clear();
             AddCallbacks(instance);
         }
     }
-    public PickupThrowActions @PickupThrow => new PickupThrowActions(this);
-    public interface IPickupThrowActions
+    public InteractionsActions @Interactions => new InteractionsActions(this);
+
+    // Camera
+    private readonly InputActionMap m_Camera;
+    private List<ICameraActions> m_CameraActionsCallbackInterfaces = new List<ICameraActions>();
+    public struct CameraActions
+    {
+        private @Default m_Wrapper;
+        public CameraActions(@Default wrapper) { m_Wrapper = wrapper; }
+        public InputActionMap Get() { return m_Wrapper.m_Camera; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(CameraActions set) { return set.Get(); }
+        public void AddCallbacks(ICameraActions instance)
+        {
+            if (instance == null || m_Wrapper.m_CameraActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_CameraActionsCallbackInterfaces.Add(instance);
+        }
+
+        private void UnregisterCallbacks(ICameraActions instance)
+        {
+        }
+
+        public void RemoveCallbacks(ICameraActions instance)
+        {
+            if (m_Wrapper.m_CameraActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        public void SetCallbacks(ICameraActions instance)
+        {
+            foreach (var item in m_Wrapper.m_CameraActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_CameraActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    public CameraActions @Camera => new CameraActions(this);
+    public interface IInteractionsActions
     {
         void OnPickupItem(InputAction.CallbackContext context);
+        void OnComputerInteraction(InputAction.CallbackContext context);
+    }
+    public interface ICameraActions
+    {
     }
 }
