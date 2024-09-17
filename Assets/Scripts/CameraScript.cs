@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class CameraScript : MonoBehaviour
@@ -50,7 +48,7 @@ public class CameraScript : MonoBehaviour
             {
                 camState = 1;
                 Cursor.lockState = CursorLockMode.None;
-                player.GetComponent<CharacterControler>().enabled = false;
+                player.GetComponent<CharacterController>().enabled = false;
                 player.GetComponent<MeshRenderer>().enabled = false;
             }
         }
@@ -62,7 +60,7 @@ public class CameraScript : MonoBehaviour
             {
                 camState = 0;
                 Cursor.lockState = CursorLockMode.Locked;
-                player.GetComponent<CharacterControler>().enabled = true;
+                player.GetComponent<CharacterController>().enabled = true;
                 player.GetComponent<MeshRenderer>().enabled = true;
             }
             
