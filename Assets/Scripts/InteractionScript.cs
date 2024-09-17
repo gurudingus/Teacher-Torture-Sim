@@ -14,21 +14,14 @@ public class InteractionScript : MonoBehaviour
     {
         
     }
-
-    // Update is called once per frame
-    void Update()
-
-        //make sure to make the event in the interaction script "Interact" and add IInteractable after monobehavior
+    private void OnComputerInteraction()
     {
-        if (Input.GetKeyDown(KeyCode.E))
+        Ray r = new Ray(InteractorSource.position, InteractorSource.forward);
+        if (Physics.Raycast(r, out RaycastHit hitInfo, InteractRange))
         {
-            Ray r = new Ray(InteractorSource.position, InteractorSource.forward);
-            if (Physics.Raycast(r, out RaycastHit hitInfo, InteractRange))
+            if (hitInfo.collider.gameObject.TryGetComponent(out IInteractable interactOBJ))
             {
-                if (hitInfo.collider.gameObject.TryGetComponent(out IInteractable interactOBJ))
-                {
-                    interactOBJ.Interact();
-                }
+                interactOBJ.Interact();
             }
         }
     }

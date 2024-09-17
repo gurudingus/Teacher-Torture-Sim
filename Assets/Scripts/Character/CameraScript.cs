@@ -1,12 +1,11 @@
 using UnityEngine;
 
-/*
-enum CameraState
+
+public enum CameraState
 {
     Player,
     Computer
 }
-*/
 
 public class CameraScript : MonoBehaviour
 {
@@ -28,8 +27,7 @@ public class CameraScript : MonoBehaviour
     public Transform camPos;
     public Transform playerPos;
 
-    //private CameraState camState = CameraState.Player;
-    private int camState = 0;
+    public CameraState camState = CameraState.Player;
 
     private void Awake()
     {
@@ -50,7 +48,7 @@ public class CameraScript : MonoBehaviour
     void Update()
     {
         //cam state 0 is for the player camera
-        if (camState == 0 /*CameraState.Player*/)
+        if (camState == CameraState.Player)
         {
             moveToPos(false);
             //rotate player around
@@ -62,46 +60,20 @@ public class CameraScript : MonoBehaviour
             //lock rotation so no flip camera
             rotateCameraPitch = Mathf.Clamp(rotateCameraPitch, -pitchRange, pitchRange);
             firstPersonCam.transform.localRotation = Quaternion.Euler(rotateCameraPitch, 0, 0);
-
-
-
-            //Superseded by the new input system stuff
-
-            /*
-            if (Input.GetButtonDown("Jump"))
-            {
-                camState = 1;
-                Cursor.lockState = CursorLockMode.None;
-                player.GetComponent<CharacterController>().enabled = false;
-                player.GetComponent<MeshRenderer>().enabled = false;
-            }
-            */
         }
-
-
-
-        //Superseded by the new input system stuff
-
-        /*
-        //cam state 1 is for the computer camera
-        else if (camState == 1)
+        else if (camState == CameraState.Computer)
         {
-            moveToPos(true);
-            if (Input.GetButtonDown("Jump"))
-            {
-                camState = 0;
-                Cursor.lockState = CursorLockMode.Locked;
-                player.GetComponent<CharacterController>().enabled = true;
-                player.GetComponent<MeshRenderer>().enabled = true;
-            }   
+            bool isPlayer = camState == CameraState.Player;
+
+            moveToPos(!isPlayer);
         }
-        */
+        
     }
 
-    private void ComputerInteraction() {
-        camState = 1 - camState; //camState = camState == CameraState.Player ? CameraState.Computer : CameraState.Player;
+    public void ComputerInteraction() {
+        camState = camState == CameraState.Player ? CameraState.Computer : CameraState.Player;
 
-        bool isPlayer = camState == 1 /*camState == CameraState.Computer*/;
+        bool isPlayer = camState == CameraState.Player;
 
         Cursor.lockState = isPlayer ? CursorLockMode.Locked : CursorLockMode.None;
         characterController.enabled = isPlayer;

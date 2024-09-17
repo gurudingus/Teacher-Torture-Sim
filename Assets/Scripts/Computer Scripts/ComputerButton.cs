@@ -15,6 +15,6 @@ public class ComputerButton : MonoBehaviour
 
     public void quit()
     {
-        cameraScript.moveToPos(false);
+        cameraScript.ComputerInteraction();
     }
 }
