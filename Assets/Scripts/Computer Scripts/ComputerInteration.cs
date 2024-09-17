@@ -5,6 +5,6 @@ public class ComputerInteration : MonoBehaviour, IInteractable
     public CameraScript cameraScript;
     public void Interact()
     {
-        cameraScript.moveToPos(false);
+        cameraScript.moveToPos(true);
     }
 }

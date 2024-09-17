@@ -17,6 +17,8 @@ public class InteractionScript : MonoBehaviour
 
     // Update is called once per frame
     void Update()
+
+        //make sure to make the event in the interaction script "Interact" and add IInteractable after monobehavior
     {
         if (Input.GetKeyDown(KeyCode.E))
         {
