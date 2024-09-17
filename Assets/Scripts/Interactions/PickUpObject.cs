@@ -9,8 +9,8 @@ using PUO = PickupableObject; //This makes PickupableObject.Mass() slightly less
     [SerializeField] private float singleHandMaximumMass = 10f;
     [SerializeField] private float maximumRange = 2f;
 
-    [SerializeField] [Tooltip("The positon and rotation of the left hand (Black ball)")] private PositionRotation leftHandTransform = new(-0.5f, 0f, 0.5f);
-    [SerializeField] [Tooltip("The positon and rotation of the right hand (White ball)")] private PositionRotation rightHandTransform = new(0.5f, 0f, 0.5f);
+    [SerializeField] [Tooltip("The positon and rotation of the left hand (Black ball)")] private PositionRotation leftHandTransform = new(new Vector3(-0.5f, 0.5f, 1f), Quaternion.Euler(0f, 0f, 15f));
+    [SerializeField] [Tooltip("The positon and rotation of the right hand (White ball)")] private PositionRotation rightHandTransform = new(new Vector3(0.5f, 0.5f, 1f), Quaternion.Euler(0f, 0f, -15f));
     private PositionRotation middleHandTransform; //The position that objects will be in when they are 
 
     //Fields
@@ -29,32 +29,34 @@ using PUO = PickupableObject; //This makes PickupableObject.Mass() slightly less
 
     void Update()
     {
-        objectLeftHand.SetPosition(leftHandTransform, transform);
+        //Todo: Make sure that double hand holding works correctly / checking which object is in the other hand to make sure you can't half pick up 2 heavy objects -> line ~45 for pick up handling, here for position handling
+
+        objectLeftHand?.SetPosition(leftHandTransform, transform); //Currently only have basic single hand holding done with only basic null handling
+        objectRightHand?.SetPosition(rightHandTransform, transform);
     }
 
     private void OnPickupItem(InputValue input)
     {
-        if (CheckHandRay(out PUO pickupableObject))
-        {
-            if (PUO.Mass(pickupableObject) > singleHandMaximumMass)
-            {
-                //TODO - Handle double handed pickup logic here, for now is just an early return
-                Debug.Log("Object was too heavy");
-                return;
-            }
+        if (!CheckHandRay(out PUO pickupableObject)) return;
 
-            switch (input.Get<float>()) {
-                case -1: //Gross floating point comparisons that do thankfully work properly
-                    objectLeftHand = pickupableObject;
-                    break;
-                case 1:
-                    objectRightHand = pickupableObject;
-                    break;
-            }
+        if (pickupableObject?.Mass > singleHandMaximumMass)
+        {
+            //TODO - Handle double handed pickup logic here, for now is just an early return
+            Debug.Log("Object was too heavy");
+            return;
         }
 
-        Debug.Log($"Left: {PUO.Mass(objectLeftHand)}");
-        Debug.Log($"Right: {PUO.Mass(objectRightHand)}");
+        switch (input.Get<float>()) {
+            case -1: //Gross floating point comparisons that do thankfully work properly
+                objectLeftHand = pickupableObject;
+                break;
+            case 1:
+                objectRightHand = pickupableObject;
+                break;
+        }
+
+        Debug.Log($"Left: {objectLeftHand?.Mass}");
+        Debug.Log($"Right: {objectRightHand?.Mass}");
     }
 
     private bool CheckHandRay(out PUO obj)

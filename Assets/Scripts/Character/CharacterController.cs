@@ -1,10 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class CharacterControler : MonoBehaviour
+//I've added this using in so now this class is spelled correctly and you can use UCharacterController when referring to the Unity class
+using UCharacterController = UnityEngine.CharacterController;
+
+public class CharacterController : MonoBehaviour
 {
-    //veriables
+    //variables
 
      
     public float movementSpeed = 5f;
@@ -20,11 +21,11 @@ public class CharacterControler : MonoBehaviour
     private float terminalVelocity = 53f;
     private float verticalVelocity;
 
-    private CharacterController characterController;
+    private UCharacterController characterController;
 
     void Awake()
     {
-        characterController = GetComponent<CharacterController>();
+        characterController = GetComponent<UCharacterController>();
     }
 
     void Update()

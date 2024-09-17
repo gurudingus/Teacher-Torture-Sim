@@ -6,7 +6,7 @@ using Unity.Mathematics;
 /// Kind of like a Transform but it only stores position and rotation, as well as only doing what I need it to. Currently it is tailored towards the object pickup related scripts.
 /// </summary>
 [Serializable] public class PositionRotation {
-    //Fields and ''''accessors''''
+    //Fields, accessors and ''''accessors''''
     [SerializeField] private Vector3 position = Vector3.zero;
     public Vector3 Position => position;
     public Vector3 GetPosition(Transform transform) => transform.position + (Vector3)(transform.localToWorldMatrix * position);
