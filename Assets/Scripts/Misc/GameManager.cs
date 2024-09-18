@@ -31,15 +31,15 @@ public class GameManager : MonoBehaviour, IResetStatic
     private void Awake()
     {
         StaticReset.Subscribe(this);
-        Events.IOTest();
+        Events.LoadFromFile();
     }
 
     public static void Subscribe(IGameEvent subscriber) => subscribers.Add(subscriber);
 
     public static void LoadLevel(string sceneName)
     {
+        StaticReset.ResetStatics(); //This probably should happen before loading a new level, as otherwise anything that does get set on level load would be resets
         SceneManager.LoadScene(sceneName);
-        StaticReset.ResetStatics();
     }
 
     public void OnStaticReset()

@@ -26,6 +26,6 @@ public class ComputerButton : MonoBehaviour
 
     public void installVirus()
     {
-        Events.SetEventComplete(GameEvents.Ending1);
+        Events.SetEventComplete(GameEvent.Ending1);
     }
 }
