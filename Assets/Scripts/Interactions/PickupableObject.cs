@@ -13,32 +13,26 @@ using UnityEngine;
 
     public void SetPosition(PositionRotation positionRotation, Transform _transform)
     {
-        Vector3 positionOtherAnchor = positionRotation.GetPosition(_transform);
-        Vector3 vectorOriginToAnchor = pickupTransform.GetPosition(transform) - transform.position;
-
-        transform.position = positionOtherAnchor - vectorOriginToAnchor;
-        transform.rotation = positionRotation.GetRotation(_transform) * Quaternion.Inverse(pickupTransform.Rotation);
+        transform.position = positionRotation.GetPosition(_transform) - (Vector3)(transform.localToWorldMatrix * pickupTransform.Position); //Some funky maths to make the positions match
+        transform.rotation = positionRotation.GetRotation(_transform) * Quaternion.Inverse(pickupTransform.Rotation); //Some slightly less funky maths to make the rotations match
     }
 
     public bool PickUp(ref PickupableObject hand) //Bool return for switch hacking
     {
-        hand = this;
-        rigidbody.isKinematic = true;
+        hand = this; //Set the hand to be equal to this object
+        rigidbody.isKinematic = true; //Make this kinematic so that it is under the control of the PickupObject script
 
-        return true;
+        return true; //Garbage return because nice switch
     }
 
     public bool Throw(ref PickupableObject hand, Vector3 force) //Same thing with the bool return
     {
-        hand = null;
-        rigidbody.isKinematic = false;
-        rigidbody.AddForce(force, ForceMode.Impulse);
+        hand = null; //Empty the hand
+        rigidbody.isKinematic = false; //Back to physics control
+        rigidbody.AddForce(force, ForceMode.Impulse); //Launch the sucker
 
-        return true;
+        return true; //Same garbage return
     }
 
-    private void OnDrawGizmosSelected()
-    {
-        PickupUtilities.DrawGizmos(pickupTransform.GetPosition(transform), pickupTransform.GetRotation(transform));
-    }
+    private void OnDrawGizmosSelected() => PickupUtilities.DrawGizmos(pickupTransform.GetPosition(transform), pickupTransform.GetRotation(transform)); //Shows the anchor that is used for the pickup
 }

@@ -15,7 +15,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "ComputerInteraction",
+                    "name": "Interaction",
                     "type": "Button",
                     "id": "53e41e15-d950-4fd8-99b5-ed1db44594a4",
                     "expectedControlType": "Button",
@@ -65,7 +65,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "ComputerInteraction",
+                    "action": "Interaction",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

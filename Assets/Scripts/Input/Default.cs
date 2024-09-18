@@ -37,7 +37,7 @@ public partial class @Default: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""ComputerInteraction"",
+                    ""name"": ""Interaction"",
                     ""type"": ""Button"",
                     ""id"": ""53e41e15-d950-4fd8-99b5-ed1db44594a4"",
                     ""expectedControlType"": ""Button"",
@@ -87,7 +87,7 @@ public partial class @Default: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""ComputerInteraction"",
+                    ""action"": ""Interaction"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -105,7 +105,7 @@ public partial class @Default: IInputActionCollection2, IDisposable
         // Interactions
         m_Interactions = asset.FindActionMap("Interactions", throwIfNotFound: true);
         m_Interactions_PickupItem = m_Interactions.FindAction("PickupItem", throwIfNotFound: true);
-        m_Interactions_ComputerInteraction = m_Interactions.FindAction("ComputerInteraction", throwIfNotFound: true);
+        m_Interactions_Interaction = m_Interactions.FindAction("Interaction", throwIfNotFound: true);
         // Camera
         m_Camera = asset.FindActionMap("Camera", throwIfNotFound: true);
     }
@@ -170,13 +170,13 @@ public partial class @Default: IInputActionCollection2, IDisposable
     private readonly InputActionMap m_Interactions;
     private List<IInteractionsActions> m_InteractionsActionsCallbackInterfaces = new List<IInteractionsActions>();
     private readonly InputAction m_Interactions_PickupItem;
-    private readonly InputAction m_Interactions_ComputerInteraction;
+    private readonly InputAction m_Interactions_Interaction;
     public struct InteractionsActions
     {
         private @Default m_Wrapper;
         public InteractionsActions(@Default wrapper) { m_Wrapper = wrapper; }
         public InputAction @PickupItem => m_Wrapper.m_Interactions_PickupItem;
-        public InputAction @ComputerInteraction => m_Wrapper.m_Interactions_ComputerInteraction;
+        public InputAction @Interaction => m_Wrapper.m_Interactions_Interaction;
         public InputActionMap Get() { return m_Wrapper.m_Interactions; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -189,9 +189,9 @@ public partial class @Default: IInputActionCollection2, IDisposable
             @PickupItem.started += instance.OnPickupItem;
             @PickupItem.performed += instance.OnPickupItem;
             @PickupItem.canceled += instance.OnPickupItem;
-            @ComputerInteraction.started += instance.OnComputerInteraction;
-            @ComputerInteraction.performed += instance.OnComputerInteraction;
-            @ComputerInteraction.canceled += instance.OnComputerInteraction;
+            @Interaction.started += instance.OnInteraction;
+            @Interaction.performed += instance.OnInteraction;
+            @Interaction.canceled += instance.OnInteraction;
         }
 
         private void UnregisterCallbacks(IInteractionsActions instance)
@@ -199,9 +199,9 @@ public partial class @Default: IInputActionCollection2, IDisposable
             @PickupItem.started -= instance.OnPickupItem;
             @PickupItem.performed -= instance.OnPickupItem;
             @PickupItem.canceled -= instance.OnPickupItem;
-            @ComputerInteraction.started -= instance.OnComputerInteraction;
-            @ComputerInteraction.performed -= instance.OnComputerInteraction;
-            @ComputerInteraction.canceled -= instance.OnComputerInteraction;
+            @Interaction.started -= instance.OnInteraction;
+            @Interaction.performed -= instance.OnInteraction;
+            @Interaction.canceled -= instance.OnInteraction;
         }
 
         public void RemoveCallbacks(IInteractionsActions instance)
@@ -260,7 +260,7 @@ public partial class @Default: IInputActionCollection2, IDisposable
     public interface IInteractionsActions
     {
         void OnPickupItem(InputAction.CallbackContext context);
-        void OnComputerInteraction(InputAction.CallbackContext context);
+        void OnInteraction(InputAction.CallbackContext context);
     }
     public interface ICameraActions
     {

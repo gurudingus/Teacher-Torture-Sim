@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6254877277957987238}
   - component: {fileID: 4748428493005467749}
   - component: {fileID: 8694266136814032253}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Player_Camera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
@@ -133,6 +133,7 @@ MonoBehaviour:
   player: {fileID: 0}
   camPos: {fileID: 0}
   playerPos: {fileID: 0}
+  camState: 0
 --- !u!1 &6254877278795668985
 GameObject:
   m_ObjectHideFlags: 0
@@ -149,7 +150,7 @@ GameObject:
   - component: {fileID: 6254877278795668979}
   - component: {fileID: 7407999828984957411}
   - component: {fileID: 2098887506877627216}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Liam Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -311,7 +312,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2763a32105a6cd4a8617ef102a4009c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  singleHandMaximumMass: 10
   maximumRange: 2
   leftHandTransform:
     position: {x: -0.5, y: 0.5, z: 1}
@@ -319,3 +319,4 @@ MonoBehaviour:
   rightHandTransform:
     position: {x: 0.5, y: 0.5, z: 1}
     rotation: {x: 0, y: 0, z: -0.1305262, w: 0.9914449}
+  force: {x: 0, y: 0, z: 10}

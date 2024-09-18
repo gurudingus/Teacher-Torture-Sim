@@ -56,7 +56,6 @@ using PUO = PickupableObject; //This makes PickupableObject.Mass() slightly less
                 Hand.Right => rightHand.Throw(ref rightHand, Force),
                 _ => false
             };
-
             return;
         }
 
@@ -75,25 +74,22 @@ using PUO = PickupableObject; //This makes PickupableObject.Mass() slightly less
             Hand.Right => pickupableObject.PickUp(ref rightHand),
             _ => false
         };
-
-        Debug.Log($"Left: {leftHand?.Mass}");
-        Debug.Log($"Right: {rightHand?.Mass}");
     }
 
     private bool CheckHandRay(out PUO obj)
     {
         if (!Physics.Raycast(camera.transform.position, camera.transform.forward, out RaycastHit handRaycast, maximumRange)) //TODO - Use a layer system for objects that can be picked up
-        { //Early return if the raycast hits nothing
+        { 
             obj = null;
-            return false;
+            return false; //Early return if the raycast hits nothing
         }
 
         PUO pickupableObject = handRaycast.transform.gameObject.GetComponent<PUO>();
 
-        if (pickupableObject == null) //Early return if the hit object has no PickupableObject component. Is likely unnecessary if I end up implementing a layer for it
+        if (pickupableObject == null) 
         {
             obj = null;
-            return false;
+            return false; //Early return if the hit object has no PickupableObject component. Is probably unnecessary if I end up implementing a layer for it
         }
 
         obj = pickupableObject;
