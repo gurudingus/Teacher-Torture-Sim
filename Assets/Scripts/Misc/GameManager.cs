@@ -52,5 +52,6 @@ public enum GameState
 {
     Menu,
     Playing,
-    Paused
+    Paused,
+    Cutscene
 }

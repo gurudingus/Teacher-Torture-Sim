@@ -8,6 +8,9 @@ public class ComputerButton : MonoBehaviour
 
     public CameraScript cameraScript;
     public GameObject door;
+
+    public GameObject playerCamera;
+    public GameObject cutsceneCamera;
     public void PanelManage(GameObject panel)
     {
         bool on = panel.activeInHierarchy;
@@ -26,6 +29,10 @@ public class ComputerButton : MonoBehaviour
 
     public void installVirus()
     {
-        Events.SetEventComplete(GameEvent.Ending1);
+        playerCamera.SetActive(false);
+        cutsceneCamera.SetActive(true);
+
+        cameraScript.ComputerInteraction();
+        GameManager.gameState = GameState.Cutscene;
     }
 }
