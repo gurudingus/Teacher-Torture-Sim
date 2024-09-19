@@ -19,7 +19,7 @@ public class ComputerButton : MonoBehaviour
 
     public void quit()
     {
-        cameraScript.ComputerInteraction();
+        cameraScript.ComputerInteraction(null);
     }
 
     public void openDoor()
@@ -32,7 +32,7 @@ public class ComputerButton : MonoBehaviour
         playerCamera.SetActive(false);
         cutsceneCamera.SetActive(true);
 
-        cameraScript.ComputerInteraction();
+        cameraScript.ComputerInteraction(null);
         GameManager.gameState = GameState.Cutscene;
     }
 }

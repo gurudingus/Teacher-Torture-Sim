@@ -50,12 +50,9 @@ using PUO = PickupableObject; //This makes PickupableObject.Mass() slightly less
 
         if (clickedHandHasItem) //If the current hand has an item in it, throw it and return from the function
         {
-            bool _1 = hand switch
-            {
-                Hand.Left => leftHand.Throw(ref leftHand, Force),
-                Hand.Right => rightHand.Throw(ref rightHand, Force),
-                _ => false
-            };
+            if (hand == Hand.Left) leftHand.Throw(ref leftHand, Force);
+            else if (hand == Hand.Right) rightHand.Throw(ref rightHand, Force);
+
             return;
         }
 
@@ -68,23 +65,19 @@ using PUO = PickupableObject; //This makes PickupableObject.Mass() slightly less
         //    return;
         //}
 
-        bool _ = hand switch //Pick up an item in the appropriate hand
-        {
-            Hand.Left => pickupableObject.PickUp(ref leftHand),
-            Hand.Right => pickupableObject.PickUp(ref rightHand),
-            _ => false
-        };
+        pickupableObject.PickUp(ref hand == Hand.Left ? ref leftHand : ref rightHand);
     }
 
     private bool CheckHandRay(out PUO obj)
     {
-        if (!Physics.Raycast(camera.transform.position, camera.transform.forward, out RaycastHit handRaycast, maximumRange)) //TODO - Use a layer system for objects that can be picked up
+        if (!Physics.Raycast(camera.transform.position, camera.transform.forward, out RaycastHit handRaycast, maximumRange, ~(1 << 6))) //TODO - Use a layer system for objects that can be picked up
         { 
             obj = null;
             return false; //Early return if the raycast hits nothing
         }
 
         PUO pickupableObject = handRaycast.transform.gameObject.GetComponent<PUO>();
+        Debug.Log(handRaycast.transform.gameObject.name);
 
         if (pickupableObject == null) 
         {

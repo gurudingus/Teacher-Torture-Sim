@@ -17,43 +17,39 @@ public class CameraScript : MonoBehaviour
 
     public float pitchRange = 60f;
 
-    public GameObject player;
-
-    //#region added by Liam
     private CharacterController characterController;
     private MeshRenderer meshRenderer;
-    //#endregion added by Liam
 
-    public Transform camPos;
-    public Transform playerPos;
+    private Transform computerCamera;
+    private Vector3 camOffset;
 
     public CameraState camState = CameraState.Player;
 
     private void Awake()
     {
         firstPersonCam = GetComponentInChildren<Camera>();
+        camOffset = firstPersonCam.transform.localPosition;
 
-        //#region added by Liam
-        characterController = player.GetComponent<CharacterController>();
-        meshRenderer = player.GetComponent<MeshRenderer>();
-        //#endregion added by Liam
+        computerCamera = GameObject.Find("CamPos")?.transform;
+
+        characterController = transform.parent.GetComponent<CharacterController>();
+        meshRenderer = transform.parent.GetComponent<MeshRenderer>();
     }
 
     private void Start()
     {
-       Cursor.lockState = CursorLockMode.Locked;
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
-    // Update is called once per frame
     void Update()
     {
-        //cam state 0 is for the player camera
+        MoveToPos(camState == CameraState.Computer);
+
         if (camState == CameraState.Player)
         {
-            moveToPos(false);
             //rotate player around
             float rotateYaw = Input.GetAxis("Mouse X") * mouseSensitivity;
-            player.transform.Rotate(0, rotateYaw, 0);
+            transform.parent.transform.Rotate(0, rotateYaw, 0);
 
             //rotate cam up and down
             rotateCameraPitch += -Input.GetAxis("Mouse Y") * mouseSensitivity;
@@ -61,17 +57,11 @@ public class CameraScript : MonoBehaviour
             rotateCameraPitch = Mathf.Clamp(rotateCameraPitch, -pitchRange, pitchRange);
             firstPersonCam.transform.localRotation = Quaternion.Euler(rotateCameraPitch, 0, 0);
         }
-        else if (camState == CameraState.Computer)
-        {
-            bool isPlayer = camState == CameraState.Player;
-
-            moveToPos(!isPlayer);
-        }
-        
     }
 
-    public void ComputerInteraction() {
-        camState = camState == CameraState.Player ? CameraState.Computer : CameraState.Player;
+    public void ComputerInteraction(InteractionScript source)
+    {
+        camState = camState == CameraState.Player ? CameraState.Computer : CameraState.Player; //Swap the camera state
 
         bool isPlayer = camState == CameraState.Player;
 
@@ -81,16 +71,16 @@ public class CameraScript : MonoBehaviour
     }
 
     //sets camera to the correct 
-    public void moveToPos(bool position)
+    public void MoveToPos(bool position)
     {
-        if (position == false)
+        if (!position)
         {
-            transform.position = Vector3.Lerp(transform.position, playerPos.position, Time.deltaTime * 10);
+            transform.position = Vector3.Lerp(transform.position, (Vector3)(transform.parent.localToWorldMatrix * camOffset) + transform.parent.position, Time.deltaTime * 10);
         }
-        else if (position == true)
+        else if (position)
         {
-            transform.position = Vector3.Lerp(transform.position, camPos.position, Time.deltaTime * 10);
-            transform.rotation = Quaternion.Euler(0f,0f,0f);
+            transform.position = Vector3.Lerp(transform.position, computerCamera.position, Time.deltaTime * 10);
+            transform.rotation = Quaternion.identity;
         }
     }
 }

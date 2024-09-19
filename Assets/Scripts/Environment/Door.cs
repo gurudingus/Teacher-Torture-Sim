@@ -12,7 +12,7 @@ public class Door : MonoBehaviour, IInteractable {
     private void Awake() => openingSpeed = openingAngle / openingTime; //Also make sure it's set properly on awake
     private void OnValidate() => openingSpeed = openingAngle / openingTime; //Make sure this gets updated whenever you change the values in the inspector
 
-    public void Interact()
+    public void Interact(InteractionScript source)
     {
         if (doorLocked) return; //Cancel all further interaction if the door is locked
 
