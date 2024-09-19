@@ -41,6 +41,7 @@ interface IInteractable
         if (camera != null) interactorSource = camera.transform;
     }
 
+    //Feel free to delete this. I rewrote this because I thought that the old code had some issue but no, this is just a more concise rewrite of the code.
     private void OnInteraction()
     {
         if (!Physics.Raycast(interactorSource.position, interactorSource.forward, out RaycastHit rayHit, interactRange, ~(1 << 6))) return; //Return if it hits nothing. Also has a layermask exclusion so that it doesn't pick up the player and cancel interactions
