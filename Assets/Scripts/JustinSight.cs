@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections;
 
-public class JustinSightCone : MonoBehaviour
+public class JustinSight : MonoBehaviour
 {
     public Transform target;
     Camera cam;
