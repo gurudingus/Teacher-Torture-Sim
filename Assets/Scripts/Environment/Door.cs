@@ -7,14 +7,22 @@ public class Door : MonoBehaviour, IInteractable {
     [SerializeField] [Tooltip("Opening time in seconds")] private float openingTime = 0.5f;
     private float openingSpeed = 180f;
 
-    private bool doorLocked = false;
+    private bool locked = false;
+    public bool Locked
+    {
+        set
+        {
+            locked = value;
+            if (locked) angle = 0;
+        }
+    }
 
     private void Awake() => openingSpeed = openingAngle / openingTime; //Also make sure it's set properly on awake
     private void OnValidate() => openingSpeed = openingAngle / openingTime; //Make sure this gets updated whenever you change the values in the inspector
 
     public void Interact(InteractionScript source)
     {
-        if (doorLocked) return; //Cancel all further interaction if the door is locked
+        if (locked) return; //Cancel all further interaction if the door is locked
 
         StopAllCoroutines(); //Cancel all coroutines to make sure you don't get a lock halfway through where both coroutines are forever pulling the door open and closed at the same time
 
