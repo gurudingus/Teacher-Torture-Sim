@@ -6,6 +6,7 @@ public class Door : MonoBehaviour, IInteractable
     [SerializeField][Tooltip("Opening time in seconds")] private float openingTime = 0.5f;
     [SerializeField][Tooltip("Opening angle in degrees")] private float openingAngle = 90f;
     private float openingSpeed = 180f;
+    private float defaultAngle = 0;
     private float angle = 0;
 
     private bool locked = false;
@@ -14,12 +15,16 @@ public class Door : MonoBehaviour, IInteractable
         set
         {
             locked = value;
-            if (locked) angle = 0;
-            //if (locked) angle = 0;
+            if (locked) angle = defaultAngle;
         }
     }
 
-    private void Awake() => openingSpeed = openingAngle / openingTime; //Also make sure it's set properly on awake
+    private void Awake()
+    {
+        openingSpeed = openingAngle / openingTime; //Also make sure it's set properly on awake
+        defaultAngle = transform.eulerAngles.y;
+    }
+
     private void OnValidate() => openingSpeed = openingAngle / openingTime; //Make sure this gets updated whenever you change the values in the inspector
 
     public void Interact(InteractionScript source)
@@ -39,7 +44,7 @@ public class Door : MonoBehaviour, IInteractable
             angle += Time.deltaTime * openingSpeed;
             if (angle > openingAngle) angle = openingAngle; //Guard to make sure it doesn't go past the bounds
 
-            transform.eulerAngles = new(0, angle, 0);
+            transform.eulerAngles = new(0, defaultAngle + angle, 0);
 
             yield return null;
         }
@@ -52,7 +57,7 @@ public class Door : MonoBehaviour, IInteractable
             angle -= Time.deltaTime * openingSpeed;
             if (angle < 0f) angle = 0f;
 
-            transform.eulerAngles = new(0, angle, 0);
+            transform.eulerAngles = new(0, defaultAngle + angle, 0);
 
             yield return null;
         }
