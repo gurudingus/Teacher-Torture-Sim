@@ -22,9 +22,11 @@ public class CutsceneManager : MonoBehaviour, IGameEvent
         
     }
 
-    public void cutsceneEnd()
+    public void cutsceneEnd(int ending)
     {
-        Events.SetEventComplete(GameEvent.Ending1);
+
+        Events.SetEventComplete((GameEvent)ending);
+
         SceneManager.LoadScene(0);
     }
 }
