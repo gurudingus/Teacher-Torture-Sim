@@ -9,7 +9,11 @@ using UnityEngine;
 
     private new Rigidbody rigidbody;
 
-    private void Awake() => rigidbody = GetComponent<Rigidbody>();
+    private void Awake()
+    {
+        rigidbody = GetComponent<Rigidbody>();
+        rigidbody.mass = mass;
+    }
 
     public void SetPosition(PositionRotation positionRotation, Transform _transform)
     {
