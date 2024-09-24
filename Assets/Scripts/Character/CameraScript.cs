@@ -20,17 +20,16 @@ public class CameraScript : MonoBehaviour
     private CharacterController characterController;
     private MeshRenderer meshRenderer;
 
-    private Transform computerCamera;
-    private Vector3 camOffset;
+    //private Transform computerCamera;
+    public PositionRotation computerCamera = new();
+    private Vector3 cameraPosition;
 
     public CameraState camState = CameraState.Player;
 
     private void Awake()
     {
         firstPersonCam = GetComponentInChildren<Camera>();
-        camOffset = firstPersonCam.transform.localPosition;
-
-        computerCamera = GameObject.Find("CamPos")?.transform;
+        cameraPosition = firstPersonCam.transform.localPosition;
 
         characterController = transform.parent.GetComponent<CharacterController>();
         meshRenderer = transform.parent.GetComponent<MeshRenderer>();
@@ -75,11 +74,11 @@ public class CameraScript : MonoBehaviour
     {
         if (!position)
         {
-            transform.position = Vector3.Lerp(transform.position, (Vector3)(transform.parent.localToWorldMatrix * camOffset) + transform.parent.position, Time.deltaTime * 10);
+            transform.position = Vector3.Lerp(transform.position, (Vector3)(transform.parent.localToWorldMatrix * cameraPosition) + transform.parent.position, Time.deltaTime * 10);
         }
         else if (position)
         {
-            transform.position = Vector3.Lerp(transform.position, computerCamera.position, Time.deltaTime * 10);
+            transform.position = Vector3.Lerp(transform.position, computerCamera.GetPosition(transform), Time.deltaTime * 10); //Second transform needs to be the transform of the computer
             transform.rotation = Quaternion.identity;
         }
     }

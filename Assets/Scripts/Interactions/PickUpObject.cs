@@ -77,7 +77,6 @@ using PUO = PickupableObject; //This makes PickupableObject.Mass() slightly less
         }
 
         PUO pickupableObject = handRaycast.transform.gameObject.GetComponent<PUO>();
-        Debug.Log(handRaycast.transform.gameObject.name);
 
         if (pickupableObject == null) 
         {
