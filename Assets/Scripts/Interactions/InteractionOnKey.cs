@@ -14,10 +14,7 @@ interface IInteractable
 
     private void Awake()
     {
-        if (!useCameraAsSource) return;
-        
-        Camera camera = GetComponentInChildren<Camera>();
-        if (camera != null) interactorSource = camera.transform;
+        if (useCameraAsSource) interactorSource = GetComponentInChildren<Camera>()?.transform;
     }
 
     private void OnInteraction()
