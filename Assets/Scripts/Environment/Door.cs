@@ -39,10 +39,10 @@ public class Door : MonoBehaviour, IInteractable
 
     IEnumerator Open()
     {
-        while (angle < openingAngle) //While the angle is under the maximum, move towards the maximum and update the transform
+        while (angle < Mathf.Max(openingAngle, 0f)) //While the angle is under the maximum, move towards the maximum and update the transform
         {
             angle += Time.deltaTime * openingSpeed;
-            if (angle > openingAngle) angle = openingAngle; //Guard to make sure it doesn't go past the bounds
+            if (angle > Mathf.Min(openingAngle, 0f)) angle = openingAngle; //Guard to make sure it doesn't go past the bounds
 
             transform.eulerAngles = new(0, defaultAngle + angle, 0);
 
@@ -52,10 +52,10 @@ public class Door : MonoBehaviour, IInteractable
 
     IEnumerator Close()
     {
-        while (angle > 0f) //Exact same thing but with closing
+        while (angle > Mathf.Min(openingAngle, 0f)) //Exact same thing but with closing
         {
             angle -= Time.deltaTime * openingSpeed;
-            if (angle < 0f) angle = 0f;
+            if (angle < Mathf.Max(openingAngle, 0f)) angle = 0f;
 
             transform.eulerAngles = new(0, defaultAngle + angle, 0);
 
