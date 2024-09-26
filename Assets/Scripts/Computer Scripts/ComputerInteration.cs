@@ -12,5 +12,7 @@ public class ComputerInteration : MonoBehaviour, IInteractable
         cameraScript.computerCamera.rotation = computerCamera.GetRotation(transform);
     }
 
+    private void OnDrawGizmosSelected() => PickupUtilities.DrawGizmos(computerCamera.GetPosition(transform), computerCamera.GetRotation(transform));
+
     public void Interact() => cameraScript.ComputerInteraction();
 }
