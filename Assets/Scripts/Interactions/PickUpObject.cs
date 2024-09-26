@@ -9,8 +9,8 @@ using PUO = PickupableObject; //This makes PickupableObject.Mass() slightly less
     //[SerializeField] private float singleHandMaximumMass = 10f;
     [SerializeField] private float maximumRange = 2f;
 
-    [SerializeField] [Tooltip("The positon and rotation of the left hand (Black ball)")] private PositionRotation leftHandTransform = new(new Vector3(-0.5f, 0.5f, 1f), Quaternion.Euler(0f, 0f, 15f));
-    [SerializeField] [Tooltip("The positon and rotation of the right hand (White ball)")] private PositionRotation rightHandTransform = new(new Vector3(0.5f, 0.5f, 1f), Quaternion.Euler(0f, 0f, -15f));
+    [SerializeField][Tooltip("The positon and rotation of the left hand (Black ball)")] private PositionRotation leftHandTransform = new(new Vector3(-0.5f, 0.5f, 1f), Quaternion.Euler(0f, 0f, 15f));
+    [SerializeField][Tooltip("The positon and rotation of the right hand (White ball)")] private PositionRotation rightHandTransform = new(new Vector3(0.5f, 0.5f, 1f), Quaternion.Euler(0f, 0f, -15f));
     private PositionRotation middleHandTransform; //The position that objects will be in when they are held by both hands at once
     [SerializeField] private Vector3 force = Vector3.forward * 10f;
     private Vector3 Force => camera.transform.rotation * force;
@@ -20,13 +20,19 @@ using PUO = PickupableObject; //This makes PickupableObject.Mass() slightly less
     private PUO rightHand = null;
     //private bool isStrongHold => leftHand == rightHand && leftHand != null; //Returns true if both hands are holding the same item and are not null
 
-    new private Camera camera;
+    private PUO raycastObject;
+
+    private Transform crosshair;
+
+    private new Camera camera;
 
     private void Awake()
     {
         camera = Camera.main;
 
         middleHandTransform = leftHandTransform | rightHandTransform;
+
+        crosshair = GameObject.Find("Crosshair").transform;
     }
 
     void Update()
@@ -35,6 +41,14 @@ using PUO = PickupableObject; //This makes PickupableObject.Mass() slightly less
 
         leftHand?.SetPosition(leftHandTransform, transform); //Currently only have basic single hand holding done with only basic null handling
         rightHand?.SetPosition(rightHandTransform, transform);
+    }
+
+    private void FixedUpdate()
+    {
+        if (!Physics.SphereCast(camera.transform.position, 0.1f, camera.transform.forward, out RaycastHit handRaycast, maximumRange, 1 << 3)) return;
+        raycastObject = handRaycast.transform.gameObject.GetComponent<PUO>();
+
+        crosshair.eulerAngles = new(0f, 0f, raycastObject == null ? 0f : 45f);
     }
 
     private void OnPickupItem(InputValue input) //TODO - I should probably refactor this to only use a single switch and then just call another function or use a reference or something
@@ -56,8 +70,6 @@ using PUO = PickupableObject; //This makes PickupableObject.Mass() slightly less
             return;
         }
 
-        if (!CheckHandRay(out PUO pickupableObject) & !clickedHandHasItem) return; //If there is no item in the hand, first check if there is an item in front of the camera, getting the object or returning if nothing is in front
-
         //TODO - Handle double handed pickup logic here, for now is just an early return that I have commented out
         //if (pickupableObject.Mass > singleHandMaximumMass)
         //{
@@ -65,27 +77,7 @@ using PUO = PickupableObject; //This makes PickupableObject.Mass() slightly less
         //    return;
         //}
 
-        pickupableObject.PickUp(ref hand == Hand.Left ? ref leftHand : ref rightHand);
-    }
-
-    private bool CheckHandRay(out PUO obj)
-    {
-        if (!Physics.Raycast(camera.transform.position, camera.transform.forward, out RaycastHit handRaycast, maximumRange, ~(1 << 6))) //TODO - Use a layer system for objects that can be picked up
-        { 
-            obj = null;
-            return false; //Early return if the raycast hits nothing
-        }
-
-        PUO pickupableObject = handRaycast.transform.gameObject.GetComponent<PUO>();
-
-        if (pickupableObject == null) 
-        {
-            obj = null;
-            return false; //Early return if the hit object has no PickupableObject component. Is probably unnecessary if I end up implementing a layer for it
-        }
-
-        obj = pickupableObject;
-        return true;
+        raycastObject?.PickUp(ref hand == Hand.Left ? ref leftHand : ref rightHand); //If there is no item in the hand, first check if there is an item in front of the camera, getting the object or returning if nothing is in front
     }
 
     private void OnDrawGizmosSelected() //Some more gizmos to help visualise the position and rotation of item pickup

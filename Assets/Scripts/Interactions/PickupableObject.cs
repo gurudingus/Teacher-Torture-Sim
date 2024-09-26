@@ -13,6 +13,7 @@ using UnityEngine;
     {
         rigidbody = GetComponent<Rigidbody>();
         rigidbody.mass = mass;
+        gameObject.layer = 3;
     }
 
     public void SetPosition(PositionRotation positionRotation, Transform _transform)
