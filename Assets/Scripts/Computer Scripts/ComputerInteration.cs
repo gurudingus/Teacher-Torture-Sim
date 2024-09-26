@@ -8,8 +8,7 @@ public class ComputerInteration : MonoBehaviour, IInteractable
 
     private void Awake()
     {
-        cameraScript.computerCamera.position = computerCamera.GetPosition(transform);
-        cameraScript.computerCamera.rotation = computerCamera.GetRotation(transform);
+        cameraScript.computerCamera = new(computerCamera.GetPosition(transform), computerCamera.GetRotation(transform));
     }
 
     private void OnDrawGizmosSelected() => PickupUtilities.DrawGizmos(computerCamera.GetPosition(transform), computerCamera.GetRotation(transform));

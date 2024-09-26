@@ -20,7 +20,7 @@ public class CameraScript : MonoBehaviour
     private CharacterController characterController;
     private MeshRenderer meshRenderer;
 
-    public Transform computerCamera { get; set; }
+    public PositionRotation computerCamera { get; set; }
     private Vector3 cameraPosition;
 
     public CameraState camState = CameraState.Player;
@@ -77,8 +77,8 @@ public class CameraScript : MonoBehaviour
         }
         else if (position)
         {
-            transform.position = Vector3.Lerp(transform.position, computerCamera.position, Time.deltaTime * 10); //Second transform needs to be the transform of the computer
-            transform.rotation = computerCamera.rotation;
+            transform.position = Vector3.Lerp(transform.position, computerCamera.Position, Time.deltaTime * 10); //Second transform needs to be the transform of the computer
+            transform.rotation = computerCamera.Rotation;
         }
     }
 }
