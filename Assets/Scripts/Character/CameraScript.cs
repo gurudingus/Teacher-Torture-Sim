@@ -79,7 +79,7 @@ public class CameraScript : MonoBehaviour
         else if (position)
         {
             transform.position = Vector3.Lerp(transform.position, computerCamera.GetPosition(transform), Time.deltaTime * 10); //Second transform needs to be the transform of the computer
-            transform.rotation = Quaternion.identity;
+            transform.rotation = computerCamera.GetRotation(transform);
         }
     }
 }
