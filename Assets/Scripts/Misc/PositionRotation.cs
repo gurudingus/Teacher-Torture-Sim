@@ -16,7 +16,11 @@ using Unity.Mathematics;
     public Quaternion GetRotation(Transform transform) => transform.rotation * rotation;
 
     //Constructors
-    public PositionRotation() {}
+    public PositionRotation()
+    {
+        position = Vector3.zero;
+        rotation = Quaternion.identity;
+    }
 
     public PositionRotation(Vector3 _position) => position = _position;
     public PositionRotation(float x, float y, float z) => position = new(x, y, z);
