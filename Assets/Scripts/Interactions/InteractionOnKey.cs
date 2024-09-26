@@ -3,10 +3,10 @@ using UnityEngine.InputSystem;
 
 interface IInteractable
 {
-    public abstract void Interact(InteractionScript interactorSource);
+    public abstract void Interact(InteractionOnKey interactorSource);
 }
 
-[RequireComponent(typeof(PlayerInput))] public class InteractionScript : MonoBehaviour
+[RequireComponent(typeof(PlayerInput))] public class InteractionOnKey : MonoBehaviour
 {
     [SerializeField] private Transform interactorSource;
     [SerializeField] [Tooltip("Overrides the interactor source to automatically select the camera attached to this gameobject")] private bool useCameraAsSource = true;

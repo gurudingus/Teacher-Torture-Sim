@@ -27,7 +27,7 @@ public class Door : MonoBehaviour, IInteractable
 
     private void OnValidate() => openingSpeed = openingAngle / openingTime; //Make sure this gets updated whenever you change the values in the inspector
 
-    public void Interact(InteractionScript source)
+    public void Interact(InteractionOnKey source)
     {
         if (locked) return; //Cancel all further interaction if the door is locked
 
