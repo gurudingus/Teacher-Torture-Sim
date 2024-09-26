@@ -5,6 +5,7 @@ public class Door : MonoBehaviour, IInteractable
 {
     [SerializeField][Tooltip("Opening time in seconds")] private float openingTime = 0.5f;
     [SerializeField][Tooltip("Opening angle in degrees")] private float openingAngle = 90f;
+    private float openingSign = 1f;
     private float openingSpeed = 180f;
     private float defaultAngle = 0;
     private float angle = 0;
@@ -21,6 +22,8 @@ public class Door : MonoBehaviour, IInteractable
 
     private void Awake()
     {
+        if (openingAngle < 0f) openingSign = -1f;
+        openingAngle = Mathf.Abs(openingAngle);
         openingSpeed = openingAngle / openingTime; //Also make sure it's set properly on awake
         defaultAngle = transform.eulerAngles.y;
     }
@@ -39,12 +42,12 @@ public class Door : MonoBehaviour, IInteractable
 
     IEnumerator Open()
     {
-        while (angle < Mathf.Max(openingAngle, 0f)) //While the angle is under the maximum, move towards the maximum and update the transform
+        while (angle < openingAngle) //While the angle is under the maximum, move towards the maximum and update the transform
         {
-            angle += Time.deltaTime * openingSpeed;
-            if (angle > Mathf.Min(openingAngle, 0f)) angle = openingAngle; //Guard to make sure it doesn't go past the bounds
+            angle += Time.deltaTime * openingSpeed * Mathf.Sign(openingAngle);
+            if (angle > openingAngle) angle = openingAngle; //Guard to make sure it doesn't go past the bounds
 
-            transform.eulerAngles = new(0, defaultAngle + angle, 0);
+            transform.eulerAngles = new(0f, defaultAngle + angle * openingSign, 0f);
 
             yield return null;
         }
@@ -52,12 +55,12 @@ public class Door : MonoBehaviour, IInteractable
 
     IEnumerator Close()
     {
-        while (angle > Mathf.Min(openingAngle, 0f)) //Exact same thing but with closing
+        while (angle > 0f) //Exact same thing but with closing
         {
-            angle -= Time.deltaTime * openingSpeed;
-            if (angle < Mathf.Max(openingAngle, 0f)) angle = 0f;
+            angle -= Time.deltaTime * openingSpeed * Mathf.Sign(openingAngle);
+            if (angle < 0f) angle = 0f;
 
-            transform.eulerAngles = new(0, defaultAngle + angle, 0);
+            transform.eulerAngles = new(0f, defaultAngle + angle * openingSign, 0f);
 
             yield return null;
         }
