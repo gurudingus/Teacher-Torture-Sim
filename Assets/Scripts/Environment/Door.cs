@@ -27,14 +27,14 @@ public class Door : MonoBehaviour, IInteractable
 
     private void OnValidate() => openingSpeed = openingAngle / openingTime; //Make sure this gets updated whenever you change the values in the inspector
 
-    public void Interact(InteractionOnKey source)
+    public void Interact()
     {
         if (locked) return; //Cancel all further interaction if the door is locked
 
         StopAllCoroutines(); //Cancel all coroutines to make sure you don't get a lock halfway through where both coroutines are forever pulling the door open and closed at the same time
 
         if (angle < openingAngle * 0.5f) StartCoroutine(Open()); //If the door is at least mostly closed, attempt to open it
-        if (angle > openingAngle * 0.5f) StartCoroutine(Close()); //If the door is at least mostly open, attempt to close it
+        if (angle >= openingAngle * 0.5f) StartCoroutine(Close()); //If the door is at least mostly open, attempt to close it
     }
 
     IEnumerator Open()

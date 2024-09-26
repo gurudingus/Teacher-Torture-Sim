@@ -1,7 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class ComputerButton : MonoBehaviour
 {
@@ -19,7 +16,7 @@ public class ComputerButton : MonoBehaviour
 
     public void quit()
     {
-        cameraScript.ComputerInteraction(null);
+        cameraScript.ComputerInteraction();
     }
 
     public void openDoor()
@@ -32,7 +29,7 @@ public class ComputerButton : MonoBehaviour
         playerCamera.SetActive(false);
         cutsceneCamera.SetActive(true);
 
-        cameraScript.ComputerInteraction(null);
+        cameraScript.ComputerInteraction();
         GameManager.gameState = GameState.Cutscene;
     }
 }

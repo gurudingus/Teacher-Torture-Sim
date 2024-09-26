@@ -3,7 +3,7 @@ using UnityEngine.InputSystem;
 
 interface IInteractable
 {
-    public abstract void Interact(InteractionOnKey interactorSource);
+    public abstract void Interact();
 }
 
 [RequireComponent(typeof(PlayerInput))] public class InteractionOnKey : MonoBehaviour
@@ -21,6 +21,6 @@ interface IInteractable
     {
         if (!Physics.Raycast(interactorSource.position, interactorSource.forward, out RaycastHit rayHit, interactionRange, ~(1 << 6))) return; //Return if it hits nothing. Also has a layermask exclusion so that it doesn't pick up the player and cancel interactions
 
-        rayHit.transform.gameObject.GetComponentInChildren<IInteractable>()?.Interact(this); //? operator to reduce verbosity. If it has an IInteractable implementing object, interact with it.
+        rayHit.transform.gameObject.GetComponentInChildren<IInteractable>()?.Interact(); //? operator to reduce verbosity. If it has an IInteractable implementing object, interact with it.
     }
 }

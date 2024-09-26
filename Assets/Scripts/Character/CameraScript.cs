@@ -58,7 +58,7 @@ public class CameraScript : MonoBehaviour
         }
     }
 
-    public void ComputerInteraction(InteractionOnKey source)
+    public void ComputerInteraction()
     {
         camState = camState == CameraState.Player ? CameraState.Computer : CameraState.Player; //Swap the camera state
 
