@@ -11,17 +11,23 @@ public enum GameEvent
     Ending6,
     Ending7,
     Ending8,
-    Ending9
+    Ending9,
+
+    None = int.MaxValue,
 }
 
 public static class Events
 {
-    private static int newlyAchievedEnding = -1;
-
     private static ulong eventsCompleted; //A bitfield for storing
+
+    public static GameEvent mostRecentEvent { get; set; } = GameEvent.None;
+
     public static void SetEventComplete(GameEvent gameEvent)
     {
+        if (GetEventComplete(gameEvent)) return;
+
         eventsCompleted |= (ulong)1 << (int)gameEvent;
+        mostRecentEvent = gameEvent;
         SaveToFile();
     }
     public static void SetEventsComplete(ulong events)
