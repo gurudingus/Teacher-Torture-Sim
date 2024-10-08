@@ -10,6 +10,9 @@ public class Door : MonoBehaviour, IInteractable
     private float defaultAngle = 0;
     private float angle = 0;
 
+    public GameObject playerCamera;
+    public GameObject cutsceneCamera;
+
     private bool locked = false;
     public bool Locked
     {
@@ -63,6 +66,17 @@ public class Door : MonoBehaviour, IInteractable
             transform.eulerAngles = new(0f, defaultAngle + angle * openingSign, 0f);
 
             yield return null;
+        }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.layer == 3)
+        {
+                playerCamera.SetActive(false);
+                cutsceneCamera.SetActive(true);
+                GameManager.gameState = GameState.Cutscene;
+                Debug.Log("touched");
         }
     }
 }
