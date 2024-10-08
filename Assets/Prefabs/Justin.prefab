@@ -87,7 +87,7 @@ GameObject:
   - component: {fileID: 6075317970466353916}
   - component: {fileID: 6075317970466353907}
   - component: {fileID: 6075317970466353906}
-  - component: {fileID: 6075317970466353905}
+  - component: {fileID: 2076800886123299125}
   - component: {fileID: 6075317970466353918}
   m_Layer: 0
   m_Name: Justin
@@ -176,7 +176,7 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &6075317970466353905
+--- !u!114 &2076800886123299125
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -185,11 +185,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 6075317970466353904}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0e26b44185669f64ab4e6191db6809ea, type: 3}
+  m_Script: {fileID: 11500000, guid: 4c117b9303854284fbd86368f6669178, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
   sight: 0
+  playerCamera: {fileID: 0}
+  cutsceneCamera: {fileID: 0}
 --- !u!95 &6075317970466353918
 Animator:
   serializedVersion: 5
