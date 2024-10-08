@@ -16,12 +16,28 @@ public enum GameEvent
 
 public static class Events
 {
+    private static int newlyAchievedEnding = -1;
+
     private static ulong eventsCompleted; //A bitfield for storing
-    public static void SetEventComplete(GameEvent gameEvent) => eventsCompleted |= (ulong)1 << (int)gameEvent;
-    public static void SetEventIncomplete(GameEvent gameEvent) => eventsCompleted &= ~((ulong)1 << (int)gameEvent);
+    public static void SetEventComplete(GameEvent gameEvent)
+    {
+        eventsCompleted |= (ulong)1 << (int)gameEvent;
+        SaveToFile();
+    }
+    public static void SetEventsComplete(ulong events)
+    {
+        eventsCompleted = events;
+        SaveToFile();
+    }
+
+    public static void SetEventIncomplete(GameEvent gameEvent)
+    {
+        eventsCompleted &= ~((ulong)1 << (int)gameEvent);
+    }
+
     public static bool GetEventComplete(GameEvent gameEvent) => (eventsCompleted & (ulong)1 << (int)gameEvent) != 0;
 
-    private static readonly string eventsFileLocation = @$"{Application.persistentDataPath}\events.butt";
+    public static string eventsFileLocation => @$"{Application.persistentDataPath}\events.butt";
 
     public static void SaveToFile()
     {

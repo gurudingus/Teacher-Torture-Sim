@@ -4,7 +4,10 @@ public class EndingItems : MonoBehaviour {
 
     [SerializeField] private GameObject[] endingObjects = new GameObject[9];
 
-    private void Awake() => SpawnItems();
+    private void Awake()
+    {
+        SpawnItems();
+    }
 
     public void SpawnItems()
     {

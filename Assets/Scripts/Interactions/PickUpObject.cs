@@ -45,10 +45,10 @@ using PUO = PickupableObject; //This makes PickupableObject.Mass() slightly less
 
     private void FixedUpdate()
     {
-        bool handRayHit = Physics.SphereCast(camera.transform.position, 0.1f, camera.transform.forward, out RaycastHit handRaycast, maximumRange, 1 << 3);
+        bool handRayHit = Physics.SphereCast(camera.transform.position, 0.1f, camera.transform.forward, out RaycastHit handRaycast, maximumRange, 1 << 3 /* only layer 3 (physics objects) */);
         crosshair.eulerAngles = new(0f, 0f, handRayHit ? 45f : 0f);
 
-        if (handRayHit) raycastObject = handRaycast.transform.gameObject.GetComponent<PUO>();
+        raycastObject = handRayHit ? handRaycast.transform.gameObject.GetComponent<PUO>() : null;
     }
 
     private void OnPickupItem(InputValue input) //TODO - I should probably refactor this to only use a single switch and then just call another function or use a reference or something
