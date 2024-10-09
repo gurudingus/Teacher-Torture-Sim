@@ -37,7 +37,7 @@ public class EndingItems : MonoBehaviour {
 
     private void NewItemSplash()
     {
-        textBox = GameObject.Find("Item Splash").GetComponent<TextMeshProUGUI>(); //Attempt to find the splash text box gameobject
+        textBox = GameObject.Find("Item Splash")?.GetComponent<TextMeshProUGUI>(); //Attempt to find the splash text box gameobject
 
         if (textBox == null) return; //Return if the item splash cannot be found. This essentially disabled the entire system if there is not a splash text box ready.
 
