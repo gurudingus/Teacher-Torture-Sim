@@ -89,6 +89,6 @@ using PUO = PickupableObject; //This makes PickupableObject.Mass() slightly less
     enum Hand
     {
         Left,
-        Right
+        Right,
     }
 }
