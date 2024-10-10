@@ -19,7 +19,11 @@ public class Door : MonoBehaviour, IInteractable
         set
         {
             locked = value;
-            if (value) angle = defaultAngle;
+
+            if (!value) return;
+
+            StopAllCoroutines();
+            transform.eulerAngles = new(0f, defaultAngle, 0f);
         }
     }
 
