@@ -14,7 +14,7 @@ public class ResetSaveFile : MonoBehaviour
         #endif
     }
 
-    private void ResetSave()
+    public void ResetSave()
     {
         Events.SetEventsComplete(0);
     }

@@ -7,7 +7,7 @@ public class QuitButton : MonoBehaviour
         //call this method when the object is clicked
         QuitGame();
     }
-    private void QuitGame()
+    public void QuitGame()
     {
         //quits the game
         Application.Quit();
