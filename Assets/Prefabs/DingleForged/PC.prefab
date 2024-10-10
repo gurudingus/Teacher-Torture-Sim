@@ -61,7 +61,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 5944588888371201666, guid: 61508f2315feced4586a8bdc4877cde1, type: 3}
+  - {fileID: 2100000, guid: a3a530523bec0cc41aed4f3a4d9da936, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -92,8 +92,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6388017135965249428}
-  - component: {fileID: 6388017135965249435}
-  - component: {fileID: 6388017135965249434}
+  - component: {fileID: 9182757931758657580}
+  - component: {fileID: 4841474714822866094}
+  - component: {fileID: 6987899521228304726}
   m_Layer: 0
   m_Name: PC
   m_TagString: Untagged
@@ -109,8 +110,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6388017135965249433}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 12.747838, y: 0.27760345, z: -8.120384}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2998828104643083694}
@@ -118,7 +119,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!54 &6388017135965249435
+--- !u!65 &9182757931758657580
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6388017135965249433}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.2463359, y: 0.4943159, z: 0.44832766}
+  m_Center: {x: -0.00671421, y: -0.014587089, z: -0.00018641353}
+--- !u!54 &4841474714822866094
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -134,7 +148,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &6388017135965249434
+--- !u!114 &6987899521228304726
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -146,7 +160,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f7569fb4cc3b1a4188b3204806d9e4a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mass: 20
+  mass: 3
   pickupTransform:
     position: {x: 0, y: 0, z: 0}
     rotation: {x: 0, y: 0, z: 0, w: 1}
