@@ -36,14 +36,11 @@ public static class Events
         SaveToFile();
     }
 
-    public static void SetEventIncomplete(GameEvent gameEvent)
-    {
-        eventsCompleted &= ~((ulong)1 << (int)gameEvent);
-    }
+    public static void SetEventIncomplete(GameEvent gameEvent) => eventsCompleted &= ~((ulong)1 << (int)gameEvent);
 
     public static bool GetEventComplete(GameEvent gameEvent) => (eventsCompleted & (ulong)1 << (int)gameEvent) != 0;
 
-    public static string eventsFileLocation => @$"{Application.persistentDataPath}\events.butt";
+    public static string eventsFileLocation => @$"{Application.persistentDataPath}\events.ass";
 
     public static void SaveToFile()
     {

@@ -12,12 +12,15 @@ public class EndingItems : MonoBehaviour {
     private TextMeshProUGUI textBox;
     private Color textBoxColour;
 
-    private void Awake()
+    private static EndingItems instance;
+
+    private void Awake() => instance = this; //This will break if multiple EndingItems scripts are in the scene but that's fine; there should never be more than one of these.
+
+    private void Start()
     {
         if (automaticallyFindItems) AttemptFindingObjects();
 
         SpawnItems();
-        Invoke(nameof(NewItemSplash), 1f);
     }
 
     private void AttemptFindingObjects()
@@ -35,6 +38,8 @@ public class EndingItems : MonoBehaviour {
         }
     }
 
+    public static void Splash() => instance.NewItemSplash();
+
     private void NewItemSplash()
     {
         textBox = GameObject.Find("Item Splash")?.GetComponent<TextMeshProUGUI>(); //Attempt to find the splash text box gameobject
@@ -47,7 +52,7 @@ public class EndingItems : MonoBehaviour {
         Events.mostRecentEvent = GameEvent.None;
 
         textBoxColour = textBox.color; //Cache the original colour of the text box so it can be brought back whenever needed
-        textBox.text = $"New item unlocked: {endingObjects[mostRecentEvent].name}";
+        textBox.text = $"New item unlocked: {endingObjects[mostRecentEvent]?.name}";
 
         Invoke(nameof(BeginFadeOut), splashFadeTime * 0.5f);
     }

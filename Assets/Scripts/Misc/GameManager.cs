@@ -42,10 +42,7 @@ public class GameManager : MonoBehaviour, IResetStatic
         SceneManager.LoadScene(sceneName);
     }
 
-    public void OnStaticReset()
-    {
-        state = GameState.Menu;
-    }
+    public void OnStaticReset() => state = GameState.Menu;
 }
 
 public enum GameState
