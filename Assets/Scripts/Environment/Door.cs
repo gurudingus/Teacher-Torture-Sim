@@ -19,7 +19,7 @@ public class Door : MonoBehaviour, IInteractable
         set
         {
             locked = value;
-            if (locked) angle = defaultAngle;
+            if (value) angle = defaultAngle;
         }
     }
 
