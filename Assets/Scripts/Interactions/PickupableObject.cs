@@ -3,7 +3,7 @@ using Stopwatch = System.Diagnostics.Stopwatch;
 
 [RequireComponent(typeof(Rigidbody))] public class PickupableObject : MonoBehaviour
 {
-    [SerializeField] [Tooltip("Weight in kg")] private float mass = 1;
+    [SerializeField] [Tooltip("Weight in kg")] private float mass = 1f;
     public float Mass => mass; 
 
     public Stopwatch throwHoldTime { get; } = new();
@@ -12,6 +12,8 @@ using Stopwatch = System.Diagnostics.Stopwatch;
     [SerializeField] [Tooltip("The positon and rotation that will attempt to match whatever is defined on a pickup script")] private PositionRotation pickupTransform;
 
     private new Rigidbody rigidbody;
+
+    private Vector3 smoothDampVelocity = Vector3.zero;
 
     private void Awake()
     {
@@ -22,7 +24,7 @@ using Stopwatch = System.Diagnostics.Stopwatch;
 
     public void SetPosition(PositionRotation positionRotation, Transform _transform)
     {
-        transform.position = positionRotation.GetPosition(_transform) - (Vector3)(transform.localToWorldMatrix * pickupTransform.Position); //Some funky maths to make the positions match
+        transform.position = Vector3.SmoothDamp(transform.position, positionRotation.GetPosition(_transform) - (Vector3)(transform.localToWorldMatrix * pickupTransform.Position), ref smoothDampVelocity, 0.05f); //Some funky maths to make the positions match
         transform.rotation = positionRotation.GetRotation(_transform) * Quaternion.Inverse(pickupTransform.Rotation); //Some slightly less funky maths to make the rotations match
     }
 
