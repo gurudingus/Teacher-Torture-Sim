@@ -14,8 +14,8 @@ using PUO = PickupableObject; //This makes PickupableObject slightly less verbos
     [SerializeField][Tooltip("The positon and rotation of the right hand (White ball)")] private PositionRotation rightHandTransform = new(new Vector3(0.5f, 0.5f, 1f), Quaternion.Euler(0f, 0f, -15f));
     //private PositionRotation middleHandTransform; //The position that objects will be in when they are held by both hands at once
     [SerializeField] private Vector3 force = Vector3.forward * 10f;
-    [SerializeField] private float holdTimeForMaxForce = 0.75f;
     private Vector3 Force => camera.transform.rotation * force;
+    [SerializeField] private float holdTimeForMaxForce = 0.75f;
 
     //Fields
     private PUO leftHand = null;
