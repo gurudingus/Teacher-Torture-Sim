@@ -130,9 +130,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mouseSensitivity: 2
   pitchRange: 60
-  player: {fileID: 0}
-  camPos: {fileID: 0}
-  playerPos: {fileID: 0}
   camState: 0
 --- !u!1 &6254877278795668985
 GameObject:
@@ -320,3 +317,4 @@ MonoBehaviour:
     position: {x: 0.5, y: 0.5, z: 1}
     rotation: {x: 0, y: 0, z: -0.1305262, w: 0.9914449}
   force: {x: 0, y: 0, z: 10}
+  holdTimeForMaxForce: 0.75

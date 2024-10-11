@@ -1,9 +1,12 @@
 using UnityEngine;
+using Stopwatch = System.Diagnostics.Stopwatch;
 
 [RequireComponent(typeof(Rigidbody))] public class PickupableObject : MonoBehaviour
 {
     [SerializeField] [Tooltip("Weight in kg")] private float mass = 1;
     public float Mass => mass; 
+
+    public Stopwatch throwHoldTime { get; } = new();
 
     [SerializeField] [Tooltip("The positon and rotation that will attempt to match whatever is defined on a pickup script")] private PositionRotation pickupTransform;
 
@@ -35,6 +38,9 @@ using UnityEngine;
         rigidbody.isKinematic = false; //Back to physics control
         rigidbody.AddForce(force, ForceMode.Impulse); //Launch the sucker
         gameObject.layer = 3;
+
+        throwHoldTime.Stop();
+        throwHoldTime.Reset();
     }
 
     private void OnDrawGizmosSelected() => PickupUtilities.DrawGizmos(pickupTransform.GetPosition(transform), pickupTransform.GetRotation(transform)); //Shows the anchor that is used for the pickup

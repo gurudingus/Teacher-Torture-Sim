@@ -28,13 +28,22 @@ public partial class @Default: IInputActionCollection2, IDisposable
             ""id"": ""ca65c367-ad1f-41a7-b250-da03a059cae5"",
             ""actions"": [
                 {
-                    ""name"": ""PickupItem"",
-                    ""type"": ""Button"",
+                    ""name"": ""HandLeft"",
+                    ""type"": ""Value"",
                     ""id"": ""54d16d58-8ca3-4e7a-bb38-64c878af91a0"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
-                    ""initialStateCheck"": false
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""HandRight"",
+                    ""type"": ""Value"",
+                    ""id"": ""e41b0e71-5f9c-4639-bfa6-8434febf144c"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 },
                 {
                     ""name"": ""Interaction"",
@@ -48,39 +57,6 @@ public partial class @Default: IInputActionCollection2, IDisposable
             ],
             ""bindings"": [
                 {
-                    ""name"": ""1D Axis"",
-                    ""id"": ""e26aafa1-6c85-45ee-9d58-d4c57026b566"",
-                    ""path"": ""1DAxis"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""PickupItem"",
-                    ""isComposite"": true,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": ""negative"",
-                    ""id"": ""ba430647-badc-4828-9360-51980fb8d9d4"",
-                    ""path"": ""<Mouse>/leftButton"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""PickupItem"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""positive"",
-                    ""id"": ""d59c4c72-9a69-45c4-a78f-60b596c9c4bd"",
-                    ""path"": ""<Mouse>/rightButton"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""PickupItem"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
                     ""name"": """",
                     ""id"": ""73ab66e6-39d3-4f90-bf75-2bf2df75dd84"",
                     ""path"": ""<Keyboard>/e"",
@@ -88,6 +64,28 @@ public partial class @Default: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Interaction"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a7f35f93-f965-4b35-88bc-554efc7c0d0a"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""HandRight"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c83b54e9-6442-49a6-ab6f-ba8eb8f453f4"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""HandLeft"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -104,7 +102,8 @@ public partial class @Default: IInputActionCollection2, IDisposable
 }");
         // Interactions
         m_Interactions = asset.FindActionMap("Interactions", throwIfNotFound: true);
-        m_Interactions_PickupItem = m_Interactions.FindAction("PickupItem", throwIfNotFound: true);
+        m_Interactions_HandLeft = m_Interactions.FindAction("HandLeft", throwIfNotFound: true);
+        m_Interactions_HandRight = m_Interactions.FindAction("HandRight", throwIfNotFound: true);
         m_Interactions_Interaction = m_Interactions.FindAction("Interaction", throwIfNotFound: true);
         // Camera
         m_Camera = asset.FindActionMap("Camera", throwIfNotFound: true);
@@ -169,13 +168,15 @@ public partial class @Default: IInputActionCollection2, IDisposable
     // Interactions
     private readonly InputActionMap m_Interactions;
     private List<IInteractionsActions> m_InteractionsActionsCallbackInterfaces = new List<IInteractionsActions>();
-    private readonly InputAction m_Interactions_PickupItem;
+    private readonly InputAction m_Interactions_HandLeft;
+    private readonly InputAction m_Interactions_HandRight;
     private readonly InputAction m_Interactions_Interaction;
     public struct InteractionsActions
     {
         private @Default m_Wrapper;
         public InteractionsActions(@Default wrapper) { m_Wrapper = wrapper; }
-        public InputAction @PickupItem => m_Wrapper.m_Interactions_PickupItem;
+        public InputAction @HandLeft => m_Wrapper.m_Interactions_HandLeft;
+        public InputAction @HandRight => m_Wrapper.m_Interactions_HandRight;
         public InputAction @Interaction => m_Wrapper.m_Interactions_Interaction;
         public InputActionMap Get() { return m_Wrapper.m_Interactions; }
         public void Enable() { Get().Enable(); }
@@ -186,9 +187,12 @@ public partial class @Default: IInputActionCollection2, IDisposable
         {
             if (instance == null || m_Wrapper.m_InteractionsActionsCallbackInterfaces.Contains(instance)) return;
             m_Wrapper.m_InteractionsActionsCallbackInterfaces.Add(instance);
-            @PickupItem.started += instance.OnPickupItem;
-            @PickupItem.performed += instance.OnPickupItem;
-            @PickupItem.canceled += instance.OnPickupItem;
+            @HandLeft.started += instance.OnHandLeft;
+            @HandLeft.performed += instance.OnHandLeft;
+            @HandLeft.canceled += instance.OnHandLeft;
+            @HandRight.started += instance.OnHandRight;
+            @HandRight.performed += instance.OnHandRight;
+            @HandRight.canceled += instance.OnHandRight;
             @Interaction.started += instance.OnInteraction;
             @Interaction.performed += instance.OnInteraction;
             @Interaction.canceled += instance.OnInteraction;
@@ -196,9 +200,12 @@ public partial class @Default: IInputActionCollection2, IDisposable
 
         private void UnregisterCallbacks(IInteractionsActions instance)
         {
-            @PickupItem.started -= instance.OnPickupItem;
-            @PickupItem.performed -= instance.OnPickupItem;
-            @PickupItem.canceled -= instance.OnPickupItem;
+            @HandLeft.started -= instance.OnHandLeft;
+            @HandLeft.performed -= instance.OnHandLeft;
+            @HandLeft.canceled -= instance.OnHandLeft;
+            @HandRight.started -= instance.OnHandRight;
+            @HandRight.performed -= instance.OnHandRight;
+            @HandRight.canceled -= instance.OnHandRight;
             @Interaction.started -= instance.OnInteraction;
             @Interaction.performed -= instance.OnInteraction;
             @Interaction.canceled -= instance.OnInteraction;
@@ -259,7 +266,8 @@ public partial class @Default: IInputActionCollection2, IDisposable
     public CameraActions @Camera => new CameraActions(this);
     public interface IInteractionsActions
     {
-        void OnPickupItem(InputAction.CallbackContext context);
+        void OnHandLeft(InputAction.CallbackContext context);
+        void OnHandRight(InputAction.CallbackContext context);
         void OnInteraction(InputAction.CallbackContext context);
     }
     public interface ICameraActions

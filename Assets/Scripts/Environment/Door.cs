@@ -77,10 +77,9 @@ public class Door : MonoBehaviour, IInteractable
     {
         if (collision.gameObject.layer == 3)
         {
-                playerCamera.SetActive(false);
-                cutsceneCamera.SetActive(true);
-                GameManager.gameState = GameState.Cutscene;
-                Debug.Log("touched");
+            playerCamera.SetActive(false);
+            cutsceneCamera.SetActive(true);
+            GameManager.gameState = GameState.Cutscene;
         }
     }
 }

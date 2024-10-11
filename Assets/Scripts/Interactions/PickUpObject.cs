@@ -1,7 +1,8 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Stopwatch = System.Diagnostics.Stopwatch;
 
-using PUO = PickupableObject; //This makes PickupableObject.Mass() slightly less verbose
+using PUO = PickupableObject; //This makes PickupableObject slightly less verbose
 
 [RequireComponent(typeof(PlayerInput))] public class PickUpObject : MonoBehaviour
 {
@@ -11,8 +12,9 @@ using PUO = PickupableObject; //This makes PickupableObject.Mass() slightly less
 
     [SerializeField][Tooltip("The positon and rotation of the left hand (Black ball)")] private PositionRotation leftHandTransform = new(new Vector3(-0.5f, 0.5f, 1f), Quaternion.Euler(0f, 0f, 15f));
     [SerializeField][Tooltip("The positon and rotation of the right hand (White ball)")] private PositionRotation rightHandTransform = new(new Vector3(0.5f, 0.5f, 1f), Quaternion.Euler(0f, 0f, -15f));
-    private PositionRotation middleHandTransform; //The position that objects will be in when they are held by both hands at once
+    //private PositionRotation middleHandTransform; //The position that objects will be in when they are held by both hands at once
     [SerializeField] private Vector3 force = Vector3.forward * 10f;
+    [SerializeField] private float holdTimeForMaxForce = 0.75f;
     private Vector3 Force => camera.transform.rotation * force;
 
     //Fields
@@ -30,7 +32,7 @@ using PUO = PickupableObject; //This makes PickupableObject.Mass() slightly less
     {
         camera = Camera.main;
 
-        middleHandTransform = leftHandTransform | rightHandTransform;
+        //middleHandTransform = leftHandTransform | rightHandTransform;
 
         crosshair = GameObject.Find("Crosshair").transform;
     }
@@ -39,7 +41,7 @@ using PUO = PickupableObject; //This makes PickupableObject.Mass() slightly less
     {
         //Todo: Make sure that double hand holding works correctly / checking which object is in the other hand to make sure you can't half pick up 2 heavy objects -> line ~45 for pick up handling, here for position handling
 
-        leftHand?.SetPosition(leftHandTransform, transform); //Currently only have basic single hand holding done with only basic null handling
+        leftHand?.SetPosition(leftHandTransform, transform); //Currently only have basic single hand holding done with only basic null handling (bugger it it works)
         rightHand?.SetPosition(rightHandTransform, transform);
     }
 
@@ -51,12 +53,22 @@ using PUO = PickupableObject; //This makes PickupableObject.Mass() slightly less
         raycastObject = handRayHit ? handRaycast.transform.gameObject.GetComponent<PUO>() : null;
     }
 
-    private void OnPickupItem(InputValue input)
-    {
-        ref PUO chosenHand = ref input.Get<float>() == -1f ? ref leftHand : ref rightHand; //Reference to whichever hand was clicked
+    private void OnHandLeft(InputValue input) => OnHand(ref leftHand, input.isPressed);
+    private void OnHandRight(InputValue input) => OnHand(ref rightHand, input.isPressed);
 
-        if (chosenHand == null) raycastObject?.PickUp(ref chosenHand); //If the hand is empty, pick up the object
-        else chosenHand.Throw(ref chosenHand, Force); //If the hand is not empty, throw the object in the hand
+    private void OnHand(ref PUO chosenHand, bool pressed)
+    {
+        Stopwatch hold = chosenHand?.throwHoldTime;
+
+        if (pressed)
+        {
+            if (chosenHand == null) raycastObject?.PickUp(ref chosenHand); //Pick up if the hand is empty
+            else hold.Start(); //Start the hold timer if the hand is not empty
+
+            return;
+        }
+
+        if (chosenHand != null && (float)hold.Elapsed.TotalSeconds > 0f) chosenHand.Throw(ref chosenHand, Force * Mathf.Min(1f, (float)hold.Elapsed.TotalSeconds / holdTimeForMaxForce));
     }
 
     private void OnDrawGizmosSelected() //Some more gizmos to help visualise the position and rotation of item pickup
