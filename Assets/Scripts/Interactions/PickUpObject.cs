@@ -76,10 +76,4 @@ using PUO = PickupableObject; //This makes PickupableObject slightly less verbos
         PickupUtilities.DrawGizmos(leftHandTransform.GetPosition(transform), leftHandTransform.GetRotation(transform), Color.black);
         PickupUtilities.DrawGizmos(rightHandTransform.GetPosition(transform), rightHandTransform.GetRotation(transform), Color.white);
     }
-
-    enum Hand
-    {
-        Left,
-        Right,
-    }
 }
