@@ -167,19 +167,19 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'How to Torture Your Teacher :D
+  m_text: 'How to torture your teacher :D
 
 
-    WASD to Move.
+    WASD to move.
 
-    ''Right and Left
-    Mouse to Pickup and Throw with Each Hand.
+    Left and right
+    mouse to pickup and throw with each hand.
 
-    "E" to Enteract.
+    "E" to enteract.
 
 
-    Your Goal
-    is to Annoy Justin (the teacher).
+    Your goal
+    is to annoy Justin (the teacher).
 
 '
   m_isRightToLeft: 0

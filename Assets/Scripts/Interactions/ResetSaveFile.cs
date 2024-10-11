@@ -1,21 +1,16 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class ResetSaveFile : MonoBehaviour
+public class ResetSaveFile : MonoBehaviour, IInteractable
 {
-    private void OnMouseDown()
+    public void Interact()
     {
-        ResetSave();
         #if UNITY_EDITOR
-
-        Debug.Log("RESET");
-
+        Debug.Log("Reset Save File");
         #endif
-    }
 
-    public void ResetSave()
-    {
         Events.SetEventsComplete(0);
+        
+        EndingItems.UpdateItems();
+        Events.mostRecentEvent = GameEvent.None;
     }
 }

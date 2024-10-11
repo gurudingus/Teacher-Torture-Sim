@@ -1,13 +1,8 @@
 using UnityEngine;
 
-public class QuitButton : MonoBehaviour
+public class QuitButton : MonoBehaviour, IInteractable
 {
-    private void OnMouseDown()
-    {
-        //call this method when the object is clicked
-        QuitGame();
-    }
-    public void QuitGame()
+    public void Interact()
     {
         //quits the game
         Application.Quit();
