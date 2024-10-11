@@ -51,33 +51,12 @@ using PUO = PickupableObject; //This makes PickupableObject.Mass() slightly less
         raycastObject = handRayHit ? handRaycast.transform.gameObject.GetComponent<PUO>() : null;
     }
 
-    private void OnPickupItem(InputValue input) //TODO - I should probably refactor this to only use a single switch and then just call another function or use a reference or something
+    private void OnPickupItem(InputValue input)
     {
-        Hand hand = input.Get<float>() == -1f ? Hand.Left : Hand.Right;
+        ref PUO chosenHand = ref input.Get<float>() == -1f ? ref leftHand : ref rightHand; //Reference to whichever hand was clicked
 
-        bool clickedHandHasItem = hand switch //Check whether or not the hand that was interacted with has an item in it
-        {
-            Hand.Left => leftHand != null,
-            Hand.Right => rightHand != null,
-            _ => false
-        };
-
-        if (clickedHandHasItem) //If the current hand has an item in it, throw it and return from the function
-        {
-            if (hand == Hand.Left) leftHand.Throw(ref leftHand, Force);
-            else if (hand == Hand.Right) rightHand.Throw(ref rightHand, Force);
-
-            return;
-        }
-
-        //TODO - Handle double handed pickup logic here, for now is just an early return that I have commented out
-        //if (pickupableObject.Mass > singleHandMaximumMass)
-        //{
-        //    Debug.Log("Object was too heavy");
-        //    return;
-        //}
-
-        raycastObject?.PickUp(ref hand == Hand.Left ? ref leftHand : ref rightHand); //If there is no item in the hand, first check if there is an item in front of the camera, getting the object or returning if nothing is in front
+        if (chosenHand == null) raycastObject?.PickUp(ref chosenHand); //If the hand is empty, pick up the object
+        else chosenHand.Throw(ref chosenHand, Force); //If the hand is not empty, throw the object in the hand
     }
 
     private void OnDrawGizmosSelected() //Some more gizmos to help visualise the position and rotation of item pickup
