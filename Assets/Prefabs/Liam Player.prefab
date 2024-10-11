@@ -311,10 +311,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maximumRange: 2
   leftHandTransform:
-    position: {x: -0.5, y: 0.5, z: 1}
+    position: {x: -0.75, y: 0.5, z: 1.5}
     rotation: {x: 0, y: 0, z: 0.1305262, w: 0.9914449}
   rightHandTransform:
-    position: {x: 0.5, y: 0.5, z: 1}
+    position: {x: 0.75, y: 0.5, z: 1.5}
     rotation: {x: 0, y: 0, z: -0.1305262, w: 0.9914449}
   force: {x: 0, y: 0, z: 10}
   holdTimeForMaxForce: 0.75

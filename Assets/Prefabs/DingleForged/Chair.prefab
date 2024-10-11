@@ -143,5 +143,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mass: 1
   pickupTransform:
-    position: {x: -1.677, y: 0, z: 3.12}
+    position: {x: -1.677, y: 0.24, z: 3.12}
     rotation: {x: 0, y: 0, z: 0, w: 1}

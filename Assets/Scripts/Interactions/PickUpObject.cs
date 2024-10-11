@@ -41,8 +41,8 @@ using PUO = PickupableObject; //This makes PickupableObject slightly less verbos
     {
         //Todo: Make sure that double hand holding works correctly / checking which object is in the other hand to make sure you can't half pick up 2 heavy objects -> line ~45 for pick up handling, here for position handling
 
-        leftHand?.SetPosition(leftHandTransform, transform); //Currently only have basic single hand holding done with only basic null handling (bugger it it works)
-        rightHand?.SetPosition(rightHandTransform, transform);
+        leftHand?.SetPosition(leftHandTransform - Vector3.forward * Mathf.SmoothStep(0f, 0.5f, HoldStrength(leftHand.Hold)), transform); //Currently only have basic single hand holding done with only basic null handling (bugger it it works)
+        rightHand?.SetPosition(rightHandTransform - Vector3.forward * Mathf.SmoothStep(0f, 0.5f, HoldStrength(rightHand.Hold)), transform);
     }
 
     private void FixedUpdate()
@@ -50,7 +50,7 @@ using PUO = PickupableObject; //This makes PickupableObject slightly less verbos
         bool handRayHit = Physics.SphereCast(camera.transform.position, 0.1f, camera.transform.forward, out RaycastHit handRaycast, maximumRange, 1 << 3 /* only layer 3 (physics objects) */);
         crosshair.eulerAngles = new(0f, 0f, handRayHit ? 45f : 0f);
 
-        raycastObject = handRayHit ? handRaycast.transform.gameObject.GetComponent<PUO>() : null;
+        raycastObject = handRayHit ? handRaycast.transform.gameObject.GetComponent<PUO>() : null; //Should this just be a simple assignment since if handRayHit is false, the component would be null and I would just need a ?. operator?
     }
 
     private void OnHandLeft(InputValue input) => OnHand(ref leftHand, input.isPressed);
@@ -58,18 +58,18 @@ using PUO = PickupableObject; //This makes PickupableObject slightly less verbos
 
     private void OnHand(ref PUO chosenHand, bool pressed)
     {
-        Stopwatch hold = chosenHand?.throwHoldTime;
-
         if (pressed)
         {
             if (chosenHand == null) raycastObject?.PickUp(ref chosenHand); //Pick up if the hand is empty
-            else hold.Start(); //Start the hold timer if the hand is not empty
+            else chosenHand?.throwHoldTime.Start(); //Start the hold timer if the hand is not empty
 
             return;
         }
 
-        if (chosenHand != null && (float)hold.Elapsed.TotalSeconds > 0f) chosenHand.Throw(ref chosenHand, Force * Mathf.Min(1f, (float)hold.Elapsed.TotalSeconds / holdTimeForMaxForce));
+        if (chosenHand != null && chosenHand.Hold > 0f) chosenHand.Throw(ref chosenHand, Force * HoldStrength(chosenHand.Hold));
     }
+
+    private float HoldStrength(float holdTime) => Mathf.Min(1f, holdTime / holdTimeForMaxForce);
 
     private void OnDrawGizmosSelected() //Some more gizmos to help visualise the position and rotation of item pickup
     {

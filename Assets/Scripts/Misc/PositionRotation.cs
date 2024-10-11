@@ -39,4 +39,9 @@ using Unity.Mathematics;
     /// Averages two PositionRotations. I chose the | operator because it sits neatly in the middle of the two values both in text and in function
     /// </summary>
     public static PositionRotation operator |(PositionRotation a, PositionRotation b) => new((a.position + b.position) * 0.5f, math.nlerp(a.rotation, b.rotation, 0.5f));
+
+    /// <summary>
+    /// Returns the PositionRotation with the Vector3 subtracted from the position
+    /// </summary>
+    public static PositionRotation operator -(PositionRotation a, Vector3 b) => new(a.position - a.rotation * b, a.rotation);
 }

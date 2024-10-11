@@ -7,6 +7,7 @@ using Stopwatch = System.Diagnostics.Stopwatch;
     public float Mass => mass; 
 
     public Stopwatch throwHoldTime { get; } = new();
+    public float Hold => (float)throwHoldTime.Elapsed.TotalSeconds;
 
     [SerializeField] [Tooltip("The positon and rotation that will attempt to match whatever is defined on a pickup script")] private PositionRotation pickupTransform;
 
