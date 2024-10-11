@@ -5766,46 +5766,6 @@ PrefabInstance:
       propertyPath: force.z
       value: 10
       objectReference: {fileID: 0}
-    - target: {fileID: 2098887506877627216, guid: 60f51b0525bcfde41b1dd452f67931dd, type: 3}
-      propertyPath: leftHandTransform.position.x
-      value: -0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 2098887506877627216, guid: 60f51b0525bcfde41b1dd452f67931dd, type: 3}
-      propertyPath: leftHandTransform.position.y
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 2098887506877627216, guid: 60f51b0525bcfde41b1dd452f67931dd, type: 3}
-      propertyPath: leftHandTransform.position.z
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2098887506877627216, guid: 60f51b0525bcfde41b1dd452f67931dd, type: 3}
-      propertyPath: leftHandTransform.rotation.w
-      value: 0.9914449
-      objectReference: {fileID: 0}
-    - target: {fileID: 2098887506877627216, guid: 60f51b0525bcfde41b1dd452f67931dd, type: 3}
-      propertyPath: leftHandTransform.rotation.z
-      value: 0.1305262
-      objectReference: {fileID: 0}
-    - target: {fileID: 2098887506877627216, guid: 60f51b0525bcfde41b1dd452f67931dd, type: 3}
-      propertyPath: rightHandTransform.position.x
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 2098887506877627216, guid: 60f51b0525bcfde41b1dd452f67931dd, type: 3}
-      propertyPath: rightHandTransform.position.y
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 2098887506877627216, guid: 60f51b0525bcfde41b1dd452f67931dd, type: 3}
-      propertyPath: rightHandTransform.position.z
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2098887506877627216, guid: 60f51b0525bcfde41b1dd452f67931dd, type: 3}
-      propertyPath: rightHandTransform.rotation.w
-      value: 0.9914449
-      objectReference: {fileID: 0}
-    - target: {fileID: 2098887506877627216, guid: 60f51b0525bcfde41b1dd452f67931dd, type: 3}
-      propertyPath: rightHandTransform.rotation.z
-      value: -0.1305262
-      objectReference: {fileID: 0}
     - target: {fileID: 6254877278795668979, guid: 60f51b0525bcfde41b1dd452f67931dd, type: 3}
       propertyPath: JumpHeight
       value: 1.2
