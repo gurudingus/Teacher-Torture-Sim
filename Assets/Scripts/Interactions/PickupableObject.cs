@@ -13,6 +13,7 @@ using Stopwatch = System.Diagnostics.Stopwatch;
 
     private new Rigidbody rigidbody;
 
+    [SerializeField] [Range(0, 0.25f)] [Tooltip("0 means instant snapping / no smoothing, max value means super sluggish movement")] private float smoothDampTime = 0.05f;
     private Vector3 smoothDampVelocity = Vector3.zero;
 
     private void Awake()
@@ -24,7 +25,7 @@ using Stopwatch = System.Diagnostics.Stopwatch;
 
     public void SetPosition(PositionRotation positionRotation, Transform _transform)
     {
-        transform.position = Vector3.SmoothDamp(transform.position, positionRotation.GetPosition(_transform) - (Vector3)(transform.localToWorldMatrix * pickupTransform.Position), ref smoothDampVelocity, 0.05f); //Some funky maths to make the positions match
+        transform.position = Vector3.SmoothDamp(transform.position, positionRotation.GetPosition(_transform) - (Vector3)(transform.localToWorldMatrix * pickupTransform.Position), ref smoothDampVelocity, smoothDampTime); //Some funky maths to make the positions match
         transform.rotation = positionRotation.GetRotation(_transform) * Quaternion.Inverse(pickupTransform.Rotation); //Some slightly less funky maths to make the rotations match
     }
 
