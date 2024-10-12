@@ -67,22 +67,8 @@ public class CrosshairCast : MonoBehaviour, IGameState
         CrosshairType = interactable == null ? CrosshairTypes.Normal : CrosshairTypes.Interaction; //If there is an interactable object, set the crosshair to its icon. Otherwise use the normal crosshair
     }
 
-    #if UNITY_EDITOR
-    private void OnValidate() //Horrifically cursed function to update the crosshairsTooltip const so that I can have a dynamic tooltip
-    {
-        FileStream stream = File.Create($"{Application.dataPath}\\CrosshairsTooltip.cs");
-        StreamWriter writer = new(stream);
-
-        string[] crosshairTypes = Enum.GetNames(typeof(CrosshairTypes));
-        string tooltip = "Different crosshairs depending on what is interactable in what way:";
-        for (int i = 0; i < crosshairTypes.Length; i++) tooltip += $"\\n{i}: {crosshairTypes[i]}";
-
-        string classText = $"public class Cursed\n{{\n\tpublic const string crosshairsTooltip = \"{tooltip}\";\n\tpublic const int numberOfCrosshairs = {crosshairTypes.Length - 1};\n}}";
-        writer.Write(classText);
-
-        writer.Close();
-        stream.Close();
-    }
+    #if UNITY_EDITOR //Horrible formatting for some horrible code; hope you enjoy
+    private void OnValidate() /*Horrifically cursed function to update the crosshairsTooltip const so that I can have a dynamic tooltip*/ { FileStream stream = File.Create($"{Application.dataPath}\\CrosshairsTooltip.cs"); StreamWriter writer = new(stream); string[] crosshairTypes = Enum.GetNames(typeof(CrosshairTypes)); string tooltip = "Different crosshairs depending on what is interactable in what way:"; for (int i = 0; i < crosshairTypes.Length; i++) tooltip += $"\\n{i}: {crosshairTypes[i]}"; string classText = $"public class Cursed\n{{\n\tpublic const string crosshairsTooltip = \"{tooltip}\";\n\tpublic const int numberOfCrosshairs = {crosshairTypes.Length - 1};\n}}"; writer.Write(classText); writer.Close(); stream.Close(); }
     #endif
 }
 
