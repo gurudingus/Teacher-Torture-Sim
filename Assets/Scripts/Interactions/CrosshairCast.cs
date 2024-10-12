@@ -3,7 +3,7 @@ using System.IO;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class CrosshairCast : MonoBehaviour, IGameEvent
+public class CrosshairCast : MonoBehaviour, IGameState
 {
     private CrosshairTypes crosshairType;
     private CrosshairTypes CrosshairType {
@@ -36,7 +36,7 @@ public class CrosshairCast : MonoBehaviour, IGameEvent
         GameManager.Subscribe(this);
     }
     
-    public void OnGameEvent(GameState gameState) => crosshairType = gameState == GameState.Playing ? CrosshairTypes.Normal : CrosshairTypes.Hidden;
+    public void OnGameStateChanged(GameState gameState) => crosshairType = gameState == GameState.Playing ? CrosshairTypes.Normal : CrosshairTypes.Hidden;
 
     private void FixedUpdate()
     {

@@ -7,15 +7,15 @@ using UnityEngine.SceneManagement;
 /// <summary>
 /// Anything that needs to have something happen when the gameState is changed can implement this interface
 /// </summary>
-public interface IGameEvent
+public interface IGameState
 {
-    public abstract void OnGameEvent(GameState gameState);
+    public abstract void OnGameStateChanged(GameState gameState);
 }
 
 public class GameManager : MonoBehaviour, IResetStatic
 {
     //Game events
-    private static List<IGameEvent> subscribers = new(); //A list of all objects implementing IGameEventSubscriber that will have their OnGameEvent() function called whenever gameState is changed
+    private static List<IGameState> subscribers = new(); //A list of all objects implementing IGameEventSubscriber that will have their OnGameEvent() function called whenever gameState is changed
 
     private static GameState state = GameState.Menu;
     public static GameState gameState
@@ -24,7 +24,7 @@ public class GameManager : MonoBehaviour, IResetStatic
         set
         {
             state = value;
-            foreach (IGameEvent subscriber in subscribers) subscriber.OnGameEvent(value);
+            foreach (IGameState subscriber in subscribers) subscriber.OnGameStateChanged(value);
         }
     }
 
@@ -36,7 +36,7 @@ public class GameManager : MonoBehaviour, IResetStatic
 
     private void Start() => gameState = GameState.Playing;
 
-    public static void Subscribe(IGameEvent subscriber) => subscribers.Add(subscriber);
+    public static void Subscribe(IGameState subscriber) => subscribers.Add(subscriber);
 
     public static void LoadLevel(string sceneName)
     {
