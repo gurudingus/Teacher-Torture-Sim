@@ -173,13 +173,15 @@ MonoBehaviour:
     WASD to move.
 
     Left and right
-    mouse to pickup and throw with each hand.
+    mouse to pick up items
+
+    Hold buttons down to throw
 
     "E" to enteract.
 
 
-    Your goal
-    is to annoy Justin (the teacher).
+    Your
+    goal is to annoy Justin (the teacher).
 
 '
   m_isRightToLeft: 0

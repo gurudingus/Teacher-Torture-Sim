@@ -10674,13 +10674,15 @@ PrefabInstance:
         WASD to move.
 
         Left
-        and right mouse to pickup and throw with each hand.
+        and right mouse to pick up items
 
-        "E" to enteract.
+        Hold buttons down to throw
+
+        "E"
+        to enteract.
 
 
-        Your
-        goal is to annoy Justin (the teacher).
+        Your goal is to annoy Justin (the teacher).
 
 '
       objectReference: {fileID: 0}
