@@ -47,10 +47,16 @@ using PUO = PickupableObject; //This makes PickupableObject slightly less verbos
 
     private void FixedUpdate()
     {
-        bool handRayHit = Physics.SphereCast(camera.transform.position, 0.1f, camera.transform.forward, out RaycastHit handRaycast, maximumRange, 1 << 3 /* only layer 3 (physics objects) */);
-        crosshair.eulerAngles = new(0f, 0f, handRayHit ? 45f : 0f);
+        CheckSphereCast();
+    }
 
-        raycastObject = handRayHit ? handRaycast.transform.gameObject.GetComponent<PUO>() : null; //Should this just be a simple assignment since if handRayHit is false, the component would be null and I would just need a ?. operator?
+    private void CheckSphereCast()
+    {
+        bool handRayHit = Physics.SphereCast(camera.transform.position, 0.1f, camera.transform.forward, out RaycastHit handRaycast, maximumRange, 1 << 3 /* only physics objects */);
+
+        crosshair.eulerAngles = new(0f, 0f, handRayHit ? 45f : 0f); //Change this to just be an icon swap
+
+        raycastObject = handRaycast.transform?.gameObject.GetComponent<PUO>();
     }
 
     private void OnHandLeft(InputValue input) => OnHand(ref leftHand, input.isPressed); //Run OnHand with a reference to the left hand
@@ -58,7 +64,7 @@ using PUO = PickupableObject; //This makes PickupableObject slightly less verbos
 
     private void OnHand(ref PUO chosenHand, bool pressed)
     {
-        if (pressed) //If the button was pressed down, pick up an object or start the timer on a helf object
+        if (pressed) //If the button was pressed down, pick up an object or start the timer on a held object
         {
             if (chosenHand == null) raycastObject?.PickUp(ref chosenHand); //Pick up if the hand is empty
             else chosenHand?.throwHoldTime.Start(); //Start the hold timer if the hand is not empty
