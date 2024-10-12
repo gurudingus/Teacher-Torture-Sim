@@ -53,12 +53,12 @@ using PUO = PickupableObject; //This makes PickupableObject slightly less verbos
         raycastObject = handRayHit ? handRaycast.transform.gameObject.GetComponent<PUO>() : null; //Should this just be a simple assignment since if handRayHit is false, the component would be null and I would just need a ?. operator?
     }
 
-    private void OnHandLeft(InputValue input) => OnHand(ref leftHand, input.isPressed);
-    private void OnHandRight(InputValue input) => OnHand(ref rightHand, input.isPressed);
+    private void OnHandLeft(InputValue input) => OnHand(ref leftHand, input.isPressed); //Run OnHand with a reference to the left hand
+    private void OnHandRight(InputValue input) => OnHand(ref rightHand, input.isPressed); //Run OnHand with a reference to the right hand
 
     private void OnHand(ref PUO chosenHand, bool pressed)
     {
-        if (pressed)
+        if (pressed) //If the button was pressed down, pick up an object or start the timer on a helf object
         {
             if (chosenHand == null) raycastObject?.PickUp(ref chosenHand); //Pick up if the hand is empty
             else chosenHand?.throwHoldTime.Start(); //Start the hold timer if the hand is not empty
@@ -66,7 +66,7 @@ using PUO = PickupableObject; //This makes PickupableObject slightly less verbos
             return;
         }
 
-        if (chosenHand != null && chosenHand.Hold > 0f) chosenHand.Throw(ref chosenHand, Force * HoldStrength(chosenHand.Hold));
+        if (chosenHand != null && chosenHand.Hold > 0f) chosenHand.Throw(ref chosenHand, Force * HoldStrength(chosenHand.Hold)); //If the button was released, the respective hand is full and it wasn't just picked up, throw it
     }
 
     private float HoldStrength(float holdTime) => Mathf.Min(1f, holdTime / holdTimeForMaxForce);

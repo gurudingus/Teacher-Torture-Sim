@@ -20,7 +20,7 @@ using Stopwatch = System.Diagnostics.Stopwatch;
     {
         rigidbody = GetComponent<Rigidbody>();
         rigidbody.mass = mass;
-        gameObject.layer = 3;
+        gameObject.layer = 3; //Makes sure the object is set to the Physics Object layer
     }
 
     public void SetPosition(PositionRotation positionRotation, Transform _transform)
@@ -33,7 +33,7 @@ using Stopwatch = System.Diagnostics.Stopwatch;
     {
         hand = this; //Set the hand to be equal to this object
         rigidbody.isKinematic = true; //Make this kinematic so that it is under the control of the PickupObject script
-        gameObject.layer = 7;
+        gameObject.layer = 7; //Set it to the Picked Up Object layer that doesn't intersect with the player
     }
 
     public void Throw(ref PickupableObject hand, Vector3 force)
@@ -41,9 +41,9 @@ using Stopwatch = System.Diagnostics.Stopwatch;
         hand = null; //Empty the hand
         rigidbody.isKinematic = false; //Back to physics control
         rigidbody.AddForce(force, ForceMode.Impulse); //Launch the sucker
-        gameObject.layer = 3;
+        gameObject.layer = 3; //Set it back to the Physics Object layer
 
-        throwHoldTime.Stop();
+        throwHoldTime.Stop(); //Stop and reset the timer
         throwHoldTime.Reset();
     }
 
