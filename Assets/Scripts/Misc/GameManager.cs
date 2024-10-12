@@ -34,6 +34,8 @@ public class GameManager : MonoBehaviour, IResetStatic
         Events.LoadFromFile();
     }
 
+    private void Start() => gameState = GameState.Playing;
+
     public static void Subscribe(IGameEvent subscriber) => subscribers.Add(subscriber);
 
     public static void LoadLevel(string sceneName)
