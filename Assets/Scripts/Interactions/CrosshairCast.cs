@@ -36,7 +36,16 @@ public class CrosshairCast : MonoBehaviour, IGameState
         GameManager.Subscribe(this);
     }
     
-    public void OnGameStateChanged(GameState gameState) => CrosshairType = gameState == GameState.Playing ? CrosshairTypes.Normal : CrosshairTypes.Hidden;
+    public void OnGameStateChanged(GameState gameState)
+    {
+        if (gameState != GameState.Playing)
+        {
+            CrosshairType = CrosshairTypes.Hidden; //Hide the crosshair when not playing
+            pickupableObject = null;
+            interactable = null;
+        }
+        else CrosshairType = CrosshairTypes.Normal;
+    }
 
     private void FixedUpdate()
     {

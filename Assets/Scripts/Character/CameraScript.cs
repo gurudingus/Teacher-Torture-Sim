@@ -62,6 +62,7 @@ public class CameraScript : MonoBehaviour
         camState = camState == CameraState.Player ? CameraState.Computer : CameraState.Player; //Swap the camera state
 
         bool isPlayer = camState == CameraState.Player;
+        GameManager.gameState = isPlayer ? GameState.Playing : GameState.Computer;
 
         Cursor.lockState = isPlayer ? CursorLockMode.Locked : CursorLockMode.None;
         characterController.enabled = isPlayer;
