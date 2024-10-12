@@ -36,7 +36,7 @@ public class CrosshairCast : MonoBehaviour, IGameState
         GameManager.Subscribe(this);
     }
     
-    public void OnGameStateChanged(GameState gameState) => crosshairType = gameState == GameState.Playing ? CrosshairTypes.Normal : CrosshairTypes.Hidden;
+    public void OnGameStateChanged(GameState gameState) => CrosshairType = gameState == GameState.Playing ? CrosshairTypes.Normal : CrosshairTypes.Hidden;
 
     private void FixedUpdate()
     {
