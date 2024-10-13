@@ -34,7 +34,6 @@ using PUO = PickupableObject; //This makes PickupableObject slightly less verbos
     void Update()
     {
         //Todo: Make sure that double hand holding works correctly / checking which object is in the other hand to make sure you can't half pick up 2 heavy objects -> line ~45 for pick up handling, here for position handling
-
         leftHand?.SetPosition(leftHandTransform - Vector3.forward * Mathf.SmoothStep(0f, 0.5f, HoldStrength(leftHand.Hold)), transform); //Currently only have basic single hand holding done with only basic null handling (bugger it it works)
         rightHand?.SetPosition(rightHandTransform - Vector3.forward * Mathf.SmoothStep(0f, 0.5f, HoldStrength(rightHand.Hold)), transform);
     }

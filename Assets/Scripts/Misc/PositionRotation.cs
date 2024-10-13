@@ -44,4 +44,9 @@ using Unity.Mathematics;
     /// Returns the PositionRotation with the Vector3 subtracted from the position
     /// </summary>
     public static PositionRotation operator -(PositionRotation a, Vector3 b) => new(a.position - a.rotation * b, a.rotation);
+
+    /// <summary>
+    /// Multiples the rotation of the PositionRotation by the Quaternion
+    /// </summary>
+    public static PositionRotation operator *(Quaternion a, PositionRotation b) => new(b.position, a * b.rotation);
 }
