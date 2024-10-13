@@ -33,7 +33,7 @@ public class JustinAIScript : MonoBehaviour
             {
                 touchCounter++;
                 #if UNITY_EDITOR
-                Debug.Log("Just was touched");
+                Debug.Log("Justin was touched");
                 #endif
             }
         }
