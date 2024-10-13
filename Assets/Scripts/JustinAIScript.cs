@@ -8,9 +8,6 @@ public class JustinAIScript : MonoBehaviour
     public bool sight;
     private int touchCounter;
 
-    public GameObject playerCamera;
-    public GameObject cutsceneCamera;
-
     void Start()
     {
         cam = GetComponentInChildren<Camera>();
@@ -28,17 +25,16 @@ public class JustinAIScript : MonoBehaviour
     {
         if (collision.gameObject.layer == 3)
         {
-            if (touchCounter == 3)
+            if (touchCounter >= 2) //Fixed so that things actually happen on the third strike
             {
-                playerCamera.SetActive(false);
-                cutsceneCamera.SetActive(true);
-
-                GameManager.gameState = GameState.Cutscene;
+                CutsceneManager.PlayCutscene(GameEvent.Ending2);
             }
             else
             {
                 touchCounter++;
-                Debug.Log("touched");
+                #if UNITY_EDITOR
+                Debug.Log("Just was touched");
+                #endif
             }
         }
     }

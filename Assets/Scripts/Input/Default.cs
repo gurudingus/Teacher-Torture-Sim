@@ -94,8 +94,30 @@ public partial class @Default: IInputActionCollection2, IDisposable
         {
             ""name"": ""Camera"",
             ""id"": ""0251f851-be4d-459b-b82e-878bc0c6531b"",
-            ""actions"": [],
-            ""bindings"": []
+            ""actions"": [
+                {
+                    ""name"": ""SkipCutscene"",
+                    ""type"": ""Value"",
+                    ""id"": ""fb27561f-ebce-4842-9920-c9a6964a1624"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""5f8dce14-59d1-4739-bbfc-9190c92af213"",
+                    ""path"": ""<Keyboard>/f"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SkipCutscene"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": []
@@ -107,6 +129,7 @@ public partial class @Default: IInputActionCollection2, IDisposable
         m_Interactions_Interaction = m_Interactions.FindAction("Interaction", throwIfNotFound: true);
         // Camera
         m_Camera = asset.FindActionMap("Camera", throwIfNotFound: true);
+        m_Camera_SkipCutscene = m_Camera.FindAction("SkipCutscene", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -230,10 +253,12 @@ public partial class @Default: IInputActionCollection2, IDisposable
     // Camera
     private readonly InputActionMap m_Camera;
     private List<ICameraActions> m_CameraActionsCallbackInterfaces = new List<ICameraActions>();
+    private readonly InputAction m_Camera_SkipCutscene;
     public struct CameraActions
     {
         private @Default m_Wrapper;
         public CameraActions(@Default wrapper) { m_Wrapper = wrapper; }
+        public InputAction @SkipCutscene => m_Wrapper.m_Camera_SkipCutscene;
         public InputActionMap Get() { return m_Wrapper.m_Camera; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -243,10 +268,16 @@ public partial class @Default: IInputActionCollection2, IDisposable
         {
             if (instance == null || m_Wrapper.m_CameraActionsCallbackInterfaces.Contains(instance)) return;
             m_Wrapper.m_CameraActionsCallbackInterfaces.Add(instance);
+            @SkipCutscene.started += instance.OnSkipCutscene;
+            @SkipCutscene.performed += instance.OnSkipCutscene;
+            @SkipCutscene.canceled += instance.OnSkipCutscene;
         }
 
         private void UnregisterCallbacks(ICameraActions instance)
         {
+            @SkipCutscene.started -= instance.OnSkipCutscene;
+            @SkipCutscene.performed -= instance.OnSkipCutscene;
+            @SkipCutscene.canceled -= instance.OnSkipCutscene;
         }
 
         public void RemoveCallbacks(ICameraActions instance)
@@ -272,5 +303,6 @@ public partial class @Default: IInputActionCollection2, IDisposable
     }
     public interface ICameraActions
     {
+        void OnSkipCutscene(InputAction.CallbackContext context);
     }
 }

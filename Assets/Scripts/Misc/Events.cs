@@ -39,6 +39,7 @@ public static class Events
     public static void SetEventIncomplete(GameEvent gameEvent) => eventsCompleted &= ~((ulong)1 << (int)gameEvent);
 
     public static bool GetEventComplete(GameEvent gameEvent) => (eventsCompleted & (ulong)1 << (int)gameEvent) != 0;
+    public static bool GetEventComplete(int gameEvent) => (eventsCompleted & (ulong)1 << gameEvent) != 0;
 
     public static string eventsFileLocation => @$"{Application.persistentDataPath}\events.ass";
 

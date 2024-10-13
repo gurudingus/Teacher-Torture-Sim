@@ -9,6 +9,8 @@ public class CrosshairCast : MonoBehaviour, IGameState
     private CrosshairTypes CrosshairType {
         set
         {
+            if (crosshair == null) return;
+
             crosshairType = value;
             if (crosshairType == CrosshairTypes.Hidden) crosshair.enabled = false;
             else

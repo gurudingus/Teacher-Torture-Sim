@@ -10,10 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 109328562925498639}
   - component: {fileID: 109328562925498636}
-  - component: {fileID: 109328562925498637}
-  - component: {fileID: 109328562925498638}
   - component: {fileID: 109328562925498641}
   - component: {fileID: 109328562925498640}
+  - component: {fileID: 5636936372356571793}
   m_Layer: 0
   m_Name: Cutscene Cam
   m_TagString: Untagged
@@ -79,26 +78,6 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
---- !u!81 &109328562925498637
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 109328562925498635}
-  m_Enabled: 1
---- !u!114 &109328562925498638
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 109328562925498635}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dcb3b1dfd17481c4cbfeb3803c2dd03d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!320 &109328562925498641
 PlayableDirector:
   m_ObjectHideFlags: 0
@@ -117,6 +96,12 @@ PlayableDirector:
   - key: {fileID: 1419705587380504086, guid: 0f65d838608623d449c4470dc31b1556, type: 2}
     value: {fileID: 109328562925498640}
   - key: {fileID: 1383380769939429970, guid: 0f65d838608623d449c4470dc31b1556, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: -7028897194344208103, guid: 0f65d838608623d449c4470dc31b1556, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: -4183716828273644293, guid: 0f65d838608623d449c4470dc31b1556, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 8202814281009345702, guid: 0f65d838608623d449c4470dc31b1556, type: 2}
     value: {fileID: 0}
   m_ExposedReferences:
     m_References: []
@@ -141,3 +126,15 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &5636936372356571793
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 109328562925498635}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 87b6d3a85a318414596284a596a2a84c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

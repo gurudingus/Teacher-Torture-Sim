@@ -1433,11 +1433,11 @@ AnimationClip:
   m_HasMotionFloatCurves: 0
   m_Events:
   - time: 19.5
-    functionName: cutsceneEnd
+    functionName: ReloadLevel
     data: 
-    objectReferenceParameter: {fileID: 0}
+    objectReferenceParameter: {fileID: 11500000, guid: 87b6d3a85a318414596284a596a2a84c, type: 3}
     floatParameter: 0
-    intParameter: 2
+    intParameter: 0
     messageOptions: 0
 --- !u!114 &-416578074946968884
 MonoBehaviour:

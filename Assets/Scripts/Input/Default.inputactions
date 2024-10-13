@@ -72,8 +72,30 @@
         {
             "name": "Camera",
             "id": "0251f851-be4d-459b-b82e-878bc0c6531b",
-            "actions": [],
-            "bindings": []
+            "actions": [
+                {
+                    "name": "SkipCutscene",
+                    "type": "Value",
+                    "id": "fb27561f-ebce-4842-9920-c9a6964a1624",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "5f8dce14-59d1-4739-bbfc-9190c92af213",
+                    "path": "<Keyboard>/f",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SkipCutscene",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": []

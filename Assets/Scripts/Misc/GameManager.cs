@@ -43,6 +43,11 @@ public class GameManager : MonoBehaviour, IResetStatic
         StaticReset.ResetStatics(); //This probably should happen before loading a new level, as otherwise anything that does get set on level load would be resets
         SceneManager.LoadScene(sceneName);
     }
+    public static void LoadLevel(int sceneID)
+    {
+        StaticReset.ResetStatics(); //This probably should happen before loading a new level, as otherwise anything that does get set on level load would be resets
+        SceneManager.LoadScene(sceneID);
+    }
 
     public void OnStaticReset() => state = GameState.Menu;
 }
