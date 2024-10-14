@@ -2,6 +2,13 @@ using UnityEngine;
 
 public class ResetSaveFile : MonoBehaviour, IInteractable
 {
+    private AudioSource audioSource;
+
+    void Awake()
+    {
+        audioSource = GetComponent<AudioSource>();
+    }
+
     public void Interact()
     {
         #if UNITY_EDITOR
@@ -12,5 +19,7 @@ public class ResetSaveFile : MonoBehaviour, IInteractable
         
         EndingItems.UpdateItems();
         Events.mostRecentEvent = GameEvent.None;
+
+        audioSource.Play();
     }
 }

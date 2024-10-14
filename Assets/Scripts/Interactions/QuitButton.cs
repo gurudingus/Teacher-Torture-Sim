@@ -2,6 +2,13 @@ using UnityEngine;
 
 public class QuitButton : MonoBehaviour, IInteractable
 {
+    private AudioSource audioSource;
+
+    void Awake()
+    {
+        audioSource = GetComponent<AudioSource>();
+    }
+
     public void Interact()
     {
         //quits the game
@@ -11,5 +18,7 @@ public class QuitButton : MonoBehaviour, IInteractable
         #if UNITY_EDITOR
         Debug.Log("Game is exiting");
         #endif
+
+        audioSource.Play();
     }
 }
