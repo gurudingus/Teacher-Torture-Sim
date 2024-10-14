@@ -19,11 +19,26 @@ using RNG = System.Random;
         GameManager.Subscribe(this);
         speaker = GetComponent<AudioSource>();
     }
-    private void Start() => PlayNextSong();
 
     public void OnGameStateChanged(GameState gameState)
     {
-        if (gameState == GameState.Cutscene) StartCoroutine(FadeOut());
+        switch (gameState)
+        {
+            case GameState.Playing:
+                speaker.loop = false;
+                StartCoroutine(FadeOut());
+                Invoke(nameof(PlayNextSong), fadeOutTime + 0.1f);
+                break;
+            case GameState.Cutscene:
+                CancelInvoke(nameof(PlayNextSong));
+                StartCoroutine(FadeOut());
+                break;
+            case GameState.Paused:
+                speaker.volume = 0.25f;
+                break;
+        }
+
+        if (gameState != GameState.Paused) speaker.volume = 1f; //Easier than having to put this in every switch case that isn't Paused
     }
 
     IEnumerator FadeOut()
@@ -39,6 +54,7 @@ using RNG = System.Random;
     private void PlayNextSong()
     {
         CancelInvoke(nameof(PlayNextSong)); //This will allow the function to also be used to skip songs
+        speaker.volume = 1f;
 
         if (queue.Count == 0)
         {
