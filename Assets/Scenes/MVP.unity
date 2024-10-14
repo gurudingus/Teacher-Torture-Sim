@@ -9067,6 +9067,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Button_quit
       objectReference: {fileID: 0}
+    - target: {fileID: 4246740973804637377, guid: 91f6e3de202d8854d9b281d9596cfe03, type: 3}
+      propertyPath: m_Volume
+      value: 0.2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 91f6e3de202d8854d9b281d9596cfe03, type: 3}
 --- !u!114 &882802538410363222
@@ -11151,6 +11155,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1673734028}
     m_Modifications:
+    - target: {fileID: 626556916716210346, guid: b504aac0c1c2bca498630adc923b32cf, type: 3}
+      propertyPath: m_Volume
+      value: 0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 3807588677029274787, guid: b504aac0c1c2bca498630adc923b32cf, type: 3}
       propertyPath: m_Name
       value: Button_reset
