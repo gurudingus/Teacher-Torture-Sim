@@ -84,5 +84,9 @@ public class CutsceneManager : MonoBehaviour, IResetStatic
         GameManager.LoadLevel(0);
     }
 
-    public void OnStaticReset() => skippable = false;
+    public void OnResetStatic()
+    {
+        skippable = false;
+        instance = null;
+    }
 }

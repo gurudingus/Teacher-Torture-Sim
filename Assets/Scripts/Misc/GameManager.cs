@@ -49,7 +49,7 @@ public class GameManager : MonoBehaviour, IResetStatic
         SceneManager.LoadScene(sceneID);
     }
 
-    public void OnStaticReset() 
+    public void OnResetStatic() 
     {
         state = GameState.Menu;
         subscribers.Clear();

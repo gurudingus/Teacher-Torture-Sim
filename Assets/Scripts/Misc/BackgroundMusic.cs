@@ -21,6 +21,7 @@ using RNG = System.Random;
         GameManager.Subscribe(this);
         
         speaker = GetComponent<AudioSource>();
+        speaker.time = speaker.clip.length * (float)random.NextDouble();
         volume = speaker.volume;
     }
 
@@ -31,11 +32,12 @@ using RNG = System.Random;
             case GameState.Playing:
                 speaker.loop = false;
                 StartCoroutine(FadeOut());
-                Invoke(nameof(PlayNextSong), fadeOutTime + 0.1f);
+                Invoke(nameof(NextSongRandomStart), fadeOutTime + 0.1f);
                 break;
             case GameState.Cutscene:
                 CancelInvoke(nameof(PlayNextSong));
                 StartCoroutine(FadeOut());
+                Invoke(nameof(DisableSpeaker), fadeOutTime); //I have no idea why this is necessary but it's just here to make sure it actually mutes the speaker once a cutscene is playing
                 break;
             case GameState.Paused:
                 speaker.volume = pausedVolume;
@@ -55,7 +57,9 @@ using RNG = System.Random;
         speaker.volume = 0f; //Make sure the volume is set to 0 after the while loop finishes
     }
 
-    private void PlayNextSong()
+    private void DisableSpeaker() => speaker.enabled = false;
+
+    private void PlayNextSong(float proportionComplete)
     {
         CancelInvoke(nameof(PlayNextSong)); //This will allow the function to also be used to skip songs
         speaker.volume = volume;
@@ -70,7 +74,11 @@ using RNG = System.Random;
         queue.RemoveAt(0);
 
         speaker.Play();
+        speaker.time = speaker.clip.length * proportionComplete;
 
-        Invoke(nameof(PlayNextSong), speaker.clip.length);
+        Invoke(nameof(PlayNextSong), speaker.clip.length * (1 - proportionComplete));
     }
+
+    private void NextSong() => PlayNextSong(0f);
+    private void NextSongRandomStart() => PlayNextSong((float)random.NextDouble());
 }

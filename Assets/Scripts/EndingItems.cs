@@ -10,7 +10,7 @@ using TMPro;
     public GameObject trophy;
 }
 
-public class EndingItems : MonoBehaviour
+public class EndingItems : MonoBehaviour, IResetStatic
 {
 
     const int numberOfEndings = 9;
@@ -31,6 +31,8 @@ public class EndingItems : MonoBehaviour
 
         SpawnItems();
     }
+
+    public void OnResetStatic() => instance = null;
 
     private void AttemptFindingObjects()
     {

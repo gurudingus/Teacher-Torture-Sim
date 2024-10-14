@@ -5,7 +5,7 @@ using System.Collections.Generic;
 /// </summary>
 public interface IResetStatic
 {
-    public void OnStaticReset();
+    public void OnResetStatic();
 }
 
 public static class StaticReset
@@ -14,7 +14,7 @@ public static class StaticReset
 
     public static void ResetStatics()
     {
-        foreach (IResetStatic subscriber in subscribers) subscriber.OnStaticReset();
+        foreach (IResetStatic subscriber in subscribers) subscriber.OnResetStatic();
         subscribers.Clear();
     }
 
