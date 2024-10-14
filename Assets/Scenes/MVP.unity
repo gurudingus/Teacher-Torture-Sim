@@ -751,7 +751,7 @@ Light:
   serializedVersion: 10
   m_Type: 2
   m_Shape: 0
-  m_Color: {r: 1, g: 0.94312716, b: 0.8726415, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Intensity: 1
   m_Range: 40
   m_SpotAngle: 30
@@ -761,7 +761,7 @@ Light:
     m_Type: 2
     m_Resolution: -1
     m_CustomResolution: -1
-    m_Strength: 1
+    m_Strength: 0.5
     m_Bias: 0.05
     m_NormalBias: 0.4
     m_NearPlane: 0.2
@@ -5580,7 +5580,7 @@ Light:
   serializedVersion: 10
   m_Type: 2
   m_Shape: 0
-  m_Color: {r: 1, g: 0.94312716, b: 0.8726415, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Intensity: 1
   m_Range: 40
   m_SpotAngle: 30
@@ -5590,7 +5590,7 @@ Light:
     m_Type: 2
     m_Resolution: -1
     m_CustomResolution: -1
-    m_Strength: 1
+    m_Strength: 0.5
     m_Bias: 0.05
     m_NormalBias: 0.4
     m_NearPlane: 0.2
@@ -12220,6 +12220,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2126772340}
     m_Modifications:
+    - target: {fileID: 8099389781598962979, guid: 1b5684a8ea4bac743a4841ce6fe65ccf, type: 3}
+      propertyPath: m_fontColor.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8099389781598962979, guid: 1b5684a8ea4bac743a4841ce6fe65ccf, type: 3}
+      propertyPath: m_fontColor.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8099389781598962979, guid: 1b5684a8ea4bac743a4841ce6fe65ccf, type: 3}
+      propertyPath: m_fontColor.r
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8099389781598962979, guid: 1b5684a8ea4bac743a4841ce6fe65ccf, type: 3}
+      propertyPath: m_fontColor32.rgba
+      value: 4278190080
+      objectReference: {fileID: 0}
     - target: {fileID: 8099389783082227370, guid: 1b5684a8ea4bac743a4841ce6fe65ccf, type: 3}
       propertyPath: m_Name
       value: Cutscene Skip
@@ -12306,6 +12322,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8099389783082227371, guid: 1b5684a8ea4bac743a4841ce6fe65ccf, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8099389783380672755, guid: 1b5684a8ea4bac743a4841ce6fe65ccf, type: 3}
+      propertyPath: m_Color.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8099389783380672755, guid: 1b5684a8ea4bac743a4841ce6fe65ccf, type: 3}
+      propertyPath: m_Color.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8099389783380672755, guid: 1b5684a8ea4bac743a4841ce6fe65ccf, type: 3}
+      propertyPath: m_Color.r
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
