@@ -15,6 +15,7 @@ public static class StaticReset
     public static void ResetStatics()
     {
         foreach (IResetStatic subscriber in subscribers) subscriber.OnStaticReset();
+        subscribers.Clear();
     }
 
     public static void Subscribe(IResetStatic subscriber) => subscribers.Add(subscriber);
