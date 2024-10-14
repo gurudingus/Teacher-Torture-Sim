@@ -23,6 +23,8 @@ public class CrosshairCast : MonoBehaviour, IGameState
     
     private RawImage crosshair;
 
+    private new bool enabled = false;
+
     [SerializeField] [Tooltip("Maximum range of the raycast")] private float maximumRange = 2.5f;
     private new Camera camera;
     private RaycastHit raycastHit;
@@ -38,7 +40,9 @@ public class CrosshairCast : MonoBehaviour, IGameState
     
     public void OnGameStateChanged(GameState gameState)
     {
-        if (!(gameState == GameState.Playing || gameState == GameState.MenuRoom))
+        enabled = !(GameManager.gameState == GameState.Playing || GameManager.gameState == GameState.MenuRoom);
+        
+        if (enabled)
         {
             CrosshairType = CrosshairTypes.Hidden; //Hide the crosshair when not playing
             pickupableObject = null;
@@ -49,7 +53,7 @@ public class CrosshairCast : MonoBehaviour, IGameState
 
     private void FixedUpdate()
     {
-        if (!(GameManager.gameState == GameState.Playing || GameManager.gameState == GameState.MenuRoom)) return; //Only run this code if the gameState is playing or menu room
+        if (enabled) return; //Only run this code if the gameState is playing or menu room
 
         Physics.SphereCast(camera.transform.position, 0.1f, camera.transform.forward, out raycastHit, maximumRange, ~(1 << 6) /* Ignore the player */);
 
