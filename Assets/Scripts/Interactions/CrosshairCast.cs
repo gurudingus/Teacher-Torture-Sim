@@ -38,7 +38,7 @@ public class CrosshairCast : MonoBehaviour, IGameState
     
     public void OnGameStateChanged(GameState gameState)
     {
-        if (gameState != GameState.Playing)
+        if (!(gameState == GameState.Playing || gameState == GameState.MenuRoom))
         {
             CrosshairType = CrosshairTypes.Hidden; //Hide the crosshair when not playing
             pickupableObject = null;
@@ -49,7 +49,7 @@ public class CrosshairCast : MonoBehaviour, IGameState
 
     private void FixedUpdate()
     {
-        if (GameManager.gameState != GameState.Playing) return; //Only run this code if the gameState is playing
+        if (!(GameManager.gameState == GameState.Playing || GameManager.gameState == GameState.MenuRoom)) return; //Only run this code if the gameState is playing or menu room
 
         Physics.SphereCast(camera.transform.position, 0.1f, camera.transform.forward, out raycastHit, maximumRange, ~(1 << 6) /* Ignore the player */);
 

@@ -34,7 +34,7 @@ public class GameManager : MonoBehaviour, IResetStatic
         Events.LoadFromFile();
     }
 
-    private void Start() => gameState = GameState.Playing;
+    private void Start() => gameState = GameState.MenuRoom;
 
     public static void Subscribe(IGameState subscriber) => subscribers.Add(subscriber);
 
@@ -59,6 +59,7 @@ public class GameManager : MonoBehaviour, IResetStatic
 public enum GameState
 {
     Menu,
+    MenuRoom,
     Playing,
     Paused,
     Cutscene,
