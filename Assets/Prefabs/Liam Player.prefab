@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 6254877277957987239}
   - component: {fileID: 6254877277957987237}
-  - component: {fileID: 6254877277957987238}
   - component: {fileID: 4748428493005467749}
   - component: {fileID: 8694266136814032253}
   m_Layer: 6
@@ -78,14 +77,6 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
---- !u!81 &6254877277957987238
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6254877277957987232}
-  m_Enabled: 1
 --- !u!114 &4748428493005467749
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -147,6 +138,7 @@ GameObject:
   - component: {fileID: 6254877278795668979}
   - component: {fileID: 7407999828984957411}
   - component: {fileID: 2098887506877627216}
+  - component: {fileID: 3140749212411348264}
   m_Layer: 6
   m_Name: Liam Player
   m_TagString: Untagged
@@ -309,7 +301,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2763a32105a6cd4a8617ef102a4009c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maximumRange: 2
   leftHandTransform:
     position: {x: -0.75, y: 0.5, z: 1.5}
     rotation: {x: 0, y: 0, z: 0.1305262, w: 0.9914449}
@@ -318,3 +309,11 @@ MonoBehaviour:
     rotation: {x: 0, y: 0, z: -0.1305262, w: 0.9914449}
   force: {x: 0, y: 0, z: 10}
   holdTimeForMaxForce: 0.75
+--- !u!81 &3140749212411348264
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6254877278795668985}
+  m_Enabled: 1

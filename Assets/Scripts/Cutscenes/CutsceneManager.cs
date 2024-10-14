@@ -18,6 +18,7 @@ public class CutsceneManager : MonoBehaviour, IResetStatic
     private static TextMeshProUGUI skipText;
     private static Image progressBar;
     private static RawImage fadeToBlack;
+    private static AudioSource cutsceneMusic;
 
     private void Awake()
     {
@@ -40,6 +41,7 @@ public class CutsceneManager : MonoBehaviour, IResetStatic
 
         Camera.main.gameObject.SetActive(false);
         instance.cutsceneCameras[(int)gameEvent].SetActive(true);
+        cutsceneMusic = instance.cutsceneCameras[(int)gameEvent].GetComponent<AudioSource>();
 
         skippable = Events.GetEventComplete(gameEvent);
         Events.SetEventComplete(gameEvent);
@@ -65,6 +67,7 @@ public class CutsceneManager : MonoBehaviour, IResetStatic
         {
             progressBar.fillAmount = 0f;
             fadeToBlack.color = Color.clear;
+            cutsceneMusic.volume = 1f;
             StopAllCoroutines();
         }
     }
@@ -75,6 +78,7 @@ public class CutsceneManager : MonoBehaviour, IResetStatic
         {
             progressBar.fillAmount = skipHoldTime / skipTime;
             fadeToBlack.color = new(0f, 0f, 0f, (skipHoldTime * 2f - skipTime) / skipTime);
+            cutsceneMusic.volume = 1f - (skipHoldTime / skipTime);
             yield return null;
         }
         GameManager.LoadLevel(0);
