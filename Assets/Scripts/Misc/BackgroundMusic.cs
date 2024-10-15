@@ -34,6 +34,8 @@ using RNG = System.Random;
 
     public void OnGameStateChanged(GameState gameState)
     {
+        if (gameState != GameState.Paused) speaker.volume = volume; //Easier than having to put this in every switch case that isn't Paused
+        
         switch (gameState)
         {
             case GameState.Playing:
@@ -54,8 +56,6 @@ using RNG = System.Random;
                 speaker.volume = pausedVolume;
                 break;
         }
-
-        if (gameState != GameState.Paused) speaker.volume = volume; //Easier than having to put this in every switch case that isn't Paused
     }
 
     private void DisableSpeaker() => speaker.enabled = false;

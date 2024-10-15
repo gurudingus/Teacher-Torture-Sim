@@ -4,7 +4,7 @@ using UnityEngine.UI;
 using UnityEngine.InputSystem;
 using TMPro;
 
-public class CutsceneManager : MonoBehaviour, IResetStatic
+public class CutsceneManager : MonoBehaviour, IResetStatic, IGameState
 {
     private static CutsceneManager instance;
 
@@ -23,6 +23,7 @@ public class CutsceneManager : MonoBehaviour, IResetStatic
     private void Awake()
     {
         instance = this;
+        GameManager.Subscribe(this);
 
         GameObject skipGUI = GameObject.Find("Cutscene Skip");
         skipText = skipGUI.GetComponentInChildren<TextMeshProUGUI>();
@@ -88,5 +89,12 @@ public class CutsceneManager : MonoBehaviour, IResetStatic
     {
         skippable = false;
         instance = null;
+    }
+
+    public void OnGameStateChanged(GameState gameState)
+    {
+        if (cutsceneMusic == null) return;
+        if (gameState == GameState.Paused) cutsceneMusic.Pause();
+        else cutsceneMusic.Play();
     }
 }

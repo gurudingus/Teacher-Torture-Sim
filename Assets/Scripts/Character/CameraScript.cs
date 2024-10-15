@@ -46,11 +46,11 @@ public class CameraScript : MonoBehaviour
         if (camState == CameraState.Player)
         {
             //rotate player around
-            float rotateYaw = Input.GetAxis("Mouse X") * mouseSensitivity;
+            float rotateYaw = Input.GetAxis("Mouse X") * mouseSensitivity * Time.timeScale;
             transform.parent.transform.Rotate(0, rotateYaw, 0);
 
             //rotate cam up and down
-            rotateCameraPitch += -Input.GetAxis("Mouse Y") * mouseSensitivity;
+            rotateCameraPitch += -Input.GetAxis("Mouse Y") * mouseSensitivity * Time.timeScale;
             //lock rotation so no flip camera
             rotateCameraPitch = Mathf.Clamp(rotateCameraPitch, -pitchRange, pitchRange);
             firstPersonCam.transform.localRotation = Quaternion.Euler(rotateCameraPitch, 0, 0);

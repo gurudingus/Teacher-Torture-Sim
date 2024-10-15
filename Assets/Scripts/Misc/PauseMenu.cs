@@ -4,15 +4,17 @@ public class PauseMenu : MonoBehaviour
 {
     private GameObject pauseMenu;
 
+    private GameState previousState;
+
     private void OnPause()
     {
-        GameState previousState = GameManager.gameState;
+        if (GameManager.gameState != GameState.Paused) previousState = GameManager.gameState;
 
-        bool paused = GameManager.gameState == GameState.Paused;
+        bool playing = GameManager.gameState == GameState.Paused; //Inverted here so it makes sense for the rest of the code
 
-        GameManager.gameState = paused ? previousState : GameState.Paused; //Update the gamestate to be either paused or not paused
-        paused = !paused; //Update paused as well so the next code is more readable
+        GameManager.gameState = playing ? previousState : GameState.Paused; //Update the gamestate to be either paused or not paused
         
-        Time.timeScale = paused ? 0f : 1f;
+        Time.timeScale = playing ? 1f : 0f;
+        Cursor.lockState = playing ? CursorLockMode.Locked : CursorLockMode.None;
     }
 }
