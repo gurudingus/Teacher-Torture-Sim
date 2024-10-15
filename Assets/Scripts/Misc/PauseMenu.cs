@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PauseMenu : MonoBehaviour
@@ -5,6 +6,12 @@ public class PauseMenu : MonoBehaviour
     private GameObject pauseMenu;
 
     private GameState previousState;
+
+    private void Awake()
+    {
+        pauseMenu = GameObject.Find("Pause Menu");
+        if (pauseMenu.IsUnityNull()) Debug.LogWarning("Pause menu not found");
+    }
 
     private void OnPause()
     {
@@ -16,5 +23,6 @@ public class PauseMenu : MonoBehaviour
         
         Time.timeScale = playing ? 1f : 0f;
         Cursor.lockState = playing ? CursorLockMode.Locked : CursorLockMode.None;
+        pauseMenu.SetActive(!playing);
     }
 }
