@@ -11,6 +11,7 @@ public class PauseMenu : MonoBehaviour
     {
         pauseMenu = GameObject.Find("Pause Menu");
         if (pauseMenu.IsUnityNull()) Debug.LogWarning("Pause menu not found");
+        pauseMenu.SetActive(false);
     }
 
     private void OnPause()
