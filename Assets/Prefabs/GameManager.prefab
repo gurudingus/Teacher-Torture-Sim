@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 8314431526299331154}
   - component: {fileID: 4837832718183300383}
   - component: {fileID: 8158539365779991869}
+  - component: {fileID: 2421360152497790461}
   - component: {fileID: 8416300773802011216}
   m_Layer: 0
   m_Name: GameManager
@@ -128,11 +129,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   songs:
   - {fileID: 8300000, guid: 27bae175cf9a54e428fa90f141a0ce80, type: 3}
-  - {fileID: 8300000, guid: b4c63b9294299c042a07acfc2b316a1d, type: 3}
-  - {fileID: 8300000, guid: b552772907c41d14c95feebe45b58cb7, type: 3}
-  - {fileID: 8300000, guid: 544a96a663d300d47b874e105eec4fb7, type: 3}
-  - {fileID: 8300000, guid: 586bbae1802519b409d933a2a687f543, type: 3}
   fadeOutTime: 0.5
+  pausedVolume: 0.1
 --- !u!82 &8158539365779991869
 AudioSource:
   m_ObjectHideFlags: 0
@@ -145,9 +143,9 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.25
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -229,6 +227,18 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &2421360152497790461
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 646289127940889367}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2b37f92c6d415a4bb08b0ef0c90c6bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &8416300773802011216
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -256,6 +266,6 @@ MonoBehaviour:
   m_ActionEvents: []
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
-  m_DefaultActionMap: Camera
+  m_DefaultActionMap: Other
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
