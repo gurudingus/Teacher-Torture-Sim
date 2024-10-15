@@ -70,7 +70,7 @@
             ]
         },
         {
-            "name": "Camera",
+            "name": "Other",
             "id": "0251f851-be4d-459b-b82e-878bc0c6531b",
             "actions": [
                 {
@@ -81,6 +81,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "Pause",
+                    "type": "Button",
+                    "id": "a6d94bd4-2888-4730-963c-afd040338348",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -92,6 +101,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "SkipCutscene",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d0716890-ed65-4f76-a889-4a1e9c88055f",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Pause",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

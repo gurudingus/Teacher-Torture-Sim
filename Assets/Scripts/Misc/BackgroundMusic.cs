@@ -12,7 +12,9 @@ using RNG = System.Random;
 
     [SerializeField] private float fadeOutTime = 0.5f;
     public float volume { private get; set; } = 1f;
-    [SerializeField] private float pausedVolume = 0.1f;
+    [SerializeField] public float pausedVolume = 0.1f;
+
+    private bool isInPlayRoom = false;
 
     private static RNG random = new();
 
@@ -30,9 +32,13 @@ using RNG = System.Random;
         switch (gameState)
         {
             case GameState.Playing:
+                if (isInPlayRoom) return; //Protection so that this only runs once
+
                 speaker.loop = false;
                 StartCoroutine(FadeOut());
                 Invoke(nameof(NextSongRandomStart), fadeOutTime + 0.1f);
+
+                isInPlayRoom = true;
                 break;
             case GameState.Cutscene:
                 CancelInvoke(nameof(PlayNextSong));
@@ -47,6 +53,8 @@ using RNG = System.Random;
         if (gameState != GameState.Paused) speaker.volume = volume; //Easier than having to put this in every switch case that isn't Paused
     }
 
+    private void DisableSpeaker() => speaker.enabled = false;
+
     IEnumerator FadeOut()
     {
         while (speaker.volume > 0f)
@@ -57,11 +65,11 @@ using RNG = System.Random;
         speaker.volume = 0f; //Make sure the volume is set to 0 after the while loop finishes
     }
 
-    private void DisableSpeaker() => speaker.enabled = false;
+    private void NextSongRandomStart() => PlayNextSong((float)random.NextDouble());
 
     private void PlayNextSong(float proportionComplete)
     {
-        CancelInvoke(nameof(PlayNextSong)); //This will allow the function to also be used to skip songs
+        StopCoroutine(nameof(QueueSong)); //This will allow the function to also be used to skip songs
         speaker.volume = volume;
 
         if (queue.Count == 0)
@@ -76,9 +84,13 @@ using RNG = System.Random;
         speaker.Play();
         speaker.time = speaker.clip.length * proportionComplete;
 
-        Invoke(nameof(PlayNextSong), speaker.clip.length * (1 - proportionComplete));
+        StartCoroutine(nameof(QueueSong));
     }
 
-    private void NextSong() => PlayNextSong(0f);
-    private void NextSongRandomStart() => PlayNextSong((float)random.NextDouble());
+    //TODO - I should really make this not a coroutine because this basically just always runs anyway and has extra overhead from needing to use the string invocation since I have to be able to cancel it
+    IEnumerator QueueSong() //I would use an invoke with the song length but the invoke is affected by timescale and I want the song to keep playing while the game is paused
+    {
+        while (speaker.isPlaying) yield return null;
+        PlayNextSong(0f);
+    }
 }

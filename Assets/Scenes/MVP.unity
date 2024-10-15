@@ -7378,7 +7378,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4837832718183300383, guid: ad57f3e7074627844a16370be345b7e9, type: 3}
       propertyPath: songs.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4837832718183300383, guid: ad57f3e7074627844a16370be345b7e9, type: 3}
       propertyPath: songs.Array.data[0]
@@ -7387,7 +7387,7 @@ PrefabInstance:
     - target: {fileID: 4837832718183300383, guid: ad57f3e7074627844a16370be345b7e9, type: 3}
       propertyPath: songs.Array.data[1]
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 8300000, guid: 523b4ed524cffd442a0721e96140f8a0, type: 3}
     - target: {fileID: 4837832718183300383, guid: ad57f3e7074627844a16370be345b7e9, type: 3}
       propertyPath: songs.Array.data[3]
       value: 
@@ -7484,6 +7484,10 @@ PrefabInstance:
       propertyPath: endingObjects.Array.data[2].trophy
       value: 
       objectReference: {fileID: 1762081773}
+    - target: {fileID: 8416300773802011216, guid: ad57f3e7074627844a16370be345b7e9, type: 3}
+      propertyPath: m_DefaultActionMap
+      value: 0251f851-be4d-459b-b82e-878bc0c6531b
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ad57f3e7074627844a16370be345b7e9, type: 3}
 --- !u!224 &1519025581 stripped
@@ -7814,6 +7818,10 @@ PrefabInstance:
     - target: {fileID: 2098887506877627216, guid: 60f51b0525bcfde41b1dd452f67931dd, type: 3}
       propertyPath: force.z
       value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4748428493005467749, guid: 60f51b0525bcfde41b1dd452f67931dd, type: 3}
+      propertyPath: m_DefaultActionMap
+      value: ca65c367-ad1f-41a7-b250-da03a059cae5
       objectReference: {fileID: 0}
     - target: {fileID: 6254877277957987237, guid: 60f51b0525bcfde41b1dd452f67931dd, type: 3}
       propertyPath: m_ClearFlags

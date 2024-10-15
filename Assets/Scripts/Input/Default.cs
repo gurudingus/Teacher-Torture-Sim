@@ -92,7 +92,7 @@ public partial class @Default: IInputActionCollection2, IDisposable
             ]
         },
         {
-            ""name"": ""Camera"",
+            ""name"": ""Other"",
             ""id"": ""0251f851-be4d-459b-b82e-878bc0c6531b"",
             ""actions"": [
                 {
@@ -103,6 +103,15 @@ public partial class @Default: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Pause"",
+                    ""type"": ""Button"",
+                    ""id"": ""a6d94bd4-2888-4730-963c-afd040338348"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -116,6 +125,17 @@ public partial class @Default: IInputActionCollection2, IDisposable
                     ""action"": ""SkipCutscene"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d0716890-ed65-4f76-a889-4a1e9c88055f"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Pause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -127,9 +147,10 @@ public partial class @Default: IInputActionCollection2, IDisposable
         m_Interactions_HandLeft = m_Interactions.FindAction("HandLeft", throwIfNotFound: true);
         m_Interactions_HandRight = m_Interactions.FindAction("HandRight", throwIfNotFound: true);
         m_Interactions_Interaction = m_Interactions.FindAction("Interaction", throwIfNotFound: true);
-        // Camera
-        m_Camera = asset.FindActionMap("Camera", throwIfNotFound: true);
-        m_Camera_SkipCutscene = m_Camera.FindAction("SkipCutscene", throwIfNotFound: true);
+        // Other
+        m_Other = asset.FindActionMap("Other", throwIfNotFound: true);
+        m_Other_SkipCutscene = m_Other.FindAction("SkipCutscene", throwIfNotFound: true);
+        m_Other_Pause = m_Other.FindAction("Pause", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -250,59 +271,68 @@ public partial class @Default: IInputActionCollection2, IDisposable
     }
     public InteractionsActions @Interactions => new InteractionsActions(this);
 
-    // Camera
-    private readonly InputActionMap m_Camera;
-    private List<ICameraActions> m_CameraActionsCallbackInterfaces = new List<ICameraActions>();
-    private readonly InputAction m_Camera_SkipCutscene;
-    public struct CameraActions
+    // Other
+    private readonly InputActionMap m_Other;
+    private List<IOtherActions> m_OtherActionsCallbackInterfaces = new List<IOtherActions>();
+    private readonly InputAction m_Other_SkipCutscene;
+    private readonly InputAction m_Other_Pause;
+    public struct OtherActions
     {
         private @Default m_Wrapper;
-        public CameraActions(@Default wrapper) { m_Wrapper = wrapper; }
-        public InputAction @SkipCutscene => m_Wrapper.m_Camera_SkipCutscene;
-        public InputActionMap Get() { return m_Wrapper.m_Camera; }
+        public OtherActions(@Default wrapper) { m_Wrapper = wrapper; }
+        public InputAction @SkipCutscene => m_Wrapper.m_Other_SkipCutscene;
+        public InputAction @Pause => m_Wrapper.m_Other_Pause;
+        public InputActionMap Get() { return m_Wrapper.m_Other; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
         public bool enabled => Get().enabled;
-        public static implicit operator InputActionMap(CameraActions set) { return set.Get(); }
-        public void AddCallbacks(ICameraActions instance)
+        public static implicit operator InputActionMap(OtherActions set) { return set.Get(); }
+        public void AddCallbacks(IOtherActions instance)
         {
-            if (instance == null || m_Wrapper.m_CameraActionsCallbackInterfaces.Contains(instance)) return;
-            m_Wrapper.m_CameraActionsCallbackInterfaces.Add(instance);
+            if (instance == null || m_Wrapper.m_OtherActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_OtherActionsCallbackInterfaces.Add(instance);
             @SkipCutscene.started += instance.OnSkipCutscene;
             @SkipCutscene.performed += instance.OnSkipCutscene;
             @SkipCutscene.canceled += instance.OnSkipCutscene;
+            @Pause.started += instance.OnPause;
+            @Pause.performed += instance.OnPause;
+            @Pause.canceled += instance.OnPause;
         }
 
-        private void UnregisterCallbacks(ICameraActions instance)
+        private void UnregisterCallbacks(IOtherActions instance)
         {
             @SkipCutscene.started -= instance.OnSkipCutscene;
             @SkipCutscene.performed -= instance.OnSkipCutscene;
             @SkipCutscene.canceled -= instance.OnSkipCutscene;
+            @Pause.started -= instance.OnPause;
+            @Pause.performed -= instance.OnPause;
+            @Pause.canceled -= instance.OnPause;
         }
 
-        public void RemoveCallbacks(ICameraActions instance)
+        public void RemoveCallbacks(IOtherActions instance)
         {
-            if (m_Wrapper.m_CameraActionsCallbackInterfaces.Remove(instance))
+            if (m_Wrapper.m_OtherActionsCallbackInterfaces.Remove(instance))
                 UnregisterCallbacks(instance);
         }
 
-        public void SetCallbacks(ICameraActions instance)
+        public void SetCallbacks(IOtherActions instance)
         {
-            foreach (var item in m_Wrapper.m_CameraActionsCallbackInterfaces)
+            foreach (var item in m_Wrapper.m_OtherActionsCallbackInterfaces)
                 UnregisterCallbacks(item);
-            m_Wrapper.m_CameraActionsCallbackInterfaces.Clear();
+            m_Wrapper.m_OtherActionsCallbackInterfaces.Clear();
             AddCallbacks(instance);
         }
     }
-    public CameraActions @Camera => new CameraActions(this);
+    public OtherActions @Other => new OtherActions(this);
     public interface IInteractionsActions
     {
         void OnHandLeft(InputAction.CallbackContext context);
         void OnHandRight(InputAction.CallbackContext context);
         void OnInteraction(InputAction.CallbackContext context);
     }
-    public interface ICameraActions
+    public interface IOtherActions
     {
         void OnSkipCutscene(InputAction.CallbackContext context);
+        void OnPause(InputAction.CallbackContext context);
     }
 }
