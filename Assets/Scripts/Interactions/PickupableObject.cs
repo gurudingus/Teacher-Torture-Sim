@@ -29,14 +29,14 @@ using Stopwatch = System.Diagnostics.Stopwatch;
         transform.rotation = positionRotation.GetRotation(_transform) * Quaternion.Inverse(pickupTransform.Rotation); //Some slightly less funky maths to make the rotations match
     }
 
-    public void PickUp(ref PickupableObject hand)
+    public virtual void PickUp(ref PickupableObject hand)
     {
         hand = this; //Set the hand to be equal to this object
         rigidbody.isKinematic = true; //Make this kinematic so that it is under the control of the PickupObject script
         gameObject.layer = 7; //Set it to the Picked Up Object layer that doesn't intersect with the player
     }
 
-    public void Throw(ref PickupableObject hand, Vector3 force)
+    public virtual void Throw(ref PickupableObject hand, Vector3 force)
     {
         hand = null; //Empty the hand
         rigidbody.isKinematic = false; //Back to physics control

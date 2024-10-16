@@ -3,7 +3,7 @@ using UnityEngine.InputSystem;
 
 using PUO = PickupableObject; //This makes PickupableObject slightly less verbose
 
-[RequireComponent(typeof(PlayerInput))] public class PickUpObject : MonoBehaviour
+[RequireComponent(typeof(PlayerInput))] public class PickUpObject : MonoBehaviour, IGameState
 {
     //Serialised Fields
     //[SerializeField] private float singleHandMaximumMass = 10f;
@@ -26,6 +26,8 @@ using PUO = PickupableObject; //This makes PickupableObject slightly less verbos
 
     private void Awake()
     {
+        GameManager.Subscribe(this);
+
         camera = Camera.main;
         crosshair = GameObject.Find("Crosshair")?.GetComponent<CrosshairCast>();
         //middleHandTransform = leftHandTransform | rightHandTransform;
@@ -60,5 +62,12 @@ using PUO = PickupableObject; //This makes PickupableObject slightly less verbos
     {
         PickupUtilities.DrawGizmos(leftHandTransform.GetPosition(transform), leftHandTransform.GetRotation(transform), Color.black);
         PickupUtilities.DrawGizmos(rightHandTransform.GetPosition(transform), rightHandTransform.GetRotation(transform), Color.white);
+    }
+
+    public void OnGameStateChanged(GameState gameState) //Drop items in both hands whenever a cutscene starts
+    {
+        if (gameState != GameState.Cutscene) return;
+        leftHand?.Throw(ref leftHand, Vector3.zero);
+        rightHand?.Throw(ref rightHand, Vector3.zero);
     }
 }
