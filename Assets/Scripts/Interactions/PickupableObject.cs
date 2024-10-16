@@ -1,6 +1,9 @@
 using UnityEngine;
 using Stopwatch = System.Diagnostics.Stopwatch;
 
+//Written by Liam unless otherwise indicated
+//Rama added code for points system
+
 [RequireComponent(typeof(Rigidbody))] public class PickupableObject : MonoBehaviour
 {
     [SerializeField] [Tooltip("Weight in kg")] private float mass = 1f;
@@ -15,6 +18,8 @@ using Stopwatch = System.Diagnostics.Stopwatch;
 
     [SerializeField] [Range(0, 0.25f)] [Tooltip("0 means instant snapping / no smoothing, max value means super sluggish movement")] private float smoothDampTime = 0.05f;
     private Vector3 smoothDampVelocity = Vector3.zero;
+
+    [SerializeField] [Tooltip("Amount of points awarded for colliding with this object")] private int collisionPoints = 1;
 
     private void Awake()
     {
@@ -45,6 +50,16 @@ using Stopwatch = System.Diagnostics.Stopwatch;
 
         throwHoldTime.Stop(); //Stop and reset the timer
         throwHoldTime.Reset();
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        //Check if the object was thrown and is not held anymore
+        if (!rigidbody.isKinematic)
+        {
+            //Add points for the collision using ScoreManager
+            ScoreManager.Instance.AddScore(collisionPoints);
+        }
     }
 
     private void OnDrawGizmosSelected() => PickupUtilities.DrawGizmos(pickupTransform.GetPosition(transform), pickupTransform.GetRotation(transform)); //Shows the anchor that is used for the pickup

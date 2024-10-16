@@ -1,5 +1,5 @@
 using UnityEngine;
-//rama's code edit by liam
+//Rama's code edit by Liam
 public class ResetSaveFile : MonoBehaviour, IInteractable
 {
     private AudioSource audioSource;

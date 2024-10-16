@@ -1,4 +1,5 @@
 using UnityEngine;
+//Rama's and Liam's code
 
 public class LockAndKillMenu : MonoBehaviour
 {
@@ -8,8 +9,8 @@ public class LockAndKillMenu : MonoBehaviour
         gameObject.SetActive(false); //Disable itself once it is triggered
         GameManager.gameState = GameState.Playing;
 
-        GameObject.Find("Menu Room")?.SetActive(false);
-        (GameObject.Find("Door")?.GetComponent<Door>()).Locked = true;
-        EndingItems.Splash();
+        GameObject.Find("Menu Room")?.SetActive(false); //Makes the Menu Room go POOF
+        (GameObject.Find("Door")?.GetComponent<Door>()).Locked = true; //Closes the door behind the player
+        EndingItems.Splash(); //Notification of new item in the room
     }
 }
