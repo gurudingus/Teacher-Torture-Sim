@@ -241,6 +241,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f6f439c7367092488c254b4cee5505a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  brokenGlass: {fileID: 1300670229790756626, guid: 5f67c8fd1a104fa428d5a833ecec5768, type: 3}
 --- !u!1 &7660494174885544676
 GameObject:
   m_ObjectHideFlags: 0

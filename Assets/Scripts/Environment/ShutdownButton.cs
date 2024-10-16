@@ -2,13 +2,9 @@ using UnityEngine;
 
 public class ShutdownButton : MonoBehaviour, IInteractable
 {
-
-
-
-
     public void Interact()
     {
-        transform.localPosition -= transform.right * 0.05f;
+        transform.localPosition += transform.up * 0.05f;
 
         Invoke(nameof(RunCutscene), 0.2f);
     }
