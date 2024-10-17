@@ -13,7 +13,7 @@ using TMPro;
 public class EndingItems : MonoBehaviour, IResetStatic
 {
 
-    const int numberOfEndings = 9;
+    const int numberOfEndings = 6;
 
     [SerializeField] private bool automaticallyFindItems = true;
     [SerializeField] private float splashFadeTime = 3f;
