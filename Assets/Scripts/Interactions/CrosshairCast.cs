@@ -55,7 +55,7 @@ public class CrosshairCast : MonoBehaviour, IGameState
     {
         if (enabled) return; //Only run this code if the gameState is playing or menu room
 
-        Physics.SphereCast(camera.transform.position, 0.025f, camera.transform.forward, out raycastHit, maximumRange, ~(1 << 6) /* Ignore the player */);
+        Physics.Raycast(camera.transform.position, camera.transform.forward, out raycastHit, maximumRange, ~(1 << 6) /* Ignore the player */);
 
         GameObject raycastObject = raycastHit.transform?.gameObject; //I only need to look for the game object of the spherecast so this is here
     
