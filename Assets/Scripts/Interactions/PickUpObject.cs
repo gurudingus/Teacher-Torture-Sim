@@ -16,8 +16,8 @@ using PUO = PickupableObject; //This makes PickupableObject slightly less verbos
     [SerializeField] private float holdTimeForMaxForce = 0.75f;
 
     //Fields
-    private PUO leftHand = null;
-    private PUO rightHand = null;
+    public static PUO leftHand = null;
+    public static PUO rightHand = null;
     //private bool isStrongHold => leftHand == rightHand && leftHand != null; //Returns true if both hands are holding the same item and are not null
 
     private CrosshairCast crosshair;
