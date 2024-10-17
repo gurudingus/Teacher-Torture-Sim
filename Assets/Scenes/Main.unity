@@ -7009,10 +7009,6 @@ PrefabInstance:
       propertyPath: purpleKey
       value: 
       objectReference: {fileID: 1840533585}
-    - target: {fileID: 7484671468135483620, guid: ca35c7ed973918c469d0c76bff50c7a5, type: 3}
-      propertyPath: m_audioClip
-      value: 
-      objectReference: {fileID: 8300000, guid: 27bae175cf9a54e428fa90f141a0ce80, type: 3}
     - target: {fileID: 9184540898910843428, guid: ca35c7ed973918c469d0c76bff50c7a5, type: 3}
       propertyPath: greyKey
       value: 

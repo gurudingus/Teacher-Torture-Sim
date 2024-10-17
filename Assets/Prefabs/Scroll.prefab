@@ -44,7 +44,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: ad799c47559e3f74b9120efaa9198900, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 0.5
   m_Pitch: 1
@@ -328,7 +328,7 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 103d81c1e47bdc54c99d83bc3d1a217f, type: 3}
   m_PrefabInstance: {fileID: 2536623722503386353}
   m_PrefabAsset: {fileID: 0}
---- !u!54 &2493119104011385223
+--- !u!54 &8881976618001646303
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -343,22 +343,8 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 0
---- !u!136 &2806404857987095638
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3454977829608458656}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.0275
-  m_Height: 0.2
-  m_Direction: 0
-  m_Center: {x: 0, y: 0.031, z: 0.051}
---- !u!136 &6788917923210618624
+  m_CollisionDetection: 2
+--- !u!136 &7020939644206175980
 CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -372,7 +358,21 @@ CapsuleCollider:
   m_Height: 0.2
   m_Direction: 0
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &7353339666490942127
+--- !u!136 &8298051582525977457
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3454977829608458656}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.0275
+  m_Height: 0.2
+  m_Direction: 0
+  m_Center: {x: 0, y: 0.031, z: 0.051}
+--- !u!114 &2017028392463085973
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -384,9 +384,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f7569fb4cc3b1a4188b3204806d9e4a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mass: 2
+  mass: 1
   pickupTransform:
     position: {x: 0, y: 0, z: 0}
     rotation: {x: 0, y: 0, z: 0, w: 1}
   smoothDampTime: 0.05
   collisionPoints: 1
+--- !u!114 &7205621756634033591
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3454977829608458656}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89e35f617d8dea549ade2692a3df429c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
