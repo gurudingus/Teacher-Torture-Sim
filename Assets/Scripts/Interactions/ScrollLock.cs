@@ -34,7 +34,7 @@ public class ScrollLock : MonoBehaviour, IInteractable {
     [SerializeField] Key greyKey;
     [SerializeField] GameObject openScroll;
 
-    private static KeysUnlocked unlocks = new();
+    private KeysUnlocked unlocks = new();
 
     private AudioSource speaker;
 
