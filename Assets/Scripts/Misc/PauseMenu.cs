@@ -27,8 +27,6 @@ public class PauseMenu : MonoBehaviour
     }
 
     public void Resume() => OnPause();
-    public void ReturnToMenu() {
-        GameManager.LoadLevel(0);
-    }
+    public void ReturnToMenu() => GameManager.LoadLevel(0);
     public void QuitGame() => Application.Quit();
 }
