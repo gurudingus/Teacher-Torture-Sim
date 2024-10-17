@@ -45,6 +45,8 @@ public class GameManager : MonoBehaviour, IResetStatic
     }
     public static void LoadLevel(int sceneID)
     {
+        Time.timeScale = 1f;
+        Cursor.lockState = CursorLockMode.Locked;
         StaticReset.ResetStatics(); //This probably should happen before loading a new level, as otherwise anything that does get set on level load would be resets
         SceneManager.LoadScene(sceneID);
     }
