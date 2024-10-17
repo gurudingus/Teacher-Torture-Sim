@@ -68,9 +68,6 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
   skipTime: 1
 --- !u!114 &8314431526299331154
 MonoBehaviour:
@@ -87,15 +84,6 @@ MonoBehaviour:
   automaticallyFindItems: 1
   splashFadeTime: 3
   endingItems:
-  - itemName: 
-    item: {fileID: 0}
-    trophy: {fileID: 0}
-  - itemName: 
-    item: {fileID: 0}
-    trophy: {fileID: 0}
-  - itemName: 
-    item: {fileID: 0}
-    trophy: {fileID: 0}
   - itemName: 
     item: {fileID: 0}
     trophy: {fileID: 0}
