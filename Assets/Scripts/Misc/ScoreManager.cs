@@ -50,6 +50,12 @@ public class ScoreManager : MonoBehaviour
             scoreText.text = "Torture Points: " + score.ToString();
         }
     }
+
+    public void ResetScore()
+    {
+        score = 0; // Set the score back to 0
+        UpdateScoreUI(); // Update the UI to reflect the reset score
+    }
 }
 
 

@@ -164,6 +164,8 @@ MonoBehaviour:
   pickupTransform:
     position: {x: 0, y: 0, z: 0}
     rotation: {x: 0, y: 0, z: 0, w: 1}
+  smoothDampTime: 0.05
+  collisionPoints: 10
 --- !u!1 &7781587968288824180
 GameObject:
   m_ObjectHideFlags: 0

@@ -21,6 +21,9 @@ using Stopwatch = System.Diagnostics.Stopwatch;
 
     [SerializeField] [Tooltip("Amount of points awarded for colliding with this object")] private int collisionPoints = 1;
 
+    //Boolean to track if points have already been awarded
+    private bool hasGivenPoints = false;
+
     private void Awake()
     {
         rigidbody = GetComponent<Rigidbody>();
@@ -39,6 +42,9 @@ using Stopwatch = System.Diagnostics.Stopwatch;
         hand = this; //Set the hand to be equal to this object
         rigidbody.isKinematic = true; //Make this kinematic so that it is under the control of the PickupObject script
         gameObject.layer = 7; //Set it to the Picked Up Object layer that doesn't intersect with the player
+
+        // Reset the flag so it can give points again after being picked up
+        hasGivenPoints = false;
     }
 
     public virtual void Throw(ref PickupableObject hand, Vector3 force)
@@ -54,11 +60,14 @@ using Stopwatch = System.Diagnostics.Stopwatch;
 
     private void OnCollisionEnter(Collision collision)
     {
-        //Check if the object was thrown and is not held anymore
-        if (!rigidbody.isKinematic)
+        if (!rigidbody.isKinematic && !hasGivenPoints)
         {
-            //Add points for the collision using ScoreManager
-            ScoreManager.Instance.AddScore(collisionPoints);
+            // Add points for the collision using ScoreManager
+            if (ScoreManager.Instance != null)
+            {
+                ScoreManager.Instance.AddScore(collisionPoints);
+                hasGivenPoints = true; // Mark that points have been awarded
+            }
         }
     }
 

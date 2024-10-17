@@ -71,6 +71,7 @@ MonoBehaviour:
     position: {x: 0, y: 0.47, z: 0}
     rotation: {x: 0, y: 0, z: 0, w: 1}
   smoothDampTime: 0.05
+  collisionPoints: 5
 --- !u!65 &4050279054847577235
 BoxCollider:
   m_ObjectHideFlags: 0

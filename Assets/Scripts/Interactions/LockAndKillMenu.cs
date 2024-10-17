@@ -12,5 +12,11 @@ public class LockAndKillMenu : MonoBehaviour
         GameObject.Find("Menu Room")?.SetActive(false); //Makes the Menu Room go POOF
         (GameObject.Find("Door")?.GetComponent<Door>()).Locked = true; //Closes the door behind the player
         EndingItems.Splash(); //Notification of new item in the room
+
+        //Reset the Torture Points to 0
+        if (ScoreManager.Instance != null)
+        {
+            ScoreManager.Instance.ResetScore(); //Reset the score using the ScoreManager
+        }
     }
 }
