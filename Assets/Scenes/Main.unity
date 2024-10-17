@@ -8945,11 +8945,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8314431526299331154, guid: ad57f3e7074627844a16370be345b7e9, type: 3}
       propertyPath: endingItems.Array.data[0].itemName
-      value: 
+      value: Cassette Tape
       objectReference: {fileID: 0}
     - target: {fileID: 8314431526299331154, guid: ad57f3e7074627844a16370be345b7e9, type: 3}
       propertyPath: endingItems.Array.data[1].itemName
-      value: 
+      value: Hammer
       objectReference: {fileID: 0}
     - target: {fileID: 8314431526299331154, guid: ad57f3e7074627844a16370be345b7e9, type: 3}
       propertyPath: endingItems.Array.data[2].itemName
