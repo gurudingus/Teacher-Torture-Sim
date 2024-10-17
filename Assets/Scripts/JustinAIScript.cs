@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections;
 
-public class JustinAIScript : MonoBehaviour
+public class JustinAIScript : MonoBehaviour, IInteractable
 {
     public Transform target;
     Camera cam;
@@ -11,9 +11,14 @@ public class JustinAIScript : MonoBehaviour
     public float cooldownTime = 0.5f;
     private bool isOnCooldown = false;
 
+    public static bool scrollIsHeld = false;
+
+    private AudioSource audioSource;
+
     void Start()
     {
         cam = GetComponentInChildren<Camera>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     void Update()
@@ -48,5 +53,13 @@ public class JustinAIScript : MonoBehaviour
     private void ResetCooldown()
     {
         isOnCooldown = false;
+    }
+
+    public void Interact()
+    {
+        audioSource.Play();
+        if (scrollIsHeld) {
+            CutsceneManager.PlayCutscene(GameEvent.Ending6);
+        }
     }
 }

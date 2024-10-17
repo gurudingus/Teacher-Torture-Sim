@@ -51,7 +51,7 @@ public class ScrollLock : MonoBehaviour, IInteractable {
 
     private void Unlock()
     {
-        Destroy(gameObject);
-        Instantiate(openScroll, transform);
+        Destroy(transform.parent.gameObject);
+        Instantiate(openScroll, transform.parent.position, transform.parent.rotation);
     }
 }

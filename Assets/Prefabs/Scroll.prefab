@@ -236,7 +236,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   purpleKey: {fileID: 0}
   greyKey: {fileID: 0}
-  key: 0
+  openScroll: {fileID: 2728391645292269495, guid: 9042906c2aaa27e4996e27c270c9cd88, type: 3}
 --- !u!1001 &2536623722503386353
 PrefabInstance:
   m_ObjectHideFlags: 0
