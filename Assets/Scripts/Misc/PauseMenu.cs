@@ -5,7 +5,7 @@ public class PauseMenu : MonoBehaviour
     private GameState previousState;
     private GameObject[] children;
 
-    private void Awake() {
+    private void Awake() { //Set all child objects to be inactive
         children = new GameObject[transform.childCount];
         for (int i = 0; i < transform.childCount; i++) children[i] = transform.GetChild(i).gameObject;
 
@@ -23,9 +23,10 @@ public class PauseMenu : MonoBehaviour
         Time.timeScale = playing ? 1f : 0f;
         Cursor.lockState = playing ? CursorLockMode.Locked : CursorLockMode.None;
 
-        foreach (GameObject child in children) child.SetActive(!playing);
+        foreach (GameObject child in children) child.SetActive(!playing); //Set all child objects active if the pause menu is open
     }
-
+    
+    //The functions to be called from the pause menu GUI buttons
     public void Resume() => OnPause();
     public void ReturnToMenu() => GameManager.LoadLevel(0);
     public void QuitGame() => Application.Quit();

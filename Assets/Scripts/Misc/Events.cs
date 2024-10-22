@@ -1,7 +1,7 @@
 using System.IO;
 using UnityEngine;
 
-using Bitfield64 = System.UInt64;
+using Bitfield64 = System.UInt64; //Nice little class alias (would have used a type alias if not for old C#) to make the code slightly more self explanatory
 
 public enum GameEvent
 {
@@ -20,7 +20,7 @@ public enum GameEvent
 
 public static class Events
 {
-    private static Bitfield64 eventsCompleted; //A bitfield for storing which events are complete
+    private static Bitfield64 eventsCompleted = 0; //A bitfield for storing which events are complete
 
     public static GameEvent mostRecentEvent { get; set; } = GameEvent.None;
 
@@ -34,23 +34,23 @@ public static class Events
     }
     public static void SetEventsComplete(Bitfield64 events)
     {
-        eventsCompleted = events; //Blanket set event that takes an entire bitfield in
+        eventsCompleted = events; //Blanket set event that takes an entire bitfield in and replaces the events with it
         SaveToFile();
     }
 
-    public static void SetEventIncomplete(GameEvent gameEvent) => eventsCompleted &= ~((Bitfield64)1 << (int)gameEvent);
+    public static void SetEventIncomplete(GameEvent gameEvent) => eventsCompleted &= ~((Bitfield64)1 << (int)gameEvent); //And with a negative bitfield (all 1s with a 0 in the gameEvent-th)
 
-    public static bool GetEventComplete(GameEvent gameEvent) => (eventsCompleted & (Bitfield64)1 << (int)gameEvent) != 0;
-    public static bool GetEventComplete(int gameEvent) => (eventsCompleted & (Bitfield64)1 << gameEvent) != 0;
+    public static bool GetEventComplete(GameEvent gameEvent) => (eventsCompleted & (Bitfield64)1 << (int)gameEvent) != 0; //Gets the bit and the position
+    public static bool GetEventComplete(int gameEvent) => (eventsCompleted & (Bitfield64)1 << gameEvent) != 0; //Gets the bit at the position but int. No idea why I made this override
 
-    public static string eventsFileLocation => @$"{Application.persistentDataPath}\events.ass";
+    public static string eventsFileLocation => @$"{Application.persistentDataPath}\events.ass.justintime.fart3.craggles.frog.CastleDoore.edge"; //Fantastic filename with contributions from everyone in the class
 
     public static void SaveToFile()
     {
         FileStream stream = File.Create(eventsFileLocation);
         BinaryWriter writer = new(stream);
 
-        writer.Write(eventsCompleted);
+        writer.Write(eventsCompleted); //Write the singular 'bitfield64' uint64
 
         writer.Close();
         stream.Close();
@@ -60,12 +60,12 @@ public static class Events
     {
         eventsCompleted = 0;
 
-        if (!File.Exists(eventsFileLocation)) return;
+        if (!File.Exists(eventsFileLocation)) return; //Don't load anything if the file is empty
 
-        FileStream stream = File.Open(eventsFileLocation, FileMode.Open);
-        if (stream.Length != 8)
+        FileStream stream = File.Open(eventsFileLocation, FileMode.Open); //Open the file now that it does exist
+        if (stream.Length != 8) //If the file is invalid, close the steam and don't load anything
         {
-            stream.Close();
+            stream.Close(); 
             return;
         }
 
