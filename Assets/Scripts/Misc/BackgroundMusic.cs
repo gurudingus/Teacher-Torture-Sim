@@ -84,8 +84,11 @@ using RNG = System.Random;
 
         speaker.clip = queue[0]; //Start the first song in the queue
         queue.RemoveAt(0); //Remove the first song from the queue
-
-        speaker.Play(); //Actually play the song
-        speaker.time = speaker.clip.length * proportionComplete; //If some non-zero value was passed into the function, the song will start some way through
+        
+        if (speaker.enabled)
+        {
+            speaker.Play(); //Actually play the song
+            speaker.time = speaker.clip.length * proportionComplete; //If some non-zero value was passed into the function, the song will start some way through
+        }
     }
 }
