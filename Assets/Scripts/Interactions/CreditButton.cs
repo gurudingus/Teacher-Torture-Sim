@@ -1,6 +1,6 @@
 using UnityEngine;
 using TMPro; 
-// Rama's code edited by Liam
+//Liam's and Rama's code
 
 public class CreditButton : MonoBehaviour, IInteractable
 {

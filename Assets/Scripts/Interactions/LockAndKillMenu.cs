@@ -16,7 +16,7 @@ public class LockAndKillMenu : MonoBehaviour
         //Reset the Torture Points to 0
         if (ScoreManager.Instance != null)
         {
-            ScoreManager.Instance.ResetScore(); //Reset the score using the ScoreManager
+            ScoreManager.Instance.ResetScore();
         }
     }
 }
