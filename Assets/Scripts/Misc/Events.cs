@@ -1,6 +1,8 @@
 using System.IO;
 using UnityEngine;
 
+using Bitfield64 = System.UInt64;
+
 public enum GameEvent
 {
     Ending1,
@@ -18,28 +20,28 @@ public enum GameEvent
 
 public static class Events
 {
-    private static ulong eventsCompleted; //A bitfield for storing
+    private static Bitfield64 eventsCompleted; //A bitfield for storing which events are complete
 
     public static GameEvent mostRecentEvent { get; set; } = GameEvent.None;
 
     public static void SetEventComplete(GameEvent gameEvent)
     {
-        if (GetEventComplete(gameEvent)) return;
+        if (GetEventComplete(gameEvent)) return; //Don't do anything if the event is already complete
 
-        eventsCompleted |= (ulong)1 << (int)gameEvent;
+        eventsCompleted |= (Bitfield64)1 << (int)gameEvent; //Bitwise OR with nothing but a 1 in in the gameEvent-th place
         mostRecentEvent = gameEvent;
-        SaveToFile();
+        SaveToFile(); //Save to file whenever events are set
     }
-    public static void SetEventsComplete(ulong events)
+    public static void SetEventsComplete(Bitfield64 events)
     {
-        eventsCompleted = events;
+        eventsCompleted = events; //Blanket set event that takes an entire bitfield in
         SaveToFile();
     }
 
-    public static void SetEventIncomplete(GameEvent gameEvent) => eventsCompleted &= ~((ulong)1 << (int)gameEvent);
+    public static void SetEventIncomplete(GameEvent gameEvent) => eventsCompleted &= ~((Bitfield64)1 << (int)gameEvent);
 
-    public static bool GetEventComplete(GameEvent gameEvent) => (eventsCompleted & (ulong)1 << (int)gameEvent) != 0;
-    public static bool GetEventComplete(int gameEvent) => (eventsCompleted & (ulong)1 << gameEvent) != 0;
+    public static bool GetEventComplete(GameEvent gameEvent) => (eventsCompleted & (Bitfield64)1 << (int)gameEvent) != 0;
+    public static bool GetEventComplete(int gameEvent) => (eventsCompleted & (Bitfield64)1 << gameEvent) != 0;
 
     public static string eventsFileLocation => @$"{Application.persistentDataPath}\events.ass";
 
