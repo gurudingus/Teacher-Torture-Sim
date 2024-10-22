@@ -3766,73 +3766,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6388017135965249428, guid: 8e35a2c3cce8cc84e9ee6599ee87db8f, type: 3}
   m_PrefabInstance: {fileID: 515710529}
   m_PrefabAsset: {fileID: 0}
---- !u!1001 &705693806
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 6213588189708658566, guid: 1e856ecce5094f840884a6ee4d2cf1ae, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 2.05
-      objectReference: {fileID: 0}
-    - target: {fileID: 6213588191009959229, guid: 1e856ecce5094f840884a6ee4d2cf1ae, type: 3}
-      propertyPath: m_text
-      value: "Credits:\nRama Chapman: Environment Artist, Level   Designer and Programmer\n\nSamuel
-        Fletcher: Cutscene Director, Programmer, and \nGame Mechanic Designer\n\nLiam
-        Shelley: Lead Prgrammer, Asset Artist and Code Police"
-      objectReference: {fileID: 0}
-    - target: {fileID: 8259983628298530820, guid: 1e856ecce5094f840884a6ee4d2cf1ae, type: 3}
-      propertyPath: m_Name
-      value: Credit_Button
-      objectReference: {fileID: 0}
-    - target: {fileID: 8259983628298530821, guid: 1e856ecce5094f840884a6ee4d2cf1ae, type: 3}
-      propertyPath: m_RootOrder
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8259983628298530821, guid: 1e856ecce5094f840884a6ee4d2cf1ae, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 21.713
-      objectReference: {fileID: 0}
-    - target: {fileID: 8259983628298530821, guid: 1e856ecce5094f840884a6ee4d2cf1ae, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 1.984188
-      objectReference: {fileID: 0}
-    - target: {fileID: 8259983628298530821, guid: 1e856ecce5094f840884a6ee4d2cf1ae, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -4.186
-      objectReference: {fileID: 0}
-    - target: {fileID: 8259983628298530821, guid: 1e856ecce5094f840884a6ee4d2cf1ae, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.0000051558013
-      objectReference: {fileID: 0}
-    - target: {fileID: 8259983628298530821, guid: 1e856ecce5094f840884a6ee4d2cf1ae, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8259983628298530821, guid: 1e856ecce5094f840884a6ee4d2cf1ae, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8259983628298530821, guid: 1e856ecce5094f840884a6ee4d2cf1ae, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8259983628298530821, guid: 1e856ecce5094f840884a6ee4d2cf1ae, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8259983628298530821, guid: 1e856ecce5094f840884a6ee4d2cf1ae, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: -179.999
-      objectReference: {fileID: 0}
-    - target: {fileID: 8259983628298530821, guid: 1e856ecce5094f840884a6ee4d2cf1ae, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 1e856ecce5094f840884a6ee4d2cf1ae, type: 3}
 --- !u!1001 &708371188
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12270,6 +12203,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Pendrive
       objectReference: {fileID: 0}
+    - target: {fileID: 7728735767278471419, guid: cbb131f59ebde2642824d85e4932dfc9, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cbb131f59ebde2642824d85e4932dfc9, type: 3}
 --- !u!4 &2066421384 stripped
@@ -12852,6 +12789,63 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6595960218886811645, guid: 080806e3abcdb8b4eb72b8acbd123e8e, type: 3}
   m_PrefabInstance: {fileID: 6630204246807336494}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &970751066041769306
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 970751066858213030, guid: 1e856ecce5094f840884a6ee4d2cf1ae, type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 970751066858213030, guid: 1e856ecce5094f840884a6ee4d2cf1ae, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 21.713
+      objectReference: {fileID: 0}
+    - target: {fileID: 970751066858213030, guid: 1e856ecce5094f840884a6ee4d2cf1ae, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.984188
+      objectReference: {fileID: 0}
+    - target: {fileID: 970751066858213030, guid: 1e856ecce5094f840884a6ee4d2cf1ae, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -4.186
+      objectReference: {fileID: 0}
+    - target: {fileID: 970751066858213030, guid: 1e856ecce5094f840884a6ee4d2cf1ae, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.0000051558013
+      objectReference: {fileID: 0}
+    - target: {fileID: 970751066858213030, guid: 1e856ecce5094f840884a6ee4d2cf1ae, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 970751066858213030, guid: 1e856ecce5094f840884a6ee4d2cf1ae, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 970751066858213030, guid: 1e856ecce5094f840884a6ee4d2cf1ae, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 970751066858213030, guid: 1e856ecce5094f840884a6ee4d2cf1ae, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 970751066858213030, guid: 1e856ecce5094f840884a6ee4d2cf1ae, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -179.999
+      objectReference: {fileID: 0}
+    - target: {fileID: 970751066858213030, guid: 1e856ecce5094f840884a6ee4d2cf1ae, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 970751066858213039, guid: 1e856ecce5094f840884a6ee4d2cf1ae, type: 3}
+      propertyPath: m_Name
+      value: Credit_Button
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 1e856ecce5094f840884a6ee4d2cf1ae, type: 3}
 --- !u!4 &986921254033810378 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4923387242031711824, guid: 592f0d8cb9e7f2144b64432cbf71d388, type: 3}
