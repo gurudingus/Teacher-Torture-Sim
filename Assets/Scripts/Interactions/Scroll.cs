@@ -1,6 +1,8 @@
 using UnityEngine;
-
+//Liam Script
 public class Scroll : PickupableObject {
+    //allows it to interact with justin object when the E key is used.
+
     public override void PickUp(ref PickupableObject hand)
     {
         base.PickUp(ref hand);

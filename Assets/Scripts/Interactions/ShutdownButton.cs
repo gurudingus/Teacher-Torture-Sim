@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class ShutdownButton : MonoBehaviour, IInteractable
 {
+    //Liam Script
+    //enables ending four when in game button object is pressed
     public void Interact()
     {
         transform.localPosition += transform.up * 0.05f;

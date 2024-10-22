@@ -1,6 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
-
+//Sam Code edited by Liam
 public interface IInteractable
 {
     public abstract void Interact();

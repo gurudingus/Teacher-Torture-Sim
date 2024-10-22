@@ -9,6 +9,7 @@ public enum CameraState
 
 public class CameraScript : MonoBehaviour
 {
+    //setup camera variables and defenitions
     private float rotateCameraPitch;
 
     private Camera firstPersonCam;
@@ -27,6 +28,7 @@ public class CameraScript : MonoBehaviour
 
     private void Awake()
     {
+        //ensures the camera is set to the correct object
         firstPersonCam = GetComponentInChildren<Camera>();
         cameraPosition = firstPersonCam.transform.localPosition;
 
@@ -36,6 +38,7 @@ public class CameraScript : MonoBehaviour
 
     private void Start()
     {
+        //locks cursor to screen
         Cursor.lockState = CursorLockMode.Locked;
     }
 

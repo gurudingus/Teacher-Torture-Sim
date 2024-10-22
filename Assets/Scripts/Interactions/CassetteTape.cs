@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class CassetteTape : PickupableObject {
 
+    //enables pickup of cassete tape object, and allows it to interact with cassete player object when it is thrown.
     public override void PickUp(ref PickupableObject hand)
     {
         base.PickUp(ref hand);
