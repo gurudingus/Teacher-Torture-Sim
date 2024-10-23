@@ -14,9 +14,6 @@ public class LockAndKillMenu : MonoBehaviour
         EndingItems.Splash(); //Notification of new item in the room
 
         //Reset the Torture Points to 0
-        if (ScoreManager.Instance != null)
-        {
-            ScoreManager.Instance.ResetScore();
-        }
+        if (ScoreManager.Instance != null) ScoreManager.Instance.ResetScore();
     }
 }

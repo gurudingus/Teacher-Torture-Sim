@@ -23,8 +23,8 @@ using RNG = System.Random;
         GameManager.Subscribe(this);
         
         speaker = GetComponent<AudioSource>();
-        speaker.time = speaker.clip.length * (float)random.NextDouble(); //Start the music playing at some random point throughout the song so that it gives the illusion of the song playing continuously while not audible
-        volume = speaker.volume;
+        /*speaker.time = speaker.clip.length * (float)random.NextDouble(); //Start the music playing at some random point throughout the song so that it gives the illusion of the song playing continuously while not audible
+        volume = speaker.volume;*/
     }
 
     private void Update()
