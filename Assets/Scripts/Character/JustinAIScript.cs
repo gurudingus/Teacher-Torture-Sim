@@ -15,6 +15,9 @@ public class JustinAIScript : MonoBehaviour, IInteractable
     public static bool scrollIsHeld = false;
 
     private AudioSource audioSource;
+    public GameObject lectureRoom;
+    public GameObject killItemPlane;
+    public GameObject torturePoints;
 
     void Start()
     {
@@ -65,6 +68,9 @@ public class JustinAIScript : MonoBehaviour, IInteractable
         audioSource.Play();
         if (scrollIsHeld) {
             CutsceneManager.PlayCutscene(GameEvent.Ending6);
+            lectureRoom.SetActive(false);
+            killItemPlane.SetActive(false);
+            torturePoints.SetActive(false);
         }
     }
 }

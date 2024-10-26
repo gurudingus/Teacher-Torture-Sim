@@ -2171,13 +2171,29 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 2076800886123299125, guid: 468794320c5db02449e46fe44fd7085b, type: 3}
+      propertyPath: sight
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2076800886123299125, guid: 468794320c5db02449e46fe44fd7085b, type: 3}
       propertyPath: target
       value: 
       objectReference: {fileID: 1080676733}
     - target: {fileID: 2076800886123299125, guid: 468794320c5db02449e46fe44fd7085b, type: 3}
+      propertyPath: lectureRoom
+      value: 
+      objectReference: {fileID: 710276381}
+    - target: {fileID: 2076800886123299125, guid: 468794320c5db02449e46fe44fd7085b, type: 3}
       propertyPath: playerCamera
       value: 
       objectReference: {fileID: 1366265710}
+    - target: {fileID: 2076800886123299125, guid: 468794320c5db02449e46fe44fd7085b, type: 3}
+      propertyPath: killItemPlane
+      value: 
+      objectReference: {fileID: 1330182972}
+    - target: {fileID: 2076800886123299125, guid: 468794320c5db02449e46fe44fd7085b, type: 3}
+      propertyPath: torturePoints
+      value: 
+      objectReference: {fileID: 1744655190}
     - target: {fileID: 2076800886123299125, guid: 468794320c5db02449e46fe44fd7085b, type: 3}
       propertyPath: cutsceneCamera
       value: 
@@ -2196,11 +2212,23 @@ PrefabInstance:
       objectReference: {fileID: 1080676733}
     - target: {fileID: 6075317970466353906, guid: 468794320c5db02449e46fe44fd7085b, type: 3}
       propertyPath: m_Height
-      value: 8
+      value: 8.14738
       objectReference: {fileID: 0}
     - target: {fileID: 6075317970466353906, guid: 468794320c5db02449e46fe44fd7085b, type: 3}
       propertyPath: m_Radius
-      value: 2
+      value: 1.2964144
+      objectReference: {fileID: 0}
+    - target: {fileID: 6075317970466353906, guid: 468794320c5db02449e46fe44fd7085b, type: 3}
+      propertyPath: m_Center.x
+      value: 2.779027e-15
+      objectReference: {fileID: 0}
+    - target: {fileID: 6075317970466353906, guid: 468794320c5db02449e46fe44fd7085b, type: 3}
+      propertyPath: m_Center.y
+      value: -0.5750928
+      objectReference: {fileID: 0}
+    - target: {fileID: 6075317970466353906, guid: 468794320c5db02449e46fe44fd7085b, type: 3}
+      propertyPath: m_Center.z
+      value: 0.018680573
       objectReference: {fileID: 0}
     - target: {fileID: 6075317970466353907, guid: 468794320c5db02449e46fe44fd7085b, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -7836,6 +7864,11 @@ MeshFilter:
 Transform:
   m_CorrespondingSourceObject: {fileID: 4923387242031711824, guid: 592f0d8cb9e7f2144b64432cbf71d388, type: 3}
   m_PrefabInstance: {fileID: 144175570}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1330182972 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7679484908499375432, guid: 74db2f6b21706034abf925b2ef685f3e, type: 3}
+  m_PrefabInstance: {fileID: 7679484908166860498}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1343415085 stripped
 GameObject:
